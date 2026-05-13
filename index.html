@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automating A Better Life — Spring 2026 Beta Cohort</title>
+  <meta name="description" content="A six-week experience for professionals who want AI to give them their life back. Spring 2026, May 23 through June 27. Beta cohort, by invitation.">
+  <meta property="og:title" content="Automating A Better Life — Spring 2026 Beta Cohort">
+  <meta property="og:description" content="A six-week experience for professionals who want AI to give them their life back.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF7F2;
+      --bg-card: #F1ECE2;
+      --ink: #1F1B16;
+      --muted: #6B6258;
+      --accent: #8B3A1F;
+      --accent-soft: #A85936;
+      --line: #DDD4C5;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    h1, h2, h3 {
+      font-family: 'Source Serif 4', Georgia, 'Hoefler Text', Cambria, serif;
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 0 0 .25em; letter-spacing: -0.025em; font-weight: 700; }
+    h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); margin: 0 0 .65em; }
+    h3 { font-size: 1.2rem; margin: 0 0 .35em; }
+    p { margin: 0 0 1em; }
+    a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+    a:hover { color: var(--accent-soft); }
+    em { font-style: italic; }
+    .eyebrow {
+      display: inline-block;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4em;
+    }
+
+    /* HERO - DEEP CHARCOAL BLOCK */
+    .hero {
+      padding: 110px 0 72px;
+      border-bottom: none;
+      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
+      color: var(--bg);
+    }
+    .hero .eyebrow { color: #D4A883; }
+    .hero h1 { color: #FFFFFF; }
+    .hero .lede { color: #FFFFFF; }
+    .hero .date-bar {
+      color: #FFFFFF;
+      border-top: 1px dashed rgba(255, 255, 255, 0.25);
+    }
+    .hero .date-bar strong { color: #FFFFFF; }
+
+    /* FOUNDER INTRO */
+    .founder-intro { padding: 80px 0; border-bottom: 1px solid var(--line); }
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .founder-photo {
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-card);
+      box-shadow: 0 4px 24px rgba(31, 27, 22, 0.08);
+    }
+    .founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .founder-text h2 { font-size: clamp(1.5rem, 3.2vw, 2.05rem); margin-bottom: 0.55em; }
+    .founder-text p { font-size: 1.05rem; color: var(--muted); line-height: 1.65; margin: 0; }
+    @media (max-width: 720px) {
+      .founder-grid { grid-template-columns: 1fr; gap: 28px; }
+      .founder-photo { max-width: 240px; margin: 0 auto; }
+      .founder-text { text-align: center; }
+    }
+
+    /* BUILD section as a DEEP COLOR BLOCK */
+    .build {
+      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
+      color: var(--bg);
+      border-bottom: none;
+      padding: 88px 0;
+    }
+    .build .eyebrow { color: #D4A883; }
+    .build h2 { color: var(--bg); }
+    .build > .container > p { color: rgba(250, 247, 242, 0.72); }
+    .build .build-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .build .build-item .num { color: #D4A883; }
+    .build .build-item h3 { color: var(--bg); }
+    .build .build-item p { color: rgba(250, 247, 242, 0.72); }
+    .hero .lede {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.2rem, 2.3vw, 1.5rem);
+      line-height: 1.5;
+      color: #FFFFFF;
+      margin: .8em 0 0;
+      max-width: 620px;
+    }
+    .hero .date-bar {
+      color: #FFFFFF;
+      margin-top: 2.8em;
+      padding-top: 2em;
+      border-top: 1px dashed rgba(255, 255, 255, 0.25);
+      text-align: center;
+    }
+    .hero .date-line {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.7em;
+    }
+    .hero .date-meta {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* SECTION */
+    section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+    section:last-of-type { border-bottom: none; }
+
+    /* WHY */
+    .why p { font-size: 1.08rem; }
+    .pull-quote {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+      line-height: 1.45;
+      color: var(--ink);
+      border-left: 3px solid var(--accent);
+      padding: 0.2em 0 0.2em 1.5em;
+      margin: 1.6em 0 0.4em;
+    }
+
+    /* BUILD */
+    .build-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 2em 0 0.5em;
+    }
+    .build-item {
+      display: flex;
+      gap: 22px;
+      padding: 26px 28px;
+      background: var(--bg-card);
+      border-radius: 6px;
+    }
+    .build-item .num {
+      flex-shrink: 0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 1.4em;
+      padding-top: 2px;
+    }
+    .build-item h3 { margin-bottom: .25em; }
+    .build-item p { margin: 0; color: var(--muted); font-size: 0.99rem; line-height: 1.55; }
+
+    /* WHO */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 1.8em;
+    }
+    .two-col .col-head {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1em;
+      padding-bottom: 0.5em;
+      border-bottom: 1px solid var(--line);
+    }
+    .two-col ul { padding-left: 1.2em; margin: 0; }
+    .two-col li { margin-bottom: 1.1em; color: var(--ink); line-height: 1.55; }
+    .two-col li strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 640px) {
+      .two-col { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    /* SHAPE - DEEP CHARCOAL BLOCK */
+    .shape {
+      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
+      color: var(--bg);
+      border-bottom: none;
+      padding: 88px 0;
+    }
+    .shape .eyebrow { color: #D4A883; }
+    .shape h2 { color: var(--bg); }
+    .shape-list { margin-top: 2em; }
+    .shape-item {
+      padding: 26px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+    .shape-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .shape-item h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #D4A883;
+      margin-bottom: 0.7em;
+    }
+    .shape-item p { margin: 0; line-height: 1.6; color: rgba(250, 247, 242, 0.82); }
+    .shape-item strong { color: var(--bg); font-weight: 600; }
+
+    /* COMMITMENT */
+    .commitment ul { padding-left: 1.5em; margin: 1.5em 0 0; }
+    .commitment li { margin-bottom: 1.1em; line-height: 1.55; }
+    .commitment li strong { color: var(--ink); font-weight: 600; }
+
+    /* CTA - DEEP CHARCOAL BLOCK */
+    .cta {
+      text-align: center;
+      padding: 110px 0;
+      border-bottom: none;
+      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
+      color: var(--bg);
+    }
+    .cta .eyebrow { color: #D4A883; }
+    .cta h2 { margin-bottom: 0.4em; color: var(--bg); }
+    .cta-question {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.6vw, 1.55rem);
+      color: var(--bg);
+      margin: 2.2em auto;
+      line-height: 1.45;
+      max-width: 580px;
+      position: relative;
+    }
+    .cta-question::before, .cta-question::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: #D4A883;
+      margin: 1.2em auto;
+    }
+    .cta-instruction {
+      max-width: 540px;
+      margin: 0 auto;
+      color: rgba(250, 247, 242, 0.78);
+      font-size: 1.02rem;
+    }
+    .cta-instruction strong { color: var(--bg); font-weight: 600; }
+    .signoff {
+      margin-top: 4.5em;
+      padding-top: 2.4em;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      text-align: center;
+      color: rgba(250, 247, 242, 0.62);
+      font-size: 0.95rem;
+    }
+    .signoff .author {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--bg);
+      font-style: italic;
+      margin-bottom: 0.3em;
+    }
+    .signoff .brand {
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, 0.55);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">Spring 2026 · Beta Cohort</div>
+      <h1>Automating A Better Life</h1>
+      <p class="lede">A seven-week experience for professionals who want AI to give them their life back.</p>
+      <div class="date-bar">
+        <div class="date-line">May 23 to July 11, 2026</div>
+        <div class="date-meta">Seven Saturdays. Small cohort. Free for you. By invitation only.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FOUNDER INTRO -->
+  <section class="founder-intro">
+    <div class="container">
+      <div class="founder-grid">
+        <div class="founder-photo">
+          <img src="assets/bg-portrait.jpg" alt="BG Hamrick, founder of Automating A Better Life" />
+        </div>
+        <div class="founder-text">
+          <div class="eyebrow">From the founder</div>
+          <h2>I'm BG. I'll be in the room every Saturday.</h2>
+          <p>I'm not running this from the sidelines. Every system you set up, I use myself. Every reply you get is mine, not a virtual assistant's. That is why the seats are limited.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <div class="container">
+      <div class="eyebrow">Why this exists</div>
+      <h2>Most AI courses focus on business growth as the starting point.</h2>
+      <p>We start somewhere else. This course teaches you how to automate the specific parts of your life and business that currently dominate your time. We use a powerful engine (a private AI workspace on your own computer and a team of digital specialists), but we point it at a different target.</p>
+      <p>We reclaim your life first. By getting your evenings, your weekends, and your attention back, you finally have the clarity needed to lead. Scaling your business happens as a result of you finding your way out of the daily grind.</p>
+      <div class="pull-quote">The technical setup is just the surface. The real work is the shift in power: moving from being the person run by the system to the one who actually commands it.</div>
+    </div>
+  </section>
+
+  <!-- BUILD -->
+  <section class="build">
+    <div class="container">
+      <div class="eyebrow">What you'll actually own</div>
+      <h2>Six real things that live on your computer.</h2>
+      <p>We aren't just talking about ideas. We are building. By the end of this, you will have:</p>
+      <div class="build-grid">
+        <div class="build-item">
+          <div class="num">1</div>
+          <div>
+            <h3>Your North Star</h3>
+            <p>One paragraph that says exactly what you want AI to do for you. It defines what "success" looks like so you can stop working so much and get your life back.</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="num">2</div>
+          <div>
+            <h3>Your Private Engine</h3>
+            <p>A working AI workspace that lives on your own computer. I do the hard setup for you. You get the power of the tech without the install headaches or monthly bills.</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="num">3</div>
+          <div>
+            <h3>Your Custom Staff</h3>
+            <p>A team of digital helpers made just for you. They aren't generic; they are built to work in your voice and handle your specific business needs.</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="num">4</div>
+          <div>
+            <h3>Your First "Win"</h3>
+            <p>One real project finished from start to finish. We will pick one big task that has been hanging over your head and use your new system to get it done.</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="num">5</div>
+          <div>
+            <h3>Your Command Center</h3>
+            <p>A simple daily routine and a dashboard. This gives you a clear view of your life and business so you always know exactly what is going on.</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="num">6</div>
+          <div>
+            <h3>Your Growing Agency</h3>
+            <p>Proof that you own the system. You will "hire" one new digital helper all by yourself. This proves you have the skills to grow your team whenever you want.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who">
+    <div class="container">
+      <div class="eyebrow">Who this is for</div>
+      <h2>Is this for you?</h2>
+      <p>This is for the professional who wants their time to belong to them again. It is for the attorneys, contractors, coaches, and owners who feel like their business has stopped being a tool and started being a cage.</p>
+      <div class="two-col">
+        <div>
+          <div class="col-head">This is for you if</div>
+          <ul>
+            <li><strong>You feel "behind" on AI:</strong> You know the world is changing, but you feel three years late and don't know where to start.</li>
+            <li><strong>You're done with "Tool Fatigue":</strong> You don't want to learn more complex software or pay for a dozen different monthly subscriptions.</li>
+            <li><strong>You're short on time:</strong> You can't commit to a three-month business course. You need a system that works right now.</li>
+            <li><strong>You know "Productivity Hacks" don't work:</strong> You've tried the apps and the tips. You're ready for a real change in how your day actually runs.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-head">This is NOT for you if</div>
+          <ul>
+            <li><strong>You only care about "Scale":</strong> If you just want to build a massive empire or automate a thousand people, this isn't for you. We are building for personal sovereignty first.</li>
+            <li><strong>You want to be a Tech Expert:</strong> If you want to learn how to code or study the "plumbing" of AI, look elsewhere. We are here to use the tools, not build them.</li>
+            <li><strong>You want a "Magic Button":</strong> If you want a gadget that does all the thinking while you stay on autopilot, this won't work. This is about you becoming the boss of the system.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHAPE -->
+  <section class="shape">
+    <div class="container">
+      <div class="eyebrow">The logistics</div>
+      <h2>Five things to know before you say yes.</h2>
+      <div class="shape-list">
+        <div class="shape-item">
+          <h3>The Schedule</h3>
+          <p><strong>Seven Saturdays. We take the week of July 4 off.</strong> We meet live on Zoom. We start with "Week 0" on May 23 and finish on July 11, 2026.</p>
+        </div>
+        <div class="shape-item">
+          <h3>The Cost</h3>
+          <p><strong>This is a Beta Group: $0.</strong> I am running this one time for free. In exchange for your seat, I only ask for two things: your honest feedback and your permission to share your success as a case study for future groups.</p>
+        </div>
+        <div class="shape-item">
+          <h3>The Space</h3>
+          <p><strong>Small and Focused.</strong> I am keeping the group small so I can be available to help every person in the room.</p>
+        </div>
+        <div class="shape-item">
+          <h3>The Tech</h3>
+          <p><strong>Private and Local.</strong> We will build using Claude Code running directly on your own computer. You won't have to pay for more monthly subscriptions or "babysit" complicated websites. Your system stays under your roof.</p>
+        </div>
+        <div class="shape-item">
+          <h3>The Time</h3>
+          <p><strong>2 hours of "Lab Time" per week,</strong> plus our live Saturday meeting. If you miss a live session, the recording will be ready for you within 48 hours so you don't fall behind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMITMENT -->
+  <section class="commitment">
+    <div class="container">
+      <div class="eyebrow">Our agreement</div>
+      <h2>Four things I'm asking of you.</h2>
+      <p>Because this is a beta group and I am personally helping you with the setup, I am looking for partners who are fully committed. If you take one of these seats, you are agreeing to:</p>
+      <ul>
+        <li><strong>Stay Current:</strong> You will attend all seven Saturday meetings or watch the recording within 48 hours.</li>
+        <li><strong>Do the Build:</strong> You will set aside about two hours a week for "lab time" to keep your system moving forward.</li>
+        <li><strong>Be Honest:</strong> You will give me the "unfiltered" truth about what is working and what is causing you trouble.</li>
+        <li><strong>Pay it Forward:</strong> You will let your experience and your results help me make the next version of this even better for other owners.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <div class="eyebrow">How to register</div>
+      <h2>One question. One reply.</h2>
+      <div class="cta-question">"What will you do with the time this gives you back?"</div>
+      <div class="cta-instruction">
+        <p>Reply to my email with <strong>"I'm in"</strong> and your answer to that one question.</p>
+        <p>That is it. No forms, no funnels, and no hurdles. I will personally confirm your seat within 24 hours.</p>
+      </div>
+      <div class="signoff">
+        <div class="author">BG Hamrick</div>
+        <div class="brand">Automating A Better Life</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
