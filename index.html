@@ -167,6 +167,87 @@
       max-width: 560px;
       margin: 0 auto;
     }
+    .hero .window-line {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 0.98rem;
+      color: #D4A883;
+      letter-spacing: 0.02em;
+      line-height: 1.5;
+      max-width: 560px;
+      margin: 1.1em auto 0;
+    }
+    .hero .window-line strong { font-weight: 600; color: #E8C29A; font-style: normal; }
+
+    /* CTA BUTTON (universal) */
+    .cta-button {
+      display: inline-block;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 18px 36px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.15s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .cta-button:hover { background: var(--accent-soft); color: #FFFFFF; text-decoration: none; }
+    .cta-button:active { transform: translateY(1px); }
+    .cta-button .arr { display: inline-block; margin-left: 0.35em; }
+    .hero .cta-button { margin-top: 2em; }
+    .build .cta-wrap, .cta .cta-wrap { text-align: center; margin-top: 2.4em; }
+
+    /* PAIN section (dark anchor block, matches hero/build/shape/cta rhythm) */
+    .pain {
+      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
+      color: var(--bg);
+      border-bottom: none;
+      padding: 88px 0;
+    }
+    .pain .eyebrow { color: #D4A883; }
+    .pain h2 { color: var(--bg); }
+    .pain p {
+      font-size: 1.08rem;
+      color: rgba(250, 247, 242, 0.84);
+      line-height: 1.65;
+      margin: 0 0 1.2em;
+    }
+    .pain p:last-child { margin-bottom: 0; }
+
+    /* Founder stat row */
+    .founder-stats {
+      margin-top: 1.4em;
+      padding-top: 1.2em;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45em 0.7em;
+      font-size: 0.94rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .founder-stats .stat { font-weight: 600; }
+    .founder-stats .dot {
+      color: var(--accent);
+      font-weight: 700;
+      padding: 0 0.15em;
+    }
+    @media (max-width: 720px) {
+      .founder-stats { justify-content: center; }
+    }
+
+    /* Peer-proof archetype line inside Shape */
+    .shape-item .peer-proof {
+      margin-top: 0.9em;
+      font-size: 0.96rem;
+      color: rgba(250, 247, 242, 0.74);
+      line-height: 1.55;
+    }
+    .shape-item .peer-proof strong { color: var(--bg); font-weight: 600; }
 
     /* SECTION */
     section { padding: 72px 0; border-bottom: 1px solid var(--line); }
@@ -338,21 +419,39 @@
       <div class="date-bar">
         <div class="date-line">May 23 to July 11, 2026</div>
         <div class="date-meta">Seven Saturdays. Small cohort. Free for you. By invitation only.</div>
+        <div class="window-line">Replies open today. Door closes <strong>Friday at 6pm ET</strong>.</div>
+        <a class="cta-button" href="mailto:bg@bghamrick.com?subject=I'm%20in%20%E2%80%94%20ABL%20Spring%202026&body=Here's%20what%20I'll%20do%20with%20the%20time%20I%20get%20back%3A%20">Reply Yes <span class="arr">&rarr;</span></a>
       </div>
     </div>
   </header>
+
+  <!-- PAIN -->
+  <section class="pain">
+    <div class="container">
+      <div class="eyebrow">What this looks like right now</div>
+      <h2>You already feel it.</h2>
+      <p>It's 9pm and you're back on your laptop. Not because you want to be. Because the day-to-day coordination work has eaten the hours that were supposed to belong to your family, your sleep, the thing you actually started this for. The calendar shifting, the inbox catching up, the seven small decisions that nobody else can make. They're not hard. They're just yours, and there are too many of them.</p>
+      <p>You've watched other people get their evenings back. You've read about AI. You feel three years late, you've tried two apps that promised the fix, and you're still the one closing the loop on everything. The pattern doesn't change. The job just gets denser.</p>
+      <p>That's the part nobody else can do for you. That's also the part this fixes first.</p>
+    </div>
+  </section>
 
   <!-- FOUNDER INTRO -->
   <section class="founder-intro">
     <div class="container">
       <div class="founder-grid">
         <div class="founder-photo">
-          <img src="assets/bg-portrait.jpg" alt="BG Hamrick, founder of Automating A Better Life" />
+          <img src="assets/bg-portrait-graded.png" alt="BG Hamrick, founder of Automating A Better Life" />
         </div>
         <div class="founder-text">
           <div class="eyebrow">From the founder</div>
           <h2>I'm BG. I'll be in the room every Saturday.</h2>
           <p>I'm not running this from the sidelines. Every system you set up, I use myself. Every reply you get is mine, not a virtual assistant's. That is why the seats are limited.</p>
+          <div class="founder-stats">
+            <span class="stat">14 digital specialists on the team.</span>
+            <span class="stat">Six months running the system on my own machine.</span>
+            <span class="stat">One real production pipeline shipping work every week.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -425,6 +524,9 @@
           </div>
         </div>
       </div>
+      <div class="cta-wrap">
+        <a class="cta-button" href="mailto:bg@bghamrick.com?subject=I'm%20in%20%E2%80%94%20ABL%20Spring%202026&body=Here's%20what%20I'll%20do%20with%20the%20time%20I%20get%20back%3A%20">I'm In <span class="arr">&rarr;</span></a>
+      </div>
     </div>
   </section>
 
@@ -473,6 +575,7 @@
         <div class="shape-item">
           <h3>The Space</h3>
           <p><strong>Small and Focused.</strong> I am keeping the group small so I can be available to help every person in the room.</p>
+          <p class="peer-proof">The room so far: attorneys, contractors, coaches, and small-business owners. People who run something real and want their week back.</p>
         </div>
         <div class="shape-item">
           <h3>The Tech</h3>
@@ -510,6 +613,9 @@
       <div class="cta-instruction">
         <p>Reply to my email with <strong>"I'm in"</strong> and your answer to that one question.</p>
         <p>That's it. No forms, no funnels, and no hurdles. I will personally confirm your seat within 24 hours.</p>
+      </div>
+      <div class="cta-wrap">
+        <a class="cta-button" href="mailto:bg@bghamrick.com?subject=I'm%20in%20%E2%80%94%20ABL%20Spring%202026&body=Here's%20what%20I'll%20do%20with%20the%20time%20I%20get%20back%3A%20">Send My Reply <span class="arr">&rarr;</span></a>
       </div>
       <div class="signoff">
         <div class="author">BG Hamrick</div>
