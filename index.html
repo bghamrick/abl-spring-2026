@@ -8,22 +8,23 @@
   <meta property="og:title" content="Automating A Better Life — Spring 2026 Beta Cohort">
   <meta property="og:description" content="A seven-week experience for professionals who want AI to give them their life back.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#050505">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Canvas */
-      --bg: #0f172a;            /* slate-900, base canvas */
-      --bg-elevated: #1e293b;   /* slate-800, one step up for cards / anchor blocks */
-      --bg-elevated-2: #243044; /* slate between 800 and 700, for nested items */
+      /* Canvas — warm-neutral, verified by pixel sample of StoryOS 2026-05-14 */
+      --bg: #050505;            /* primary canvas, warm-neutral near-black */
+      --bg-alt: #141414;        /* alt canvas, warm-neutral charcoal */
+      --bg-elevated: #1f1f1f;   /* one step up from charcoal, for cards on either canvas */
+      --bg-elevated-2: #2a2a2a; /* nested elevation */
 
-      /* Text */
-      --ink: #f8fafc;           /* slate-50, near-white display */
-      --body: #cbd5e1;          /* slate-300, default body */
-      --muted: #94a3b8;         /* slate-400, deep secondary */
-      --quiet: #64748b;         /* slate-500, finest print */
+      /* Text — warm-neutral grays to match canvas */
+      --ink: #fafafa;           /* near-white display */
+      --body: #c9c9c9;          /* default body */
+      --muted: #8f8f8f;         /* deep secondary */
+      --quiet: #6a6a6a;         /* finest print */
 
       /* Accents */
       --accent: #ea580c;        /* orange-600, the brand mark */
@@ -31,9 +32,9 @@
       --accent-warm: #fbbf24;   /* amber-400, window line / soft warm */
       --accent-deep: #c2410c;   /* orange-700, depth */
 
-      /* Lines */
-      --line: #334155;          /* slate-700, default rule */
-      --line-soft: #1e293b;     /* slate-800, low-contrast rule on canvas */
+      /* Lines — warm-neutral to match canvas */
+      --line: #333333;          /* default rule */
+      --line-soft: #1a1a1a;     /* low-contrast rule on canvas */
     }
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; background: var(--bg); }
@@ -115,15 +116,22 @@
     /* Section base */
     section {
       padding: 88px 0;
-      border-bottom: 1px solid var(--line-soft);
     }
-    section:last-of-type { border-bottom: none; }
+    /* Alternating canvas rhythm — verified warm-neutral palette */
+    .hero          { background: var(--bg); }
+    .pain          { background: var(--bg-alt); }
+    .founder-intro { background: var(--bg); }
+    .why           { background: var(--bg-alt); }
+    .build         { background: var(--bg); }
+    .who           { background: var(--bg-alt); }
+    .shape         { background: var(--bg); }
+    .commitment    { background: var(--bg-alt); }
+    .cta           { background: var(--bg); }
 
     /* HERO */
     .hero {
       padding: 120px 0 88px;
       text-align: center;
-      border-bottom: 1px solid var(--line-soft);
     }
     .hero h1 .m-break { display: inline; }
     @media (max-width: 640px) {
