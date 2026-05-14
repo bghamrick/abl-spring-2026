@@ -4,29 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Automating A Better Life — Spring 2026 Beta Cohort</title>
-  <meta name="description" content="A six-week experience for professionals who want AI to give them their life back. Spring 2026, May 23 through June 27. Beta cohort, by invitation.">
+  <meta name="description" content="A seven-week experience for professionals who want AI to give them their life back. Spring 2026, May 23 through July 11. Beta cohort, by invitation.">
   <meta property="og:title" content="Automating A Better Life — Spring 2026 Beta Cohort">
-  <meta property="og:description" content="A six-week experience for professionals who want AI to give them their life back.">
+  <meta property="og:description" content="A seven-week experience for professionals who want AI to give them their life back.">
   <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0f172a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAF7F2;
-      --bg-card: #F1ECE2;
-      --ink: #1F1B16;
-      --muted: #6B6258;
-      --accent: #8B3A1F;
-      --accent-soft: #A85936;
-      --line: #DDD4C5;
+      /* Canvas */
+      --bg: #0f172a;            /* slate-900, base canvas */
+      --bg-elevated: #1e293b;   /* slate-800, one step up for cards / anchor blocks */
+      --bg-elevated-2: #243044; /* slate between 800 and 700, for nested items */
+
+      /* Text */
+      --ink: #f8fafc;           /* slate-50, near-white display */
+      --body: #cbd5e1;          /* slate-300, default body */
+      --muted: #94a3b8;         /* slate-400, deep secondary */
+      --quiet: #64748b;         /* slate-500, finest print */
+
+      /* Accents */
+      --accent: #ea580c;        /* orange-600, the brand mark */
+      --accent-hot: #f97316;    /* orange-500, hover lift */
+      --accent-warm: #fbbf24;   /* amber-400, window line / soft warm */
+      --accent-deep: #c2410c;   /* orange-700, depth */
+
+      /* Lines */
+      --line: #334155;          /* slate-700, default rule */
+      --line-soft: #1e293b;     /* slate-800, low-contrast rule on canvas */
     }
     * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; background: var(--bg); }
     body {
       margin: 0;
       background: var(--bg);
-      color: var(--ink);
+      color: var(--body);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
       font-size: 18px;
       line-height: 1.65;
@@ -39,53 +53,170 @@
       padding: 0 28px;
     }
     h1, h2, h3 {
-      font-family: 'Source Serif 4', Georgia, 'Hoefler Text', Cambria, serif;
-      font-weight: 600;
-      line-height: 1.18;
-      letter-spacing: -0.01em;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
       color: var(--ink);
     }
-    h1 { font-size: clamp(2.4rem, 5.5vw, 3.6rem); margin: 0 0 .25em; letter-spacing: -0.025em; font-weight: 700; }
-    h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); margin: 0 0 .65em; }
+    h1 {
+      font-size: clamp(2.1rem, 6vw, 4rem);
+      margin: 0 0 .25em;
+      letter-spacing: -0.035em;
+      font-weight: 900;
+    }
+    h2 {
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      margin: 0 0 .65em;
+      letter-spacing: -0.025em;
+    }
     h3 { font-size: 1.2rem; margin: 0 0 .35em; }
     p { margin: 0 0 1em; }
-    a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
-    a:hover { color: var(--accent-soft); }
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+    a:hover { color: var(--accent-hot); }
     em { font-style: italic; }
+
+    /* EYEBROW (StoryOS-style: flanked by hairlines, centered, with optional bloom ornament) */
+    .eyebrow-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 1.6em;
+    }
+    .eyebrow-wrap .line {
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--line);
+    }
     .eyebrow {
-      display: inline-block;
       font-family: 'Inter', system-ui, sans-serif;
       font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.4em;
+      white-space: nowrap;
+    }
+    .eyebrow-wrap .bloom {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      color: var(--accent);
     }
 
-    /* HERO - DEEP CHARCOAL BLOCK */
-    .hero {
-      padding: 110px 0 72px;
-      border-bottom: none;
-      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
-      color: var(--bg);
-      text-align: center;
+    /* Section base */
+    section {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--line-soft);
     }
-    .hero .eyebrow { color: #D4A883; }
-    .hero h1 { color: #FFFFFF; }
+    section:last-of-type { border-bottom: none; }
+
+    /* HERO */
+    .hero {
+      padding: 120px 0 88px;
+      text-align: center;
+      border-bottom: 1px solid var(--line-soft);
+    }
     .hero h1 .m-break { display: inline; }
     @media (max-width: 640px) {
       .hero h1 .m-break { display: block; }
     }
-    .hero .lede { color: #FFFFFF; }
-    .hero .date-bar {
-      color: #FFFFFF;
-      border-top: 1px dashed rgba(255, 255, 255, 0.25);
+    .hero h1 .accent-word { color: var(--accent); }
+    .hero .lede {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+      line-height: 1.5;
+      color: var(--body);
+      margin: 1em auto 0;
+      max-width: 620px;
     }
-    .hero .date-bar strong { color: #FFFFFF; }
+    .hero .date-bar {
+      color: var(--ink);
+      margin-top: 3em;
+      padding-top: 2.2em;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .hero .date-line {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.6rem, 3.6vw, 2.3rem);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin-bottom: 0.7em;
+    }
+    .hero .date-meta {
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      line-height: 1.5;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .hero .window-line {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--accent-warm);
+      letter-spacing: 0.01em;
+      line-height: 1.55;
+      max-width: 560px;
+      margin: 1.3em auto 0;
+    }
+    .hero .window-line strong {
+      font-weight: 700;
+      font-style: normal;
+      color: var(--accent-warm);
+    }
+
+    /* CTA BUTTON */
+    .cta-button {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding: 18px 38px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.18s ease, transform 0.15s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .cta-button:hover {
+      background: var(--accent-hot);
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .cta-button:active { transform: translateY(1px); }
+    .cta-button .arr { display: inline-block; margin-left: 0.4em; }
+    .hero .cta-button { margin-top: 2.2em; }
+    .build .cta-wrap, .cta .cta-wrap { text-align: center; margin-top: 2.6em; }
+
+    /* PAIN — canvas level, the dark base does the work */
+    .pain p {
+      font-size: 1.08rem;
+      color: var(--body);
+      line-height: 1.65;
+      margin: 0 0 1.2em;
+    }
+    .pain p:last-child { margin-bottom: 0; }
 
     /* FOUNDER INTRO */
-    .founder-intro { padding: 80px 0; border-bottom: 1px solid var(--line); }
+    .founder-intro { padding: 88px 0; }
     .founder-grid {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -96,141 +227,47 @@
       border-radius: 8px;
       overflow: hidden;
       aspect-ratio: 1 / 1;
-      background: var(--bg-card);
-      box-shadow: 0 4px 24px rgba(31, 27, 22, 0.08);
+      background: var(--bg-elevated);
     }
-    .founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .founder-text h2 { font-size: clamp(1.5rem, 3.2vw, 2.05rem); margin-bottom: 0.55em; }
-    .founder-text p { font-size: 1.05rem; color: var(--muted); line-height: 1.65; margin: 0; }
+    .founder-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .founder-text h2 {
+      font-size: clamp(1.55rem, 3.2vw, 2.1rem);
+      margin-bottom: 0.55em;
+    }
+    .founder-text p {
+      font-size: 1.05rem;
+      color: var(--body);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .founder-text .eyebrow-wrap { justify-content: flex-start; margin-bottom: 1.2em; }
+    .founder-text .eyebrow-wrap .line:first-child { display: none; }
     @media (max-width: 720px) {
       .founder-grid { grid-template-columns: 1fr; gap: 28px; }
       .founder-photo { max-width: 240px; margin: 0 auto; }
       .founder-text { text-align: center; }
+      .founder-text .eyebrow-wrap { justify-content: center; }
+      .founder-text .eyebrow-wrap .line:first-child { display: block; }
     }
-
-    /* BUILD section as a DEEP COLOR BLOCK */
-    .build {
-      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
-      color: var(--bg);
-      border-bottom: none;
-      padding: 88px 0;
-    }
-    .build .eyebrow { color: #D4A883; }
-    .build h2 { color: var(--bg); }
-    .build > .container > p { color: rgba(250, 247, 242, 0.72); }
-    .build .build-item {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .build .build-item .num { color: #D4A883; }
-    .build .build-item h3 { color: var(--bg); }
-    .build .build-item p { color: rgba(250, 247, 242, 0.72); }
-    .build .build-item .week-stamp {
-      display: block;
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #D4A883;
-      margin-bottom: 0.5em;
-    }
-    .hero .lede {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: clamp(1.2rem, 2.3vw, 1.5rem);
-      line-height: 1.5;
-      color: #FFFFFF;
-      margin: .8em auto 0;
-      max-width: 620px;
-    }
-    .hero .date-bar {
-      color: #FFFFFF;
-      margin-top: 2.8em;
-      padding-top: 2em;
-      border-top: 1px dashed rgba(255, 255, 255, 0.25);
-      text-align: center;
-    }
-    .hero .date-line {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: clamp(1.7rem, 4vw, 2.5rem);
-      font-weight: 600;
-      color: #FFFFFF;
-      letter-spacing: 0.01em;
-      line-height: 1.2;
-      margin-bottom: 0.7em;
-    }
-    .hero .date-meta {
-      font-size: 0.92rem;
-      color: rgba(255, 255, 255, 0.78);
-      letter-spacing: 0.04em;
-      line-height: 1.5;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-    .hero .window-line {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic;
-      font-size: 0.98rem;
-      color: #D4A883;
-      letter-spacing: 0.02em;
-      line-height: 1.5;
-      max-width: 560px;
-      margin: 1.1em auto 0;
-    }
-    .hero .window-line strong { font-weight: 600; color: #E8C29A; font-style: normal; }
-
-    /* CTA BUTTON (universal) */
-    .cta-button {
-      display: inline-block;
-      background: var(--accent);
-      color: #FFFFFF;
-      font-family: 'Inter', sans-serif;
-      font-size: 1.08rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      padding: 18px 36px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.2s ease, transform 0.15s ease;
-      border: none;
-      cursor: pointer;
-    }
-    .cta-button:hover { background: var(--accent-soft); color: #FFFFFF; text-decoration: none; }
-    .cta-button:active { transform: translateY(1px); }
-    .cta-button .arr { display: inline-block; margin-left: 0.35em; }
-    .hero .cta-button { margin-top: 2em; }
-    .build .cta-wrap, .cta .cta-wrap { text-align: center; margin-top: 2.4em; }
-
-    /* PAIN section (dark anchor block, matches hero/build/shape/cta rhythm) */
-    .pain {
-      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
-      color: var(--bg);
-      border-bottom: none;
-      padding: 88px 0;
-    }
-    .pain .eyebrow { color: #D4A883; }
-    .pain h2 { color: var(--bg); }
-    .pain p {
-      font-size: 1.08rem;
-      color: rgba(250, 247, 242, 0.84);
-      line-height: 1.65;
-      margin: 0 0 1.2em;
-    }
-    .pain p:last-child { margin-bottom: 0; }
 
     /* Founder stat row */
     .founder-stats {
-      margin-top: 1.4em;
-      padding-top: 1.2em;
+      margin-top: 1.6em;
+      padding-top: 1.3em;
       border-top: 1px solid var(--line);
       display: flex;
       flex-wrap: wrap;
       gap: 0.45em 0.7em;
-      font-size: 0.94rem;
-      color: var(--ink);
-      line-height: 1.5;
+      font-size: 0.95rem;
+      color: var(--body);
+      line-height: 1.55;
     }
-    .founder-stats .stat { font-weight: 600; }
+    .founder-stats .stat { font-weight: 600; color: var(--ink); }
     .founder-stats .dot {
       color: var(--accent);
       font-weight: 700;
@@ -240,33 +277,25 @@
       .founder-stats { justify-content: center; }
     }
 
-    /* Peer-proof archetype line inside Shape */
-    .shape-item .peer-proof {
-      margin-top: 0.9em;
-      font-size: 0.96rem;
-      color: rgba(250, 247, 242, 0.74);
-      line-height: 1.55;
-    }
-    .shape-item .peer-proof strong { color: var(--bg); font-weight: 600; }
-
-    /* SECTION */
-    section { padding: 72px 0; border-bottom: 1px solid var(--line); }
-    section:last-of-type { border-bottom: none; }
-
     /* WHY */
-    .why p { font-size: 1.08rem; }
+    .why p { font-size: 1.08rem; color: var(--body); }
     .pull-quote {
-      font-family: 'Source Serif 4', Georgia, serif;
+      font-family: 'Inter', sans-serif;
       font-style: italic;
-      font-size: clamp(1.25rem, 2.4vw, 1.5rem);
-      line-height: 1.45;
+      font-weight: 500;
+      font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+      line-height: 1.5;
       color: var(--ink);
       border-left: 3px solid var(--accent);
-      padding: 0.2em 0 0.2em 1.5em;
-      margin: 1.6em 0 0.4em;
+      padding: 0.3em 0 0.3em 1.5em;
+      margin: 1.8em 0 0.4em;
     }
 
     /* BUILD */
+    .build > .container > p {
+      color: var(--body);
+      font-size: 1.06rem;
+    }
     .build-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -277,21 +306,44 @@
       display: flex;
       gap: 22px;
       padding: 26px 28px;
-      background: var(--bg-card);
-      border-radius: 6px;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: border-color 0.18s ease;
     }
+    .build-item:hover { border-color: var(--line); }
     .build-item .num {
       flex-shrink: 0;
-      font-family: 'Source Serif 4', Georgia, serif;
+      font-family: 'Inter', sans-serif;
       font-size: 2rem;
-      font-weight: 600;
+      font-weight: 900;
       color: var(--accent);
       line-height: 1;
       min-width: 1.4em;
       padding-top: 2px;
+      letter-spacing: -0.03em;
     }
-    .build-item h3 { margin-bottom: .25em; }
-    .build-item p { margin: 0; color: var(--muted); font-size: 0.99rem; line-height: 1.55; }
+    .build-item h3 {
+      margin-bottom: .25em;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .build-item p {
+      margin: 0;
+      color: var(--body);
+      font-size: 0.99rem;
+      line-height: 1.55;
+    }
+    .build-item .week-stamp {
+      display: block;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5em;
+    }
 
     /* WHO */
     .two-col {
@@ -302,71 +354,84 @@
     }
     .two-col .col-head {
       font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--accent);
       margin-bottom: 1em;
-      padding-bottom: 0.5em;
+      padding-bottom: 0.6em;
       border-bottom: 1px solid var(--line);
     }
     .two-col ul { padding-left: 1.2em; margin: 0; }
-    .two-col li { margin-bottom: 1.1em; color: var(--ink); line-height: 1.55; }
+    .two-col li {
+      margin-bottom: 1.1em;
+      color: var(--body);
+      line-height: 1.6;
+    }
+    .two-col li::marker { color: var(--accent); }
     .two-col li strong { color: var(--ink); font-weight: 600; }
     @media (max-width: 640px) {
       .two-col { grid-template-columns: 1fr; gap: 28px; }
     }
 
-    /* SHAPE - DEEP CHARCOAL BLOCK */
-    .shape {
-      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
-      color: var(--bg);
-      border-bottom: none;
-      padding: 88px 0;
-    }
-    .shape .eyebrow { color: #D4A883; }
-    .shape h2 { color: var(--bg); }
+    /* SHAPE */
     .shape-list { margin-top: 2em; }
     .shape-item {
-      padding: 26px 0;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line-soft);
     }
     .shape-item:last-child { border-bottom: none; padding-bottom: 0; }
     .shape-item h3 {
       font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #D4A883;
+      color: var(--accent);
       margin-bottom: 0.7em;
     }
-    .shape-item p { margin: 0; line-height: 1.6; color: rgba(250, 247, 242, 0.82); }
-    .shape-item strong { color: var(--bg); font-weight: 600; }
+    .shape-item p {
+      margin: 0 0 0.7em;
+      line-height: 1.65;
+      color: var(--body);
+    }
+    .shape-item p:last-child { margin-bottom: 0; }
+    .shape-item strong { color: var(--ink); font-weight: 600; }
+    .shape-item .peer-proof {
+      margin-top: 0.9em;
+      font-size: 0.96rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .shape-item .peer-proof strong { color: var(--ink); font-weight: 600; }
 
     /* COMMITMENT */
     .commitment ul { padding-left: 1.5em; margin: 1.5em 0 0; }
-    .commitment li { margin-bottom: 1.1em; line-height: 1.55; }
+    .commitment li {
+      margin-bottom: 1.1em;
+      line-height: 1.6;
+      color: var(--body);
+    }
+    .commitment li::marker { color: var(--accent); }
     .commitment li strong { color: var(--ink); font-weight: 600; }
+    .commitment p { color: var(--body); }
 
-    /* CTA - DEEP CHARCOAL BLOCK */
+    /* CTA */
     .cta {
       text-align: center;
-      padding: 110px 0;
+      padding: 120px 0;
       border-bottom: none;
-      background: linear-gradient(180deg, #2A2826 0%, #1F1D1B 100%);
-      color: var(--bg);
     }
-    .cta .eyebrow { color: #D4A883; }
-    .cta h2 { margin-bottom: 0.4em; color: var(--bg); }
+    .cta h2 { margin-bottom: 0.4em; }
     .cta-question {
-      font-family: 'Source Serif 4', Georgia, serif;
+      font-family: 'Inter', sans-serif;
       font-style: italic;
+      font-weight: 500;
       font-size: clamp(1.3rem, 2.6vw, 1.55rem);
-      color: var(--bg);
-      margin: 2.2em auto;
-      line-height: 1.45;
+      color: var(--ink);
+      margin: 2.4em auto;
+      line-height: 1.5;
       max-width: 580px;
       position: relative;
     }
@@ -375,36 +440,37 @@
       display: block;
       width: 40px;
       height: 1px;
-      background: #D4A883;
-      margin: 1.2em auto;
+      background: var(--accent);
+      margin: 1.3em auto;
     }
     .cta-instruction {
       max-width: 540px;
       margin: 0 auto;
-      color: rgba(250, 247, 242, 0.78);
+      color: var(--body);
       font-size: 1.02rem;
     }
-    .cta-instruction strong { color: var(--bg); font-weight: 600; }
+    .cta-instruction strong { color: var(--ink); font-weight: 600; }
     .signoff {
       margin-top: 4.5em;
       padding-top: 2.4em;
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      border-top: 1px solid var(--line);
       text-align: center;
-      color: rgba(250, 247, 242, 0.62);
+      color: var(--muted);
       font-size: 0.95rem;
     }
     .signoff .author {
-      font-family: 'Source Serif 4', Georgia, serif;
+      font-family: 'Inter', sans-serif;
       font-size: 1.15rem;
-      color: var(--bg);
-      font-style: italic;
+      color: var(--ink);
+      font-weight: 600;
       margin-bottom: 0.3em;
     }
     .signoff .brand {
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(250, 247, 242, 0.55);
+      color: var(--accent);
+      font-weight: 600;
     }
   </style>
 </head>
@@ -413,8 +479,20 @@
   <!-- HERO -->
   <header class="hero">
     <div class="container">
-      <div class="eyebrow">Spring 2026 · Beta Cohort</div>
-      <h1>Automating A Better <span class="m-break">Life</span></h1>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <svg class="bloom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3c2.5 2 2.5 5 0 7 2.5-2 5-2 7 0-2 2.5-5 2.5-7 0 2 2.5 2 5 0 7-2.5-2-2.5-5 0-7-2.5 2-5 2-7 0 2-2.5 5-2.5 7 0z"/>
+          <circle cx="12" cy="10" r="1" fill="currentColor"/>
+        </svg>
+        <span class="eyebrow">Spring 2026 · Beta Cohort</span>
+        <svg class="bloom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3c2.5 2 2.5 5 0 7 2.5-2 5-2 7 0-2 2.5-5 2.5-7 0 2 2.5 2 5 0 7-2.5-2-2.5-5 0-7-2.5 2-5 2-7 0 2-2.5 5-2.5 7 0z"/>
+          <circle cx="12" cy="10" r="1" fill="currentColor"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+      <h1>Automating A Better <span class="m-break"><span class="accent-word">Life</span></span></h1>
       <p class="lede">A seven-week experience for professionals who want AI to give them their life back.</p>
       <div class="date-bar">
         <div class="date-line">May 23 to July 11, 2026</div>
@@ -428,7 +506,11 @@
   <!-- PAIN -->
   <section class="pain">
     <div class="container">
-      <div class="eyebrow">What this looks like right now</div>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">What this looks like right now</span>
+        <span class="line"></span>
+      </div>
       <h2>You already feel it.</h2>
       <p>It's 9pm and you're back on your laptop. Not because you want to be. Because the day-to-day coordination work has eaten the hours that were supposed to belong to your family, your sleep, the thing you actually started this for. The calendar shifting, the inbox catching up, the seven small decisions that nobody else can make. They're not hard. They're just yours, and there are too many of them.</p>
       <p>You've watched other people get their evenings back. You've read about AI. You feel three years late, you've tried two apps that promised the fix, and you're still the one closing the loop on everything. The pattern doesn't change. The job just gets denser.</p>
@@ -441,10 +523,14 @@
     <div class="container">
       <div class="founder-grid">
         <div class="founder-photo">
-          <img src="assets/bg-portrait-graded.png" alt="BG Hamrick, founder of Automating A Better Life" />
+          <img src="assets/bg-portrait-dark.png" alt="BG Hamrick, founder of Automating A Better Life" />
         </div>
         <div class="founder-text">
-          <div class="eyebrow">From the founder</div>
+          <div class="eyebrow-wrap">
+            <span class="line"></span>
+            <span class="eyebrow">From the founder</span>
+            <span class="line"></span>
+          </div>
           <h2>I'm BG. I'll be in the room every Saturday.</h2>
           <p>I'm not running this from the sidelines. Every system you set up, I use myself. Every reply you get is mine, not a virtual assistant's. That is why the seats are limited.</p>
           <div class="founder-stats">
@@ -460,7 +546,11 @@
   <!-- WHY -->
   <section class="why">
     <div class="container">
-      <div class="eyebrow">Why this exists</div>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Why this exists</span>
+        <span class="line"></span>
+      </div>
       <h2>Most AI courses focus on business growth as the starting point.</h2>
       <p>We start somewhere else. This course teaches you how to automate the specific parts of your life and business that currently dominate your time. We use a powerful engine (a private AI workspace on your own computer and a team of digital specialists), but we point it at a different target.</p>
       <p>We reclaim your life first. By getting your evenings, your weekends, and your attention back, you finally have the clarity needed to lead. Scaling your business happens as a result of you finding your way out of the daily grind.</p>
@@ -471,7 +561,11 @@
   <!-- BUILD -->
   <section class="build">
     <div class="container">
-      <div class="eyebrow">What you'll actually own</div>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">What you'll actually own</span>
+        <span class="line"></span>
+      </div>
       <h2>Six real things that live on your computer.</h2>
       <p>We aren't just talking about ideas. We are building. By the end of this, you will have:</p>
       <div class="build-grid">
@@ -533,7 +627,11 @@
   <!-- WHO -->
   <section class="who">
     <div class="container">
-      <div class="eyebrow">Who this is for</div>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Who this is for</span>
+        <span class="line"></span>
+      </div>
       <h2>Is this for you?</h2>
       <p>This is for the professional who wants their time to belong to them again. It is for the attorneys, contractors, coaches, and owners who feel like their business has stopped being a tool and started being a cage.</p>
       <div class="two-col">
@@ -561,7 +659,11 @@
   <!-- SHAPE -->
   <section class="shape">
     <div class="container">
-      <div class="eyebrow">The logistics</div>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">The logistics</span>
+        <span class="line"></span>
+      </div>
       <h2>Five things to know before you say yes.</h2>
       <div class="shape-list">
         <div class="shape-item">
@@ -592,7 +694,11 @@
   <!-- COMMITMENT -->
   <section class="commitment">
     <div class="container">
-      <div class="eyebrow">Our agreement</div>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Our agreement</span>
+        <span class="line"></span>
+      </div>
       <h2>Four things I'm asking of you.</h2>
       <p>Because this is a beta group and I am personally helping you with the setup, I am looking for partners who are fully committed. If you take one of these seats, you are agreeing to:</p>
       <ul>
@@ -607,7 +713,19 @@
   <!-- CTA -->
   <section class="cta">
     <div class="container">
-      <div class="eyebrow">How to register</div>
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <svg class="bloom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3c2.5 2 2.5 5 0 7 2.5-2 5-2 7 0-2 2.5-5 2.5-7 0 2 2.5 2 5 0 7-2.5-2-2.5-5 0-7-2.5 2-5 2-7 0 2-2.5 5-2.5 7 0z"/>
+          <circle cx="12" cy="10" r="1" fill="currentColor"/>
+        </svg>
+        <span class="eyebrow">How to register</span>
+        <svg class="bloom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3c2.5 2 2.5 5 0 7 2.5-2 5-2 7 0-2 2.5-5 2.5-7 0 2 2.5 2 5 0 7-2.5-2-2.5-5 0-7-2.5 2-5 2-7 0 2-2.5 5-2.5 7 0z"/>
+          <circle cx="12" cy="10" r="1" fill="currentColor"/>
+        </svg>
+        <span class="line"></span>
+      </div>
       <h2>One question. One reply.</h2>
       <div class="cta-question">"What will you do with the time this gives you back?"</div>
       <div class="cta-instruction">
