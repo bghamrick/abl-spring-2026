@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Node (if build step ever added)
+node_modules/
+dist/
+.cache/
