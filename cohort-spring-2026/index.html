@@ -470,6 +470,27 @@
       height: 100%;
       border: 0;
     }
+    .resource-embed .video-placeholder {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--bg-elevated);
+      border: 1px dashed var(--line);
+    }
+    .resource-embed .video-placeholder .placeholder-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
     .resource-embed .embed-caption {
       margin-top: 10px;
       color: var(--muted);
@@ -647,11 +668,11 @@
     <div class="container">
       <div class="eyebrow-wrap">
         <span class="line"></span>
-        <span class="eyebrow">The full arc</span>
+        <span class="eyebrow">The full cohort</span>
         <span class="line"></span>
       </div>
       <h2>Seven Saturdays.</h2>
-      <p>One live session each Saturday at 1 PM ET. Recordings go here within 48 hours so nobody falls behind.</p>
+      <p>One live session each Saturday at 1 PM ET. Recordings go here within 24 hours so nobody falls behind.</p>
 
       <!--
         =====================================================================
@@ -712,12 +733,12 @@
             <h3>Orientation &amp; Install</h3>
             <p>We meet, install your ABL folder live if it isn't already, and you each have your first real conversation with Alfred. By the end of the session, your private workspace is running.</p>
             <div class="resources">
-              <!-- PLACEHOLDER: swap video ID after Saturday's session is uploaded to YouTube -->
+              <!-- PLACEHOLDER: swap to a real <div class="video-wrap"><iframe ...></iframe></div> after Saturday's recording is uploaded to YouTube -->
               <div class="resource-embed">
-                <div class="video-wrap">
-                  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                <div class="video-placeholder">
+                  <div class="placeholder-label">Recording will appear here</div>
                 </div>
-                <div class="embed-caption">Week 0 recording · May 23 · <em>placeholder</em> — swap after upload</div>
+                <div class="embed-caption">Week 0 recording · May 23 · placeholder — swap after upload</div>
               </div>
               <a class="resource" href="assets/week-0/orientation-worksheet.pdf" target="_blank">
                 <span class="res-icon">⬇</span>
@@ -727,8 +748,7 @@
                 </span>
                 <span class="res-tag">PDF</span>
               </a>
-              <!-- PLACEHOLDER: swap href with the real Google Drive URL from the enrollment email -->
-              <a class="resource" href="#" target="_blank">
+              <a class="resource" href="https://drive.google.com/file/d/1wwuZELHOhjF0B7W_0iwrKyiVvIPlQByE/view?usp=sharing" target="_blank">
                 <span class="res-icon">↗</span>
                 <span class="res-body">
                   <span class="res-title">Your ABL folder — download</span>
