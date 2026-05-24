@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BG Hamrick — Brand Guidelines · v1.0</title>
+  <meta name="description" content="The visual and editorial system for Automating A Better Life. BG Hamrick brand canon, version 1.0, locked 2026-05-24.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1E323E">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       ABL Brand Canon — locked 2026-05-24
+       Anchor (sea blue, 205°), Paper (cream), Coral (accent).
+       Manrope for body/UI. Instrument Serif for display.
+       This page IS the brand exhibit — every token below is also
+       a render target downstream in the document.
+       ========================================================= */
+    :root {
+      /* Anchor (sea blue, dark) */
+      --anchor:           #1E323E;
+      --anchor-deep:      #142932;
+      --anchor-soft:      #2A4659;
+
+      /* Paper (warm cream) */
+      --paper:            #F9F4E8;
+      --paper-deep:       #F4EFE3;
+      --paper-deeper:     #EDE7D7;
+      --paper-near-white: #FDFBF6;
+
+      /* Coral */
+      --coral:            #D9683F;
+      --coral-soft:       #E68C66;
+      --coral-bright:     #F47C70;
+      --burnt:            #C75A34;
+      --burnt-deep:       #A74821;
+
+      /* Ink */
+      --ink:              #1A1A1A;
+      --ink-mid:          #3D3D3D;
+      --ink-soft:         #6F6F6F;
+
+      --white:            #FFFFFF;
+
+      /* Type */
+      --font-body:    'Manrope', system-ui, -apple-system, sans-serif;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      /* Rhythm */
+      --max-content: 1140px;
+      --gutter: clamp(20px, 4vw, 56px);
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; background: var(--paper); }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .container {
+      max-width: var(--max-content);
+      margin: 0 auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
+    .container--narrow {
+      max-width: 760px;
+    }
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      color: var(--anchor);
+    }
+    h1 {
+      font-size: clamp(2.6rem, 6.4vw, 5rem);
+      margin: 0 0 .3em;
+      line-height: 1.02;
+    }
+    h2 {
+      font-size: clamp(2rem, 4.2vw, 3rem);
+      margin: 0 0 .6em;
+    }
+    h3 {
+      font-family: var(--font-body);
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      font-size: 1.15rem;
+      margin: 0 0 .4em;
+      color: var(--anchor);
+    }
+    p { margin: 0 0 1em; }
+    em { font-style: italic; }
+    strong { color: var(--anchor); font-weight: 600; }
+    a {
+      color: var(--coral);
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+      transition: color 0.18s ease;
+    }
+    a:hover { color: var(--burnt); }
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--paper-deeper);
+      color: var(--anchor);
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid rgba(30, 50, 62, 0.12);
+    }
+    h1 em, h2 em, h3 em { color: var(--coral); font-style: italic; }
+
+    /* BRAND MARK — inline masthead. Sits flush against the anchor hero. */
+    .brand-mark-masthead {
+      background: var(--anchor);
+      padding: 22px 28px 0;
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.18s ease;
+    }
+    .brand-mark:hover {
+      background: rgba(249, 244, 232, 0.08);
+      text-decoration: none;
+    }
+    .brand-mark .brand-glyph {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: block;
+    }
+    .brand-mark .brand-text {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--paper-near-white);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) {
+      .brand-mark-masthead { padding: 14px 16px 0; }
+      .brand-mark { padding: 4px 8px; gap: 7px; }
+      .brand-mark .brand-glyph { width: 14px; height: 14px; }
+      .brand-mark .brand-text { font-size: 0.74rem; }
+    }
+
+    /* EYEBROW — centered, with coral hairlines */
+    .eyebrow-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 1.4em;
+    }
+    .eyebrow-wrap .line {
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--coral);
+      opacity: 0.55;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      white-space: nowrap;
+    }
+
+    /* Section base + alternating paper rhythm */
+    section { padding: 96px 0; }
+    .hero          { background: var(--anchor); padding: 84px 0 96px; text-align: center; position: relative; overflow: hidden; }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(0,0,0,0.18) 100%);
+      pointer-events: none;
+    }
+    .brand           { background: var(--paper); }
+    .palette         { background: var(--paper-deep); }
+    .typography      { background: var(--paper); }
+    .rules           { background: var(--paper-deep); }
+    .voice           { background: var(--paper); }
+    .examples        { background: var(--paper-deep); }
+    .assets          { background: var(--paper); }
+    .versioning      { background: var(--paper-deep); }
+    .footer-band     { background: var(--anchor); padding: 72px 0 56px; text-align: center; position: relative; overflow: hidden; }
+    .footer-band::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, transparent 0%, rgba(0,0,0,0.22) 100%);
+      pointer-events: none;
+    }
+    .footer-band .container { position: relative; z-index: 1; }
+
+    /* H2 coral underline accent — follows H2 alignment per canon §4 */
+    .section-h2-accent {
+      display: block;
+      width: 48px;
+      height: 2px;
+      background: var(--coral);
+      margin: 0 auto 1.6em;
+      border-radius: 2px;
+    }
+    .palette h2,
+    .typography h2,
+    .rules h2,
+    .voice h2,
+    .examples h2,
+    .assets h2,
+    .versioning h2,
+    .brand h2 { text-align: center; }
+
+    /* HERO */
+    .hero .container { position: relative; z-index: 1; }
+    .hero h1 {
+      color: var(--paper-near-white);
+      max-width: 16ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 em { color: var(--coral-soft); }
+    .hero .lede {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      line-height: 1.55;
+      color: rgba(249, 244, 232, 0.82);
+      margin: 1.4em auto 0;
+      max-width: 600px;
+    }
+    .hero .lede em { color: var(--coral-soft); font-style: italic; }
+    .hero .eyebrow { color: var(--coral-soft); }
+    .hero .eyebrow-wrap .line { background: var(--coral-soft); opacity: 0.5; }
+    .hero .meta-strip {
+      margin-top: 3em;
+      padding-top: 2.2em;
+      border-top: 1px solid rgba(249, 244, 232, 0.18);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 22px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(249, 244, 232, 0.72);
+    }
+    .hero .meta-strip .dot {
+      color: var(--coral-soft);
+      font-weight: 700;
+    }
+
+    /* BRAND (§1) */
+    .brand .container { max-width: 820px; }
+    .brand p {
+      font-size: 1.08rem;
+      color: var(--ink);
+      line-height: 1.7;
+      margin: 0 0 1.2em;
+    }
+    .brand p:last-child { margin-bottom: 0; }
+    .brand p strong { color: var(--ink); font-weight: 600; }
+
+    /* PULL QUOTE — used for the brand line + "when in doubt" */
+    .pull-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 2.8vw, 1.9rem);
+      line-height: 1.35;
+      color: var(--anchor);
+      background: var(--paper-near-white);
+      border-left: 3px solid var(--coral);
+      padding: 1.1em 1.4em 1.1em 1.6em;
+      margin: 2em 0;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 8px 24px -16px rgba(20, 41, 50, 0.18);
+    }
+    .pull-quote--center {
+      text-align: center;
+      max-width: 660px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* PILLARS LIST */
+    .pillar-list {
+      list-style: none;
+      counter-reset: pillar;
+      padding: 0;
+      margin: 1.6em 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .pillar-list li {
+      counter-increment: pillar;
+      position: relative;
+      padding: 18px 22px 18px 58px;
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--anchor);
+    }
+    .pillar-list li::before {
+      content: counter(pillar);
+      position: absolute;
+      left: 18px;
+      top: 12px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 2rem;
+      color: var(--coral);
+      line-height: 1;
+    }
+
+    /* PALETTE (§2) */
+    .palette-family {
+      margin-bottom: 4em;
+    }
+    .palette-family:last-of-type { margin-bottom: 0; }
+    .palette-family__intro {
+      max-width: 720px;
+      margin: 0 auto 2em;
+      text-align: center;
+      color: var(--ink-mid);
+      font-size: 1.02rem;
+    }
+    .palette-family__head {
+      text-align: center;
+      margin-bottom: 1.4em;
+    }
+    .palette-family__name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--anchor);
+      margin: 0 0 0.3em;
+    }
+    .palette-family__name em { color: var(--coral); font-style: italic; }
+    .palette-family__tag {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+    }
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 2em;
+    }
+    .swatch-grid--two { grid-template-columns: repeat(3, 1fr); }
+    .swatch {
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .swatch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px -18px rgba(20, 41, 50, 0.25);
+    }
+    .swatch__block {
+      position: relative;
+      width: 100%;
+      min-height: 132px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 18px 20px;
+    }
+    .swatch__hex {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .swatch__hex.on-dark { color: var(--paper-near-white); }
+    .swatch__hex.on-light { color: var(--anchor); }
+    .swatch__body {
+      padding: 18px 20px 20px;
+      border-top: 1px solid var(--paper-deeper);
+      background: var(--paper-near-white);
+    }
+    .swatch__name {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--anchor);
+      margin: 0 0 0.35em;
+      letter-spacing: -0.005em;
+    }
+    .swatch__usage {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* DO / DON'T LISTS */
+    .dodont-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 1em;
+    }
+    @media (max-width: 720px) {
+      .dodont-grid { grid-template-columns: 1fr; gap: 12px; }
+    }
+    .dodont {
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 10px;
+      padding: 22px 24px 20px;
+    }
+    .dodont__badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      line-height: 1;
+      margin-bottom: 1em;
+    }
+    .dodont__badge--do {
+      background: var(--coral);
+      color: var(--paper-near-white);
+    }
+    .dodont__badge--dont {
+      background: var(--anchor);
+      color: var(--paper-near-white);
+    }
+    .dodont ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .dodont li {
+      position: relative;
+      padding: 0 0 0 22px;
+      margin: 0 0 0.9em;
+      font-size: 0.96rem;
+      line-height: 1.55;
+      color: var(--ink-mid);
+    }
+    .dodont li:last-child { margin-bottom: 0; }
+    .dodont li::before {
+      position: absolute;
+      left: 0;
+      top: 0.05em;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+    .dodont--do li::before {
+      content: '+';
+      color: var(--coral);
+      font-style: normal;
+      font-weight: 600;
+    }
+    .dodont--dont li::before {
+      content: '×';
+      color: var(--anchor);
+      font-weight: 600;
+      font-style: normal;
+    }
+    .dodont li strong { color: var(--anchor); font-weight: 600; }
+    .dodont li code {
+      font-size: 0.82em;
+    }
+
+    /* TYPOGRAPHY (§3) */
+    .typo-intro {
+      max-width: 760px;
+      margin: 0 auto 2.6em;
+      text-align: center;
+      color: var(--ink-mid);
+      font-size: 1.05rem;
+    }
+    .typo-intro p { margin: 0 0 1em; }
+    .typo-intro p:last-child { margin-bottom: 0; }
+
+    .specimen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin: 2em 0;
+    }
+    @media (max-width: 820px) {
+      .specimen-grid { grid-template-columns: 1fr; }
+    }
+    .specimen {
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 12px;
+      padding: 32px 32px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+    .specimen__label {
+      font-family: var(--font-body);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 0.5em;
+    }
+    .specimen__face {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.4rem;
+      letter-spacing: -0.005em;
+      color: var(--anchor);
+      margin: 0 0 1em;
+    }
+    .specimen__face em { color: var(--coral); }
+    .specimen__weights {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+      margin-bottom: 1.4em;
+      padding-bottom: 1.4em;
+      border-bottom: 1px solid var(--paper-deeper);
+    }
+    .specimen__weights code {
+      font-size: 0.85em;
+      background: var(--paper-deep);
+    }
+    .specimen__render {
+      flex: 1;
+    }
+    .specimen__caption {
+      margin-top: 1.4em;
+      padding-top: 1em;
+      border-top: 1px dashed var(--paper-deeper);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    /* Manrope specimen */
+    .render-manrope__body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink);
+      margin: 0 0 1.4em;
+    }
+    .render-manrope__eyebrow {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1.4em;
+    }
+    .render-manrope__brand-mark {
+      background: var(--anchor);
+      color: var(--paper-near-white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.01em;
+      padding: 14px 18px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    /* Instrument Serif specimen */
+    .render-serif__display {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2rem, 4.4vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: -0.015em;
+      color: var(--anchor);
+      margin: 0 0 1.2em;
+    }
+    .render-serif__display em { color: var(--coral); font-style: italic; }
+    .render-serif__pullquote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.45rem;
+      line-height: 1.3;
+      color: var(--anchor);
+      border-left: 3px solid var(--coral);
+      padding: 0.2em 0 0.2em 1em;
+      margin: 0;
+    }
+
+    /* HIERARCHY TABLE */
+    .hierarchy-wrap {
+      margin-top: 3em;
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .hierarchy-head {
+      padding: 22px 28px 18px;
+      border-bottom: 1px solid var(--paper-deeper);
+      background: var(--paper-deep);
+    }
+    .hierarchy-head h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      color: var(--anchor);
+      margin: 0;
+    }
+    .hierarchy-head h3 em { color: var(--coral); font-style: italic; }
+    .hierarchy-head p {
+      margin: 0.4em 0 0;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+    }
+    .hierarchy-table-scroll {
+      overflow-x: auto;
+    }
+    table.hierarchy {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      min-width: 720px;
+    }
+    table.hierarchy thead th {
+      background: var(--anchor);
+      color: var(--paper-near-white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: left;
+      padding: 14px 16px;
+    }
+    table.hierarchy tbody td {
+      padding: 14px 16px;
+      border-top: 1px solid var(--paper-deeper);
+      color: var(--ink-mid);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    table.hierarchy tbody tr:nth-child(odd) td {
+      background: var(--paper-deep);
+    }
+    table.hierarchy td.tier {
+      font-weight: 600;
+      color: var(--anchor);
+      white-space: nowrap;
+    }
+    table.hierarchy td.face {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--anchor);
+    }
+    table.hierarchy td code {
+      font-size: 0.82em;
+      background: var(--paper-near-white);
+    }
+
+    /* APPLICATION RULES (§4) */
+    .rules-intro {
+      max-width: 720px;
+      margin: 0 auto 2.4em;
+      text-align: center;
+      color: var(--ink-mid);
+      font-size: 1.05rem;
+    }
+    .rule-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .rule {
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 12px;
+      padding: 32px 36px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .rule:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px -20px rgba(20, 41, 50, 0.2);
+    }
+    .rule h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--anchor);
+      margin: 0 0 0.7em;
+    }
+    .rule h3 em { color: var(--coral); font-style: italic; }
+    .rule p {
+      color: var(--ink-mid);
+      line-height: 1.65;
+      margin: 0 0 1em;
+    }
+    .rule p:last-child { margin-bottom: 0; }
+    .rule code {
+      font-size: 0.85em;
+    }
+    .rule .reasoning {
+      margin-top: 0.4em;
+      padding: 14px 18px;
+      background: var(--paper-deep);
+      border-left: 2px solid var(--coral);
+      border-radius: 0 4px 4px 0;
+      font-style: italic;
+      color: var(--ink-mid);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+    .rule .reasoning strong {
+      font-style: normal;
+      color: var(--coral);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-right: 0.4em;
+    }
+
+    /* VOICE (§5) */
+    .voice .container { max-width: 820px; }
+    .voice-intro {
+      max-width: 720px;
+      margin: 0 auto 2.4em;
+      text-align: center;
+      color: var(--ink-mid);
+      font-size: 1.05rem;
+    }
+    .voice-principle {
+      padding: 28px 0 28px;
+      border-bottom: 1px solid var(--paper-deeper);
+    }
+    .voice-principle:last-of-type { border-bottom: none; }
+    .voice-principle p {
+      margin: 0;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      font-size: 1.04rem;
+    }
+    .voice-principle p strong {
+      color: var(--anchor);
+      font-weight: 700;
+      font-family: var(--font-body);
+    }
+    .voice-not {
+      margin-top: 2.4em;
+      padding: 28px 30px 24px;
+      background: var(--paper-deep);
+      border-radius: 12px;
+      border: 1px solid var(--paper-deeper);
+    }
+    .voice-not h3 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin: 0 0 1em;
+    }
+    .voice-not ul {
+      margin: 0;
+      padding-left: 1.3em;
+    }
+    .voice-not li {
+      margin-bottom: 1em;
+      color: var(--ink-mid);
+      line-height: 1.65;
+    }
+    .voice-not li:last-child { margin-bottom: 0; }
+    .voice-not li::marker { color: var(--coral); }
+
+    /* EXAMPLES (§6) */
+    .examples-intro {
+      max-width: 720px;
+      margin: 0 auto 2.4em;
+      text-align: center;
+      color: var(--ink-mid);
+      font-size: 1.05rem;
+    }
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 720px) {
+      .example-grid { grid-template-columns: 1fr; }
+    }
+    .example-card {
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 12px;
+      padding: 28px 30px 26px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .example-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(217, 104, 63, 0.5);
+      box-shadow: 0 14px 36px -20px rgba(20, 41, 50, 0.22);
+    }
+    .example-card__label {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 0.6em;
+    }
+    .example-card__name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.4rem;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: var(--anchor);
+      margin: 0 0 0.5em;
+    }
+    .example-card__name em { color: var(--coral); font-style: italic; }
+    .example-card__url {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--coral);
+      margin-bottom: 0.9em;
+      word-break: break-all;
+    }
+    .example-card__desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.94rem;
+      line-height: 1.6;
+      color: var(--ink-mid);
+      margin: 0;
+    }
+
+    /* ASSETS (§7) */
+    .assets .container { max-width: 860px; }
+    .assets-intro {
+      max-width: 720px;
+      margin: 0 auto 2em;
+      text-align: center;
+      color: var(--ink-mid);
+      font-size: 1.05rem;
+    }
+    dl.asset-list {
+      margin: 0;
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    dl.asset-list > div {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0;
+      border-bottom: 1px solid var(--paper-deeper);
+    }
+    dl.asset-list > div:last-child { border-bottom: none; }
+    dl.asset-list dt {
+      padding: 20px 24px;
+      background: var(--paper-deep);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--anchor);
+      line-height: 1.4;
+    }
+    dl.asset-list dd {
+      margin: 0;
+      padding: 20px 24px;
+      color: var(--ink-mid);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+    dl.asset-list dd code {
+      font-size: 0.85em;
+      background: var(--paper-deep);
+    }
+    @media (max-width: 640px) {
+      dl.asset-list > div { grid-template-columns: 1fr; }
+      dl.asset-list dt { padding-bottom: 8px; }
+      dl.asset-list dd { padding-top: 8px; background: var(--paper-near-white); }
+    }
+    .asset-route {
+      margin-top: 1.6em;
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+    }
+    .asset-route strong { color: var(--anchor); font-weight: 600; }
+
+    /* VERSIONING (§8) */
+    .versioning .container { max-width: 820px; }
+    .versioning .container > p {
+      color: var(--ink-mid);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .flow-list {
+      counter-reset: flow;
+      list-style: none;
+      padding: 0;
+      margin: 2em auto;
+      max-width: 720px;
+    }
+    .flow-list > li {
+      counter-increment: flow;
+      position: relative;
+      padding: 20px 26px 18px 70px;
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+    .flow-list > li::before {
+      content: counter(flow);
+      position: absolute;
+      left: 22px;
+      top: 14px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.9rem;
+      color: var(--coral);
+      line-height: 1;
+    }
+    .flow-list strong { color: var(--anchor); font-weight: 600; }
+    .versioning .note {
+      margin-top: 2em;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px 24px;
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-left: 3px solid var(--coral);
+      border-radius: 0 8px 8px 0;
+      color: var(--ink-mid);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+    .versioning .note strong { color: var(--anchor); font-weight: 600; }
+
+    /* FOOTER BAND — anchor, with signoff */
+    .footer-band .signoff {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+      color: var(--paper-near-white);
+      letter-spacing: -0.005em;
+      line-height: 1.4;
+      margin: 0 0 1.6em;
+    }
+    .footer-band .signoff::before,
+    .footer-band .signoff::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--coral-soft);
+      margin: 1em auto;
+      opacity: 0.7;
+    }
+    .footer-band .colophon {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.78rem;
+      color: rgba(249, 244, 232, 0.55);
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+    .footer-band .brand-line {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral-soft);
+      margin: 0 0 1.4em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 720px) {
+      section { padding: 80px 0; }
+      .hero { padding: 64px 0 80px; }
+      .footer-band { padding: 56px 0 48px; }
+      .swatch__block { min-height: 110px; padding: 14px 16px; }
+      .rule { padding: 26px 24px; }
+      .palette-family { margin-bottom: 3em; }
+    }
+    @media (max-width: 480px) {
+      .swatch-grid { grid-template-columns: 1fr; }
+      .pillar-list { grid-template-columns: 1fr; }
+      .specimen { padding: 24px 22px; }
+      .rule { padding: 22px 22px; }
+      .hero .meta-strip { font-size: 0.68rem; letter-spacing: 0.18em; gap: 8px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BRAND MARK — inline masthead, flush against hero -->
+  <div class="brand-mark-masthead">
+    <a class="brand-mark" href="#" aria-label="BG Hamrick — Brand Guidelines">
+      <svg class="brand-glyph" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="14" height="14" rx="2" stroke="#D9683F" stroke-width="1.5"/>
+        <rect x="5" y="5" width="6" height="6" rx="1" fill="#D9683F"/>
+      </svg>
+      <span class="brand-text">BG Hamrick · Brand Guidelines</span>
+    </a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Version 1.0 · Locked 2026-05-24</span>
+        <span class="line"></span>
+      </div>
+      <h1>BG Hamrick — <em>Brand</em> Guidelines</h1>
+      <p class="lede">The visual and editorial system for <em>Automating A Better Life</em>.</p>
+      <div class="meta-strip">
+        <span>Version 1.0</span>
+        <span class="dot">·</span>
+        <span>Locked 2026-05-24</span>
+        <span class="dot">·</span>
+        <span>Maintained by Iris</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- §1 BRAND -->
+  <section class="brand" id="brand">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 01 · The Brand</span>
+        <span class="line"></span>
+      </div>
+      <h2>The <em>brand</em>.</h2>
+      <span class="section-h2-accent"></span>
+
+      <p>BG Hamrick is a sixty-year-old writer using AI to automate a better life. He is publishing about it in public &mdash; what he tries, what works, what fails &mdash; out of a Substack at <code>bghamrick.com</code>. The brand is shaped like an editorial publication, not a SaaS product and not a personal-coach business. It is honest, sharp, evidence-shaped, and skeptical of its own category. It does not promise transformation. It shows the work.</p>
+
+      <p>The brand line is the single non-decaying anchor and ships everywhere short-form:</p>
+
+      <blockquote class="pull-quote pull-quote--center">
+        I am using AI to automate a better life. I'm writing about it at bghamrick.com.
+      </blockquote>
+
+      <p>The brand operates across five content pillars, fixed:</p>
+
+      <ol class="pillar-list">
+        <li>AI and Automation</li>
+        <li>Health</li>
+        <li>Work and Career</li>
+        <li>Purpose and Growth</li>
+        <li>The Experiments</li>
+      </ol>
+
+      <p>The brand promise, visually and editorially, is restraint. Editorial-publication-shaped, not SaaS-shaped. Confident type. Real evidence. No hype, no neon, no badges, no shocked-face thumbnails, no AI-generated stock imagery as a finished surface. The reader should feel they are reading a small, sharply-edited magazine &mdash; not being sold to by a guru and not being onboarded by a startup.</p>
+    </div>
+  </section>
+
+  <!-- §2 COLOR PALETTE -->
+  <section class="palette" id="palette">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 02 · Color Palette</span>
+        <span class="line"></span>
+      </div>
+      <h2>The <em>palette</em>.</h2>
+      <span class="section-h2-accent"></span>
+
+      <div class="palette-family__intro">
+        <p>The palette is modeled on the editorial-publishing tradition: warm cream paper, a dark anchor for hero and masthead, a single warm coral accent. What distinguishes BG Hamrick from comparable editorial brands is the anchor &mdash; instead of black or true-charcoal, the dark surface is a sea blue at HSL ~205&deg;. It carries the same weight as a black anchor but reads warmer and less corporate. Cream paper plus sea-blue anchor plus warm coral accent &mdash; three notes, played consistently across every surface.</p>
+        <p><strong>Restraint is the rule.</strong> No surface uses more than three colors from the palette at once: anchor, paper, and one accent. Coral is loud. Use it sparingly &mdash; for the things you genuinely want the reader's eye to land on.</p>
+      </div>
+
+      <!-- ANCHOR FAMILY -->
+      <div class="palette-family">
+        <div class="palette-family__head">
+          <h3 class="palette-family__name"><em>Anchor</em> &mdash; sea blue</h3>
+          <span class="palette-family__tag">The brand's dark surface</span>
+        </div>
+        <div class="palette-family__intro">
+          <p>Hero, masthead, dark pull-quote bands, footer, the anchor-band closing CTA. The sea-blue tilt at HSL ~205&deg; is what makes this palette specifically BG Hamrick's rather than a generic editorial dark-mode.</p>
+        </div>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch__block" style="background:#1E323E;">
+              <span class="swatch__hex on-dark">#1E323E</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Anchor</p>
+              <p class="swatch__usage">Primary dark surface &mdash; hero background, masthead strip, dark footer.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#142932;">
+              <span class="swatch__hex on-dark">#142932</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Anchor deep</p>
+              <p class="swatch__usage">Deepest variant &mdash; hero gradient base, dark-band shadow root, deepest closing CTA.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#2A4659;">
+              <span class="swatch__hex on-dark">#2A4659</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Anchor soft</p>
+              <p class="swatch__usage">Softer dark &mdash; cards on dark, dark-on-dark separation, hover states on anchor surfaces.</p>
+            </div>
+          </div>
+        </div>
+        <div class="dodont-grid">
+          <div class="dodont dodont--do">
+            <span class="dodont__badge dodont__badge--do">Do</span>
+            <ul>
+              <li>Use <code>#1E323E</code> as the default dark surface; reach for the deeper and softer variants only when there is a real reason (a gradient base, a card sitting on a dark band).</li>
+              <li>Place the masthead's anchor strip flush against the hero's anchor surface &mdash; the two read as one continuous brand band.</li>
+              <li>Pair anchor with paper-near-white text (<code>#FDFBF6</code>) for body copy and coral-soft (<code>#E68C66</code>) for accent copy on dark.</li>
+            </ul>
+          </div>
+          <div class="dodont dodont--dont">
+            <span class="dodont__badge dodont__badge--dont">Don't</span>
+            <ul>
+              <li>Replace the sea-blue anchor with a true black or charcoal &mdash; the warmth is part of the brand.</li>
+              <li>Use anchor on more than a third of a long-scroll page. Anchor sections are bookends or pull-quote moments, not a default surface.</li>
+              <li>Pair anchor directly with bright coral (<code>#F47C70</code>) &mdash; the vibration is uncomfortable. Use coral-soft (<code>#E68C66</code>) for accent type on anchor surfaces.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAPER FAMILY -->
+      <div class="palette-family">
+        <div class="palette-family__head">
+          <h3 class="palette-family__name"><em>Paper</em> &mdash; warm cream</h3>
+          <span class="palette-family__tag">The brand's default light surface</span>
+        </div>
+        <div class="palette-family__intro">
+          <p>Body sections, content cards, link cards, schedule grids. The cream warmth is doing as much identity work as the coral accent &mdash; a true white would read SaaS; the cream reads publication.</p>
+        </div>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch__block" style="background:#F9F4E8;">
+              <span class="swatch__hex on-light">#F9F4E8</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Paper</p>
+              <p class="swatch__usage">Default light surface &mdash; main body background, primary content sections.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#F4EFE3;">
+              <span class="swatch__hex on-light">#F4EFE3</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Paper deep</p>
+              <p class="swatch__usage">Subtle card backgrounds, secondary surfaces, alternating section bands.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#EDE7D7;">
+              <span class="swatch__hex on-light">#EDE7D7</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Paper edge</p>
+              <p class="swatch__usage">Card edges, divider hairlines, inset borders.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#FDFBF6;">
+              <span class="swatch__hex on-light">#FDFBF6</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Paper near-white</p>
+              <p class="swatch__usage">Print-feeling cards, modal backgrounds, body type on anchor surfaces.</p>
+            </div>
+          </div>
+        </div>
+        <div class="dodont-grid">
+          <div class="dodont dodont--do">
+            <span class="dodont__badge dodont__badge--do">Do</span>
+            <ul>
+              <li>Use <code>#F9F4E8</code> as the default body background for any light section.</li>
+              <li>Use <code>#FDFBF6</code> for body copy text color on anchor surfaces &mdash; it is the warm equivalent of white-on-dark and matches the brand's print sensibility.</li>
+              <li>Layer paper-deep cards on a paper background to create subtle depth without ornament.</li>
+            </ul>
+          </div>
+          <div class="dodont dodont--dont">
+            <span class="dodont__badge dodont__badge--dont">Don't</span>
+            <ul>
+              <li>Substitute pure white (<code>#FFFFFF</code>) for the cream paper anywhere on the body surface. White is reserved for true-white moments (a print-card mock, a hard product chrome callout) and should be rare.</li>
+              <li>Use paper backgrounds for hero sections &mdash; anchor owns hero. Paper is the body voice.</li>
+              <li>Stack three paper shades adjacent (paper / paper-deep / paper-edge) without an anchor or coral break &mdash; the surface goes muddy.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORAL FAMILY -->
+      <div class="palette-family">
+        <div class="palette-family__head">
+          <h3 class="palette-family__name"><em>Coral</em> &mdash; warm accent</h3>
+          <span class="palette-family__tag">The single accent color</span>
+        </div>
+        <div class="palette-family__intro">
+          <p>CTAs, italic accent words inside headlines, current-state indicators, section underlines, hover states. Coral is the only color that says "look here" &mdash; protect that signal by using it sparingly.</p>
+        </div>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch__block" style="background:#D9683F;">
+              <span class="swatch__hex on-dark">#D9683F</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Coral</p>
+              <p class="swatch__usage">Primary accent &mdash; CTAs, italic accent words in headlines on light, section underlines, current-state borders.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#E68C66;">
+              <span class="swatch__hex on-dark">#E68C66</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Coral soft</p>
+              <p class="swatch__usage">Accent on anchor surfaces &mdash; italic accent words on dark, links on anchor, hairlines on anchor bands.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#F47C70;">
+              <span class="swatch__hex on-dark">#F47C70</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Coral bright</p>
+              <p class="swatch__usage">Hover states, brief highlight moments.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#C75A34;">
+              <span class="swatch__hex on-dark">#C75A34</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Burnt</p>
+              <p class="swatch__usage">Deeper coral &mdash; secondary accent, button hover from <code>#D9683F</code>.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#A74821;">
+              <span class="swatch__hex on-dark">#A74821</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Burnt deep</p>
+              <p class="swatch__usage">Deepest burnt &mdash; pressed states, accent text where a heavier coral reads better.</p>
+            </div>
+          </div>
+        </div>
+        <div class="dodont-grid">
+          <div class="dodont dodont--do">
+            <span class="dodont__badge dodont__badge--do">Do</span>
+            <ul>
+              <li>Treat coral as the brand's single accent signal &mdash; use it on the thing the reader is meant to act on (the CTA), the thing they are meant to read with emphasis (the italic accent word), and the thing they are meant to orient against (the current-week indicator).</li>
+              <li>Use <code>#D9683F</code> for italic accent words on cream paper; use <code>#E68C66</code> for italic accent words on anchor. The vibration matters &mdash; <code>#D9683F</code> on <code>#1E323E</code> shimmers; <code>#E68C66</code> does not.</li>
+              <li>On hover, coral becomes burnt (<code>#C75A34</code>); on active, it goes burnt-deep (<code>#A74821</code>). The accent darkens as the interaction commits.</li>
+            </ul>
+          </div>
+          <div class="dodont dodont--dont">
+            <span class="dodont__badge dodont__badge--dont">Don't</span>
+            <ul>
+              <li>Use more than one coral surface per viewport. The accent loses its meaning when it appears three places at once.</li>
+              <li>Use bright coral (<code>#F47C70</code>) as the primary accent &mdash; it is a hover and highlight color, not a resting state.</li>
+              <li>Substitute a different accent (orange, red, gold) for a one-off campaign. The accent is the brand. Canon changes flow through BG, not through a campaign brief.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- INK FAMILY -->
+      <div class="palette-family">
+        <div class="palette-family__head">
+          <h3 class="palette-family__name"><em>Ink</em> &mdash; text</h3>
+          <span class="palette-family__tag">Three text greys</span>
+        </div>
+        <div class="palette-family__intro">
+          <p>Default body is primary; secondary and tertiary are opt-in for descriptions, ledes, and captions. Never default the body to the lighter shade &mdash; the document reads softer than the brand specifies if you do.</p>
+        </div>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch__block" style="background:#1A1A1A;">
+              <span class="swatch__hex on-dark">#1A1A1A</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Ink</p>
+              <p class="swatch__usage">Primary body text on cream. Default for every paragraph that isn't deliberately recolored.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#3D3D3D;">
+              <span class="swatch__hex on-dark">#3D3D3D</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Ink soft</p>
+              <p class="swatch__usage">Secondary text &mdash; descriptions, ledes, sub-headlines, intro paragraphs explicitly opted into the lighter shade.</p>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__block" style="background:#6F6F6F;">
+              <span class="swatch__hex on-dark">#6F6F6F</span>
+            </div>
+            <div class="swatch__body">
+              <p class="swatch__name">Ink muted</p>
+              <p class="swatch__usage">Tertiary text &mdash; captions, byline detail, footer notes, micro-meta.</p>
+            </div>
+          </div>
+        </div>
+        <div class="dodont-grid">
+          <div class="dodont dodont--do">
+            <span class="dodont__badge dodont__badge--do">Do</span>
+            <ul>
+              <li>Set <code>body { color: #1A1A1A; }</code> as the default and opt secondary copy into <code>#3D3D3D</code> explicitly where it earns the lighter weight.</li>
+              <li>Use <code>#6F6F6F</code> for the smallest type tier (captions, metadata, footer micro-text).</li>
+              <li>On anchor surfaces, use <code>#FDFBF6</code> (paper-near-white) for primary text and a paper-near-white at 82% opacity (<code>rgba(249, 244, 232, 0.82)</code>) for secondary copy.</li>
+            </ul>
+          </div>
+          <div class="dodont dodont--dont">
+            <span class="dodont__badge dodont__badge--dont">Don't</span>
+            <ul>
+              <li>Default the body to <code>#3D3D3D</code> &mdash; every paragraph then runs one notch lighter than canon.</li>
+              <li>Use <code>#6F6F6F</code> for body copy. It is a caption color.</li>
+              <li>Stack three ink shades visibly in the same block of copy. Pick a tier and stay with it.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHITE NOTE -->
+      <div class="palette-family">
+        <div class="palette-family__head">
+          <h3 class="palette-family__name"><em>White</em></h3>
+          <span class="palette-family__tag">Used sparingly</span>
+        </div>
+        <div class="palette-family__intro" style="margin-bottom:0;">
+          <p><code>#FFFFFF</code> only appears where a true white is structurally necessary &mdash; a print-card chrome callout, a UI chrome element, an export specification that demands it. The default light surface is cream, never white.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §3 TYPOGRAPHY -->
+  <section class="typography" id="typography">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 03 · Typography</span>
+        <span class="line"></span>
+      </div>
+      <h2><em>Two</em> faces. Nothing else.</h2>
+      <span class="section-h2-accent"></span>
+
+      <div class="typo-intro">
+        <p>The brand runs a strict two-face system. Manrope for body, UI, and secondary headlines. Instrument Serif for display and editorial accent &mdash; including the italic accent word inside Manrope-set headlines, which is the brand's most recognizable typographic move. Both are free via Google Fonts.</p>
+        <p>A third typeface is a canon violation. If a piece needs a different face &mdash; JetBrains Mono for a code block, a script face for a one-off campaign &mdash; the answer is no. System monospace handles code. The two-face system handles the rest.</p>
+      </div>
+
+      <div class="specimen-grid">
+        <!-- MANROPE SPECIMEN -->
+        <div class="specimen">
+          <span class="specimen__label">Body · UI · Secondary headlines</span>
+          <p class="specimen__face">Manrope</p>
+          <p class="specimen__weights">Weights: <code>300</code> body default · <code>400</code> regular UI · <code>600</code> eyebrows, card titles, button labels · <code>700</code> heavy display, footer brand-mark · <code>800</code> reserved</p>
+          <div class="specimen__render">
+            <p class="render-manrope__body">The brand runs on cream paper. The accent is warm coral. The display face is a serif you mostly see in italic, set against a sans body. Three notes, played consistently.</p>
+            <p class="render-manrope__eyebrow">Dispatch &middot; Issue 01</p>
+            <span class="render-manrope__brand-mark">AUTOMATING A BETTER LIFE</span>
+          </div>
+          <p class="specimen__caption">Body 300/17px/1.65 line-height. Eyebrow 600/0.72rem/0.22em letter-spacing, coral on cream. Brand-mark 700/0.82rem/0.01em letter-spacing, paper-near-white on anchor.</p>
+        </div>
+
+        <!-- INSTRUMENT SERIF SPECIMEN -->
+        <div class="specimen">
+          <span class="specimen__label">Display · Editorial accent</span>
+          <p class="specimen__face"><em>Instrument Serif</em></p>
+          <p class="specimen__weights">Styles: <code>Regular</code> H1, H2, pull-quotes, numerals · <code>Italic</code> accent words inside headlines, pull-quotes, display ledes, signoff</p>
+          <div class="specimen__render">
+            <p class="render-serif__display">The brand line is the hook. <em>Everything else</em> ladders.</p>
+            <blockquote class="render-serif__pullquote">When in doubt, ask: would this look at home on the homepage of a small, sharp magazine?</blockquote>
+          </div>
+          <p class="specimen__caption">Display 400/5rem/1.02 line-height/-0.015em letter-spacing. Italic accent word in coral <code>#D9683F</code> on cream. The italic-accent-word-inside-a-headline pattern is the single most recognizable typographic move in the brand.</p>
+        </div>
+      </div>
+
+      <!-- HIERARCHY TABLE -->
+      <div class="hierarchy-wrap">
+        <div class="hierarchy-head">
+          <h3>The type <em>hierarchy</em>.</h3>
+          <p>The scale as it runs on the live surfaces today. Display tiers use <code>clamp()</code>; smaller tiers are fixed.</p>
+        </div>
+        <div class="hierarchy-table-scroll">
+          <table class="hierarchy">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Face</th>
+                <th>Weight</th>
+                <th>Size</th>
+                <th>Line-height</th>
+                <th>Letter-spacing</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tier">H1 (display)</td>
+                <td class="face">Instrument Serif</td>
+                <td>400</td>
+                <td><code>clamp(2.6rem, 6.4vw, 5rem)</code></td>
+                <td>1.02</td>
+                <td>-0.015em</td>
+                <td>Hero headline. Italic accent word in coral. Paper-near-white on anchor, anchor on cream.</td>
+              </tr>
+              <tr>
+                <td class="tier">H2 (section)</td>
+                <td class="face">Instrument Serif</td>
+                <td>400</td>
+                <td><code>clamp(2rem, 4.2vw, 3rem)</code></td>
+                <td>1.05</td>
+                <td>-0.015em</td>
+                <td>Section heads. Italic accent word in coral. Paired with 48px coral underline (<code>.section-h2-accent</code>).</td>
+              </tr>
+              <tr>
+                <td class="tier">H3 (sub)</td>
+                <td class="face">Instrument Serif</td>
+                <td>400</td>
+                <td>1.6&ndash;2.4rem</td>
+                <td>1.05&ndash;1.1</td>
+                <td>-0.01em</td>
+                <td>Card titles in editorial mode, anchor-band sub-headings.</td>
+              </tr>
+              <tr>
+                <td class="tier">Lede</td>
+                <td class="face">Manrope</td>
+                <td>300</td>
+                <td><code>clamp(1.05rem, 1.8vw, 1.2rem)</code></td>
+                <td>1.6</td>
+                <td>&mdash;</td>
+                <td>Hero lede. Ink-mid on cream, paper at 82% on anchor.</td>
+              </tr>
+              <tr>
+                <td class="tier">Body</td>
+                <td class="face">Manrope</td>
+                <td>300</td>
+                <td>17px (1.0625rem)</td>
+                <td>1.65</td>
+                <td>&mdash;</td>
+                <td>Default paragraph. Ink (<code>#1A1A1A</code>) on cream, paper-near-white on anchor.</td>
+              </tr>
+              <tr>
+                <td class="tier">Body emphasis</td>
+                <td class="face">Manrope</td>
+                <td>600</td>
+                <td>inherits</td>
+                <td>inherits</td>
+                <td>&mdash;</td>
+                <td>Bold inside body. Use <code>&lt;strong&gt;</code>. Color shifts to <code>--anchor</code> for visual weight.</td>
+              </tr>
+              <tr>
+                <td class="tier">Body italic</td>
+                <td class="face">Manrope</td>
+                <td>300 italic</td>
+                <td>inherits</td>
+                <td>inherits</td>
+                <td>&mdash;</td>
+                <td>Ordinary <code>&lt;em&gt;</code> emphasis. Stays in the Manrope family.</td>
+              </tr>
+              <tr>
+                <td class="tier">Card title</td>
+                <td class="face">Manrope</td>
+                <td>600</td>
+                <td>1.1&ndash;1.18rem</td>
+                <td>&mdash;</td>
+                <td>-0.005em</td>
+                <td>Pillar card names, schedule card labels, link card titles. Anchor color.</td>
+              </tr>
+              <tr>
+                <td class="tier">Eyebrow</td>
+                <td class="face">Manrope</td>
+                <td>600</td>
+                <td>0.68&ndash;0.72rem</td>
+                <td>1</td>
+                <td>0.22em</td>
+                <td>Uppercase kicker label. Coral on cream, coral-soft on anchor. Often flanked by 60px&times;1px coral hairlines.</td>
+              </tr>
+              <tr>
+                <td class="tier">Caption</td>
+                <td class="face">Manrope</td>
+                <td>400</td>
+                <td>0.75&ndash;0.85rem</td>
+                <td>1.5</td>
+                <td>0.02em</td>
+                <td>Footer notes, byline meta, micro-detail. Ink-muted.</td>
+              </tr>
+              <tr>
+                <td class="tier">Numeral (editorial)</td>
+                <td class="face">Instrument Serif</td>
+                <td>400 italic</td>
+                <td>2.2&ndash;2.6rem</td>
+                <td>1</td>
+                <td>&mdash;</td>
+                <td>Schedule grid numerals, build-step numbers. Coral color on cream.</td>
+              </tr>
+              <tr>
+                <td class="tier">Code</td>
+                <td class="face">system monospace</td>
+                <td>400</td>
+                <td>inherits or 0.88em</td>
+                <td>1.5</td>
+                <td>&mdash;</td>
+                <td><code>&lt;code&gt;</code> and <code>&lt;pre&gt;</code>. Stack: <code>ui-monospace, SFMono-Regular, Menlo, Consolas, monospace</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TYPE DO/DONT -->
+      <div class="dodont-grid" style="margin-top:3em;">
+        <div class="dodont dodont--do">
+          <span class="dodont__badge dodont__badge--do">Do</span>
+          <ul>
+            <li>Use Instrument Serif italic for the accent word inside every section H2 &mdash; this is the brand's most recognizable typographic move.</li>
+            <li>Pair the H2's italic accent word with the 48px coral underline (<code>.section-h2-accent</code>) on paper sections. The two devices are designed to work together.</li>
+            <li>Bold inside body copy with Manrope 600 or 700 wrapped in <code>&lt;strong&gt;</code>. Shift the color to anchor for the bold to read with weight.</li>
+            <li>Use system monospace for any <code>&lt;code&gt;</code> or <code>&lt;pre&gt;</code> block. The stack renders cleanly across macOS, Windows, and Linux.</li>
+          </ul>
+        </div>
+        <div class="dodont dodont--dont">
+          <span class="dodont__badge dodont__badge--dont">Don't</span>
+          <ul>
+            <li>Introduce a third typeface for any reason. JetBrains Mono is not on the brand. Inter is not on the brand (it was used in pre-rebrand versions and is retired).</li>
+            <li>Bold Instrument Serif. It does not carry weight. For weight, switch to Manrope 600+. For editorial emphasis on the serif, use italic.</li>
+            <li>Use italic Instrument Serif in body copy where italic Manrope is the right call. The serif italic is for headline accents, pull-quotes, and ledes that consciously echo the H1 voice &mdash; not for ordinary <code>&lt;em&gt;</code> emphasis.</li>
+            <li>Pair Manrope with any sans other than itself, or Instrument Serif with any serif other than itself. The two-face system is the system.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §4 APPLICATION RULES -->
+  <section class="rules" id="rules">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 04 · Application Rules</span>
+        <span class="line"></span>
+      </div>
+      <h2>Application <em>rules</em>.</h2>
+      <span class="section-h2-accent"></span>
+
+      <div class="rules-intro">
+        <p>These are the canon extensions established during the first canon-applied surfaces (cohort hub + root landing, 2026-05-24). Each is a short principle with reasoning. Designers should treat them as load-bearing &mdash; not stylistic preferences.</p>
+      </div>
+
+      <div class="rule-grid">
+        <div class="rule">
+          <h3>Section-h2-accent follows the H2's <em>text-alignment</em>.</h3>
+          <p>When the H2 centers, the 48px coral underline centers. When the H2 left-aligns (founder-intro pattern, asymmetric two-column layout), the underline sits left.</p>
+          <div class="reasoning"><strong>Reasoning:</strong> the accent's job is to anchor its headline, not the page. Centering an underline beneath a left-aligned H2 creates an optical-axis conflict &mdash; the eye reads the headline left-anchored and then sees the accent breaking right of that axis. The underline tracks the headline.</div>
+        </div>
+
+        <div class="rule">
+          <h3>Chrome layers can carry <em>bespoke</em> padding.</h3>
+          <p>The <code>--gutter</code> token (<code>clamp(20px, 4vw, 56px)</code>) is a content-column rhythm token &mdash; it applies to content surfaces (sections, cards, columns). Chrome layers (masthead, persistent navs, utility chips, footer brand-marks) sit on a different conceptual layer and can carry tighter padding when positional logic demands it.</p>
+          <div class="reasoning"><strong>Reasoning:</strong> a brand-mark in the top-left corner of the document is not part of the article column below it. Forcing it to match the content gutter makes it read as part of the body copy &mdash; wrong posture. Top-of-document chrome hugs the corner tighter than the content rhythm, the same way a newspaper masthead does.</div>
+        </div>
+
+        <div class="rule">
+          <h3>Body color defaults to <code>--ink</code>; secondary copy <em>opts in</em>.</h3>
+          <p>Set <code>body { color: #1A1A1A; }</code> and let descriptions, ledes, captions, and micro-meta opt into <code>#3D3D3D</code> deliberately where they earn the lighter weight.</p>
+          <div class="reasoning"><strong>Reasoning:</strong> defaulting the body to secondary means every paragraph runs one notch lighter than the canon's primary-text role. The document reads softer than spec. Primary ink owns the body; secondary and tertiary are deliberate, not default.</div>
+        </div>
+
+        <div class="rule">
+          <h3>The masthead sits <em>inline</em>, not fixed.</h3>
+          <p>The brand-mark lives on its own anchor strip at the very top, flush against the hero's anchor background. It scrolls away with the hero.</p>
+          <div class="reasoning"><strong>Reasoning:</strong> a persistent fixed masthead either has to be color-safe across every section below (which forces a chrome pill or a JS color-swap &mdash; both more engineering than the value warrants), or it goes invisible against paper sections. The inline anchor-on-anchor masthead achieves continuity with the hero &mdash; the eye reads masthead and hero as one integrated brand band, the way a magazine cover wordmark reads with the cover image as one composition.</p></div>
+        </div>
+
+        <div class="rule">
+          <h3>Mono stack is <em>system mono only</em>.</h3>
+          <p><code>ui-monospace, SFMono-Regular, Menlo, Consolas, monospace</code>. No JetBrains Mono. No Fira Code. No third typeface.</p>
+          <div class="reasoning"><strong>Reasoning:</strong> the brand is a strict two-face system. Code and metadata that need a monospace face get the operating system's native monospace &mdash; which renders cleanly on every device the audience uses (SF Mono on macOS, Cascadia/Consolas on Windows, DejaVu Sans Mono on Linux). The decision is permanent; any future request to add a named mono face is a canon-update question for BG, not a per-piece tweak.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §5 BRAND VOICE -->
+  <section class="voice" id="voice">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 05 · Brand Voice (Visual)</span>
+        <span class="line"></span>
+      </div>
+      <h2>The <em>visual</em> voice.</h2>
+      <span class="section-h2-accent"></span>
+
+      <div class="voice-intro">
+        <p>The visual voice mirrors the editorial voice. Sharp, restrained, evidence-shaped, anti-tech-bro, anti-guru. Warmth comes from the cream paper and the serif italics &mdash; never from sentiment, lifestyle imagery, or stock-photo emotion.</p>
+      </div>
+
+      <div class="voice-principle">
+        <p><strong>Editorial, not SaaS.</strong> The reference set is Gabriel Omat, Tracy Ma's editorial work for Bloomberg Businessweek and the NYT, The Browser Company's marketing pages, Stripe Press, and the top tier of Substack publications (Anne Helen Petersen, Ted Gioia, Robin Sloan). Confident type, structured grids, real interface screenshots over isometric illustrations, real artifacts over stock photography.</p>
+      </div>
+
+      <div class="voice-principle">
+        <p><strong>Show, don't tell.</strong> Real screenshots. Real headshots. Real evidence. If a section is about an AI workflow, show the actual workflow output, not a generated illustration of "AI working." If a section is about a result, show the artifact that proves the result. The brand earns trust by showing the work &mdash; visuals that decorate around the claim instead of demonstrating it actively undermine the voice.</p>
+      </div>
+
+      <div class="voice-principle">
+        <p><strong>Confident without being loud.</strong> Type carries the weight. Headlines do the work an illustration would do on a SaaS landing page. The italic accent word, the coral underline, the masthead-and-hero anchor band &mdash; those are confident moves. Gradient hero shots, drop-shadowed CTAs floating off-anchor, neon highlights, and ornamental flourishes are not.</p>
+      </div>
+
+      <div class="voice-principle">
+        <p><strong>Anti-tech-bro.</strong> No neon gradients. No chatbot speech bubbles. No "AI is coming" iconography. No generated stock illustrations of robots or futuristic interfaces. AI-generated imagery is acceptable as ideation or sketching &mdash; never as the finished surface unless the piece is conceptually <em>about</em> AI imagery and the use is deliberate.</p>
+      </div>
+
+      <div class="voice-principle">
+        <p><strong>Anti-guru.</strong> No high-contrast lifestyle hero shots. No testimonial wallpaper. No badge spam. No big-red-arrow YouTube thumbnails. No shocked-face thumbnail tells. No "you won't believe" type treatments. The audience is reading a writer, not a coach.</p>
+      </div>
+
+      <div class="voice-not">
+        <h3>Examples of what the brand does not do</h3>
+        <ul>
+          <li>A SaaS-style hero with a gradient background, a screenshot floating in 3D, and three feature pills below a "Get Started Free" CTA. Wrong shape &mdash; it implies product, not publication.</li>
+          <li>A guru-shaped landing with a high-contrast BG-at-laptop hero photo, a "as seen on" logo strip, three testimonial cards, and a countdown timer. Wrong shape &mdash; it implies coaching, not writing.</li>
+          <li>An AI-tool-style landing with cold whites, abstract geometric backgrounds, and rendered hero illustrations of nodes connecting. Wrong shape &mdash; it implies utility, not editorial.</li>
+        </ul>
+      </div>
+
+      <blockquote class="pull-quote pull-quote--center" style="margin-top:2.6em;">
+        When in doubt, ask: would this look at home on the homepage of a small, sharp magazine? If yes, ship. If no, redesign.
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- §6 EXAMPLES -->
+  <section class="examples" id="examples">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 06 · Examples in the Wild</span>
+        <span class="line"></span>
+      </div>
+      <h2>Examples in the <em>wild</em>.</h2>
+      <span class="section-h2-accent"></span>
+
+      <div class="examples-intro">
+        <p>The surfaces where the brand currently lives, with notes on which to reference for which kind of work.</p>
+      </div>
+
+      <div class="example-grid">
+        <a class="example-card" href="https://bghamrick.com" target="_blank" rel="noopener">
+          <span class="example-card__label">Voice anchor</span>
+          <p class="example-card__name">The <em>Substack</em></p>
+          <p class="example-card__url">bghamrick.com</p>
+          <p class="example-card__desc">The brand's central content hub. Still running Substack's default theme; full rebrand pending Substack's customization constraints. Treat it as the brand's voice anchor for editorial copy, not its visual anchor.</p>
+        </a>
+
+        <a class="example-card" href="https://go.bghamrick.com/cohort-spring-2026/" target="_blank" rel="noopener">
+          <span class="example-card__label">First canon-applied surface</span>
+          <p class="example-card__name">The <em>cohort hub</em></p>
+          <p class="example-card__url">go.bghamrick.com/cohort-spring-2026/</p>
+          <p class="example-card__desc">Locked 2026-05-24. Utility page (students hit it weekly). Reference for the utility-page treatment: center-aligned hero, schedule grid with Instrument Serif italic numerals, anchor band for the highest-stakes single element, link cards with hover-flip-to-anchor pattern, current-state indicator with coral border.</p>
+        </a>
+
+        <a class="example-card" href="https://go.bghamrick.com/" target="_blank" rel="noopener">
+          <span class="example-card__label">Second canon-applied surface</span>
+          <p class="example-card__name">The <em>root landing</em></p>
+          <p class="example-card__url">go.bghamrick.com</p>
+          <p class="example-card__desc">Also locked 2026-05-24. Interim build pending a future redesign. Reference for the editorial-marketing treatment: bookend anchor bands, founder-intro with graded portrait in a paper-deep card frame, pull-quote in italic Instrument Serif with coral left-border, founder-stats row with coral dot separators, signoff as a magazine colophon.</p>
+        </a>
+
+        <div class="example-card" style="cursor:default;">
+          <span class="example-card__label">Canonical interpretation</span>
+          <p class="example-card__name">Brand preview <em>sandbox</em></p>
+          <p class="example-card__url">~/Code/abl-brand-preview/</p>
+          <p class="example-card__desc">The cleanest possible application of the canon in CSS. Any future surface can be diffed against the <code>:root</code> block in <code>styles.css</code> to confirm canon adherence in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §7 ASSET LIBRARY -->
+  <section class="assets" id="assets">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 07 · Asset Library</span>
+        <span class="line"></span>
+      </div>
+      <h2>Asset <em>library</em>.</h2>
+      <span class="section-h2-accent"></span>
+
+      <div class="assets-intro">
+        <p>Pointers to the working files and locations a collaborator will need.</p>
+      </div>
+
+      <dl class="asset-list">
+        <div>
+          <dt>Source-of-truth canon document</dt>
+          <dd><code>LOS/My Life/Projects/social-media-abl.md</code> (&sect;Brand canon section). This is where palette and font changes land first; this guidelines doc re-renders to track.</dd>
+        </div>
+        <div>
+          <dt>Reference CSS implementation</dt>
+          <dd><code>~/Code/abl-brand-preview/styles.css</code>. CSS custom properties for every palette and type token; the variable names are the canonical names.</dd>
+        </div>
+        <div>
+          <dt>Portrait variants (founder photo)</dt>
+          <dd><code>~/Code/abl-spring-2026/assets/bg-portrait*.{jpg,png}</code>. The graded variant (<code>bg-portrait-graded.png</code>) is the editorial portrait used on the root landing.</dd>
+        </div>
+        <div>
+          <dt>Favicon</dt>
+          <dd><code>~/Code/abl-spring-2026/favicon.svg</code>. Coral <code>#D9683F</code> monogram on transparent ground.</dd>
+        </div>
+        <div>
+          <dt>Per-cohort posters</dt>
+          <dd><code>~/Code/abl-spring-2026/cohort-spring-2026/assets/week-N/poster.jpg</code>. Reference treatment for weekly content art.</dd>
+        </div>
+      </dl>
+
+      <p class="asset-route">For new asset requests, route to <strong>Iris</strong> (Brand Visuals Steward). Iris produces SVG / PNG / spec; <strong>Felix</strong> lands the bytes if the asset goes onto a web surface.</p>
+    </div>
+  </section>
+
+  <!-- §8 VERSIONING -->
+  <section class="versioning" id="versioning">
+    <div class="container">
+      <div class="eyebrow-wrap">
+        <span class="line"></span>
+        <span class="eyebrow">Section 08 · Versioning and Updates</span>
+        <span class="line"></span>
+      </div>
+      <h2>Versioning and <em>updates</em>.</h2>
+      <span class="section-h2-accent"></span>
+
+      <p>This document is <strong>version 1.0</strong>, locked <strong>2026-05-24</strong>. It is the formal external-facing artifact of the brand canon that was established in the internal source-of-truth on the same day.</p>
+
+      <p style="text-align:center; margin-top:2em;">Canon updates flow in one direction:</p>
+
+      <ol class="flow-list">
+        <li><strong>A palette or type change is proposed</strong> &mdash; usually by BG, sometimes flagged by Iris when a new pattern emerges across multiple surfaces.</li>
+        <li><strong>BG signs off.</strong> Color and font changes require BG. Iris does not unilaterally extend canon; she operates it.</li>
+        <li><strong>The source of truth updates first.</strong> Changes land in <code>LOS/My Life/Projects/social-media-abl.md</code> &sect;Brand canon.</li>
+        <li><strong>This document re-renders to track.</strong> Version number increments; the lock date updates.</li>
+      </ol>
+
+      <div class="note">
+        <p><strong>Pattern-level extensions</strong> (the five application rules in &sect;4 are examples) can be proposed by Iris when a new surface establishes a pattern that ladders across future work. They are adopted via the memory file at <code>project_abl_brand_canon_2026-05-24</code> and the canon update in the source-of-truth document. Iris drafts the extension; BG signs off; both files update in lockstep.</p>
+        <p style="margin-bottom:0;"><strong>Out-of-scope changes</strong> &mdash; net-new conceptual direction, a logo or wordmark from scratch, a campaign sub-brand with its own palette &mdash; are explicit canon-update decisions that flow to BG, not per-piece tweaks. The brand is conservative about extension by design. Compounding consistency is the goal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER BAND -->
+  <footer class="footer-band">
+    <div class="container">
+      <p class="brand-line">Automating A Better Life</p>
+      <p class="signoff">&mdash; Iris, Brand Visuals Steward, myABL &middot; 2026-05-24</p>
+      <p class="colophon">&copy; BG Hamrick, 2026. Brand canon locked 2026-05-24.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
