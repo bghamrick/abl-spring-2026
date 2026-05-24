@@ -632,6 +632,100 @@
       text-align: center;
     }
 
+    /* CLICK-TO-PLAY VIDEO PLAYER
+       Custom poster + coral play button overlay on top of a 16:9 well.
+       On click, the poster is replaced with a Drive iframe (?autoplay=1).
+       Used for every weekly Saturday recording — see the HTML comment
+       block in the schedule section for the declarative pattern. */
+    .video-player .video-well {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--anchor-deep);
+      border: 1px solid rgba(30, 50, 62, 0.18);
+    }
+    .video-player .video-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: var(--paper-deep);
+    }
+    .video-player .video-poster-fallback {
+      position: absolute;
+      inset: 0;
+      background: var(--paper-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .video-player .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--coral);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(20, 41, 50, 0.45), 0 0 0 6px rgba(217, 104, 63, 0.18);
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .video-player .video-play-btn::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 11px 0 11px 18px;
+      border-color: transparent transparent transparent var(--paper-near-white);
+      margin-left: 4px;
+    }
+    .video-player .video-play-btn:hover,
+    .video-player .video-play-btn:focus-visible {
+      background: var(--coral-bright);
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow: 0 10px 32px rgba(20, 41, 50, 0.55), 0 0 0 8px rgba(244, 124, 112, 0.22);
+      outline: none;
+    }
+    .video-player .video-play-btn:focus-visible {
+      outline: 2px solid var(--paper-near-white);
+      outline-offset: 4px;
+    }
+    .video-player .video-well iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    @media (max-width: 600px) {
+      .video-player .video-play-btn {
+        width: 56px;
+        height: 56px;
+      }
+      .video-player .video-play-btn::before {
+        border-width: 9px 0 9px 15px;
+      }
+    }
+
     /* LINKS */
     .link-grid {
       display: grid;
@@ -872,8 +966,29 @@
         Replace the .resources-empty placeholder with one or more of the
         patterns below. Add as many as you like; they stack vertically.
 
-        UNLISTED YOUTUBE VIDEO EMBED (Zoom recording):
-        ----------------------------------------------
+        CLICK-TO-PLAY GOOGLE DRIVE VIDEO (preferred — every Saturday recording):
+        -----------------------------------------------------------------------
+        Save a custom poster image at assets/week-N/poster.jpg, then drop in:
+
+        <div class="resource-embed video-player"
+             data-video-id="DRIVE_FILE_ID"
+             data-poster="assets/week-N/poster.jpg"
+             data-caption="Week N recording · Date"
+             data-label="Week N recording"></div>
+
+        The component renders itself from these data attributes on page load:
+        a 16:9 well shows the poster with a coral play button centered on top.
+        On click, the poster swaps for a Drive iframe with ?autoplay=1, so the
+        video starts immediately (no second click needed).
+
+        - data-video-id   the Drive file ID (the long string in the share URL)
+        - data-poster     path to the still image; degrades gracefully if missing
+        - data-caption    caption below the player (HTML entities allowed)
+        - data-label      aria-label seed → "Play <label>" (optional; defaults
+                          to "Play video")
+
+        UNLISTED YOUTUBE VIDEO EMBED (alternative — when not on Drive):
+        ----------------------------------------------------------------
         <div class="resource-embed">
           <div class="video-wrap">
             <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
@@ -923,12 +1038,11 @@
             <h3>Orientation &amp; First Conversation</h3>
             <p>By Saturday you'll have Claude Pro signed up, the ABL folder installed, and your Mental Inventory written. The live session is your first real conversation with Alfred &mdash; we get your AI team talking, and you walk out with a clear next step.</p>
             <div class="resources">
-              <div class="resource-embed">
-                <div class="video-wrap">
-                  <iframe src="https://drive.google.com/file/d/1rBofSo9VxiEJV3qzFiYhMiF797zfXarg/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <div class="embed-caption">Week 0 recording &middot; May 23</div>
-              </div>
+              <div class="resource-embed video-player"
+                   data-video-id="1rBofSo9VxiEJV3qzFiYhMiF797zfXarg"
+                   data-poster="assets/week-0/poster.jpg"
+                   data-caption="Week 0 recording &middot; May 23"
+                   data-label="Week 0 recording"></div>
               <a class="resource" href="#start-here">
                 <span class="res-icon">✎</span>
                 <span class="res-body">
@@ -1092,6 +1206,78 @@
       <p>Built by BG · Brand canon locked 2026-05-24</p>
     </div>
   </section>
+
+  <!-- CLICK-TO-PLAY VIDEO COMPONENT
+       Walks every .video-player on page load and renders a poster + play-button
+       overlay from its data-* attributes. On click, swaps in a Drive iframe
+       with ?autoplay=1 so playback starts on the first tap. -->
+  <script>
+    (function () {
+      function buildPlayer(el) {
+        var videoId = el.getAttribute('data-video-id') || '';
+        var posterSrc = el.getAttribute('data-poster') || '';
+        var caption = el.getAttribute('data-caption') || '';
+        var label = el.getAttribute('data-label') || 'video';
+        if (!videoId) { return; }
+
+        // Build the 16:9 well with poster + play button.
+        var well = document.createElement('div');
+        well.className = 'video-well';
+
+        if (posterSrc) {
+          var poster = document.createElement('img');
+          poster.className = 'video-poster';
+          poster.alt = label;
+          poster.src = posterSrc;
+          // Graceful fallback if the poster file is missing.
+          poster.onerror = function () {
+            poster.remove();
+            var fallback = document.createElement('div');
+            fallback.className = 'video-poster-fallback';
+            fallback.textContent = label;
+            well.insertBefore(fallback, well.firstChild);
+          };
+          well.appendChild(poster);
+        } else {
+          var fallback = document.createElement('div');
+          fallback.className = 'video-poster-fallback';
+          fallback.textContent = label;
+          well.appendChild(fallback);
+        }
+
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'video-play-btn';
+        btn.setAttribute('aria-label', 'Play ' + label);
+        well.appendChild(btn);
+
+        function play() {
+          var iframe = document.createElement('iframe');
+          iframe.src = 'https://drive.google.com/file/d/' + videoId + '/preview?autoplay=1';
+          iframe.setAttribute('allow', 'autoplay; fullscreen');
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.setAttribute('title', label);
+          well.innerHTML = '';
+          well.appendChild(iframe);
+        }
+        btn.addEventListener('click', play);
+
+        el.appendChild(well);
+
+        if (caption) {
+          var cap = document.createElement('div');
+          cap.className = 'embed-caption';
+          cap.innerHTML = caption;
+          el.appendChild(cap);
+        }
+      }
+
+      var players = document.querySelectorAll('.video-player');
+      for (var i = 0; i < players.length; i++) {
+        buildPlayer(players[i]);
+      }
+    })();
+  </script>
 
 </body>
 </html>
