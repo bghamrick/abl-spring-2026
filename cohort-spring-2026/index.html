@@ -396,6 +396,53 @@
     }
     .saturday-block a:hover { color: var(--coral-bright); }
 
+    /* OFFICE HOURS BLOCK — paper variant, coral edge, "new" tag for emphasis */
+    .office-hours-block {
+      position: relative;
+      margin-top: 1.6em;
+      padding: 28px 30px;
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-top: 3px solid var(--coral);
+      border-radius: 0 0 14px 14px;
+    }
+    .office-hours-block .oh-tag {
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      padding: 4px 10px;
+      background: var(--coral);
+      color: var(--paper-near-white);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-radius: 3px;
+    }
+    .office-hours-block h3 {
+      margin: 0 0 0.6em;
+      color: var(--anchor);
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.4rem;
+      line-height: 1.15;
+    }
+    .office-hours-block p {
+      margin: 0 0 0.8em;
+      color: var(--ink-mid);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .office-hours-block p:last-child { margin-bottom: 0; }
+    .office-hours-block strong { color: var(--anchor); font-weight: 600; }
+    .office-hours-block a {
+      color: var(--coral);
+      font-weight: 600;
+    }
+    .office-hours-block a:hover { color: var(--coral-bright); }
+
     .callout {
       margin-top: 2.4em;
       padding: 22px 26px;
@@ -823,6 +870,7 @@
       .schedule-item { flex-direction: row; gap: 16px; padding: 22px 22px; }
       .schedule-item .num { font-size: 2.2rem; min-width: 1.3em; }
       .saturday-block { padding: 24px 22px; }
+      .office-hours-block { padding: 24px 22px; }
       .hero .portrait { width: 76px; height: 76px; }
     }
     @media (max-width: 480px) {
@@ -885,64 +933,41 @@
     </div>
   </section>
 
-  <!-- START HERE -->
+  <!-- WEEKLY RHYTHM -->
   <section class="start-here" id="start-here">
     <div class="container">
       <div class="eyebrow-wrap">
         <span class="line"></span>
-        <span class="eyebrow">Week 0 · Start Here</span>
+        <span class="eyebrow">Weekly Rhythm</span>
         <span class="line"></span>
       </div>
-      <h2>Do this <em>before</em> Saturday at 1:00 PM ET.</h2>
+      <h2>Every <em>Saturday</em>. Every <em>Tuesday</em>.</h2>
       <span class="section-h2-accent"></span>
-      <p>Three tasks before Saturday. About 40 minutes total. Doing them now makes your first week a lot smoother.</p>
-
-      <ol class="step-list">
-        <li>
-          <h3>Sign up for Claude Pro (~5 minutes)</h3>
-          <p>Alfred and the rest of your AI team run on Claude. You'll need a Claude Pro account ($20/month) to use them.</p>
-          <p><strong>Where to sign up:</strong> <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> &mdash; create an account, then click Upgrade.</p>
-          <p><strong>What you need:</strong> Email and a credit card.</p>
-          <p><strong>Why now:</strong> Without it, you can't run Alfred on Saturday.</p>
-        </li>
-        <li>
-          <h3>Set up your ABL folder (~15 minutes)</h3>
-          <p>This folder is your workspace. It holds plain text files and an AI assistant named <strong>Alfred</strong>, who reads them.</p>
-          <p><strong>Where to get it:</strong> Check your inbox for the access email with a Google Drive link.</p>
-          <p><strong>What to do:</strong> Download the ZIP, unzip it into your home folder, and rename the new folder to <code>ABL</code>.</p>
-          <p class="hint"><em>Home folder = the folder named after you. On Mac: open Finder &rarr; Go menu &rarr; Home. On Windows: open File Explorer &rarr; This PC &rarr; C: &rarr; Users &rarr; your name.</em></p>
-          <p><strong>One thing to expect:</strong> The first time you say hello to Alfred, Claude will ask permission to write to a few files in your ABL folder. That's normal &mdash; it's Alfred personalizing the system to you. Click <strong>Allow</strong> on each prompt. If you decline, Alfred can't set himself up.</p>
-          <p><strong>If you get stuck:</strong> The same email has step-by-step instructions for Mac and Windows. If something still won't work, email me. Don't fight the computer.</p>
-        </li>
-        <li>
-          <h3>Do the Mental Inventory (~20 minutes)</h3>
-          <p>Pen and paper only &mdash; no phone, no computer. Find a quiet spot. Make three columns:</p>
-          <ul>
-            <li>What I'm currently doing</li>
-            <li>What I should be doing</li>
-            <li>What I want to be doing</li>
-          </ul>
-          <div class="step-note">
-            <p>This paper is private &mdash; no one else in the cohort sees it, and neither do I. On Saturday you'll share it with Alfred to kick off your first conversation with your AI team.</p>
-          </div>
-        </li>
-      </ol>
+      <p>Two standing slots each week. One long session, one open door. Same Zoom link both times.</p>
 
       <div class="saturday-block">
-        <h3>Saturday at 1:00 PM ET</h3>
-        <p>Same Zoom link every Saturday: <a href="https://us02web.zoom.us/s/3047605686">Join the Zoom</a>.</p>
-        <p><strong>You'll need:</strong></p>
+        <h3>Saturday cohort session &middot; 1:00 PM ET</h3>
+        <p>Ninety minutes, every Saturday. The main event. We work the week's material together, live.</p>
+        <p><a href="https://us02web.zoom.us/s/3047605686">Join the Zoom</a> &middot; same link every week.</p>
+        <p><strong>What you bring:</strong></p>
         <ul>
           <li>Your computer (a second screen helps)</li>
-          <li>A Claude Pro subscription ($20/month)</li>
-          <li>Your ABL folder installed</li>
-          <li>Your Mental Inventory</li>
+          <li>Your Claude Pro subscription, active</li>
+          <li>Your ABL folder installed and ready</li>
+          <li>Your bullet journal, or whatever tool you use to name your direction for the week (mine is the bullet journal)</li>
         </ul>
+      </div>
+
+      <div class="office-hours-block">
+        <div class="oh-tag">New &middot; starts May 26</div>
+        <h3>Tuesday Office Hours &middot; 2:00&ndash;2:45 PM ET</h3>
+        <p>Drop in. No agenda. First come, first served. Bring whatever you're stuck on, whatever you're chewing on, or just listen in. Same Zoom link as Saturday.</p>
+        <p><a href="https://us02web.zoom.us/s/3047605686">Join the Zoom</a></p>
       </div>
 
       <div class="callout">
         <h3>If something breaks</h3>
-        <p>Email me at <a href="mailto:bg@bghamrick.com">bg@bghamrick.com</a>. Folder setup is the only thing I want you reaching out about before Saturday. Everything else can wait for the call.</p>
+        <p>Email me at <a href="mailto:bg@bghamrick.com">bg@bghamrick.com</a>. Between sessions, this is the channel.</p>
       </div>
     </div>
   </section>
