@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Day With Alfred — Spring 2026 · Session 2 · Follow-along script</title>
+  <meta name="description" content="Follow-along script for Week 1 of ABL Spring 2026: A Day With Alfred. Read along during the session, or come back to it any time.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1E323E">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       ABL Brand Canon — locked 2026-05-24
+       Anchor (sea blue, 205°), Paper (cream), Coral (accent).
+       Manrope for body/UI. Instrument Serif for display.
+       This page mirrors the hub's tokens so they stay consistent.
+       ========================================================= */
+    :root {
+      --anchor:           #1E323E;
+      --anchor-deep:      #142932;
+      --anchor-soft:      #2A4659;
+      --paper:            #F9F4E8;
+      --paper-deep:       #F4EFE3;
+      --paper-deeper:     #EDE7D7;
+      --paper-near-white: #FDFBF6;
+      --coral:            #D9683F;
+      --coral-soft:       #E68C66;
+      --coral-bright:     #F47C70;
+      --burnt:            #C75A34;
+      --ink:              #1A1A1A;
+      --ink-mid:          #3D3D3D;
+      --ink-soft:         #6F6F6F;
+      --white:            #FFFFFF;
+      --font-body:    'Manrope', system-ui, -apple-system, sans-serif;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --max-prose: 720px;
+      --gutter: clamp(20px, 4vw, 56px);
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; background: var(--paper); }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      /* Looser line-height than the marketing hub — this is a read-along document */
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Brand mark — same masthead as the hub */
+    .brand-mark-masthead {
+      background: var(--anchor);
+      padding: 22px 28px 22px;
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.18s ease;
+    }
+    .brand-mark:hover { background: rgba(249, 244, 232, 0.08); text-decoration: none; }
+    .brand-mark .brand-glyph { width: 16px; height: 16px; flex-shrink: 0; display: block; }
+    .brand-mark .brand-text {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--paper-near-white);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) {
+      .brand-mark-masthead { padding: 14px 16px 14px; }
+      .brand-mark { padding: 4px 8px; gap: 7px; }
+      .brand-mark .brand-glyph { width: 14px; height: 14px; }
+      .brand-mark .brand-text { font-size: 0.74rem; }
+    }
+
+    /* Back-link bar — sits below the masthead, lets students jump back to the hub */
+    .back-bar {
+      background: var(--paper-deep);
+      border-bottom: 1px solid var(--paper-deeper);
+      padding: 14px var(--gutter);
+    }
+    .back-bar .back-bar-inner {
+      max-width: var(--max-prose);
+      margin: 0 auto;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-mid);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .back-link:hover { color: var(--coral); }
+    .back-link .arrow {
+      color: var(--coral);
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Document container — narrow, prose-cap width */
+    .doc {
+      max-width: var(--max-prose);
+      margin: 0 auto;
+      padding: 72px var(--gutter) 96px;
+    }
+
+    /* Title block */
+    .title-block {
+      margin-bottom: 64px;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.015em;
+      color: var(--anchor);
+      font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+      margin: 0 0 0.4em;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1.2em;
+      display: block;
+    }
+    .title-eyebrow-under {
+      color: var(--ink-soft);
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      margin-top: 0.4em;
+    }
+
+    /* Section headers */
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.012em;
+      color: var(--anchor);
+      font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+      margin: 0 0 0.5em;
+    }
+    h2 em { color: var(--coral); font-style: italic; }
+    h3 {
+      font-family: var(--font-body);
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      color: var(--anchor);
+      font-size: 1.08rem;
+      margin: 0 0 0.4em;
+    }
+
+    /* Coral underline accent under each h2, mirroring the hub */
+    .section-h2-accent {
+      display: block;
+      width: 56px;
+      height: 2px;
+      background: var(--coral);
+      margin: 0 0 1.4em;
+      border-radius: 2px;
+    }
+
+    /* Section spacing — generous vertical rhythm */
+    section.doc-section { margin-top: 88px; }
+    section.doc-section:first-of-type { margin-top: 0; }
+    section.doc-section .sub { margin-top: 2.6em; }
+
+    p {
+      margin: 0 0 1.1em;
+      color: var(--ink);
+      max-width: var(--max-prose);
+    }
+    em { font-style: italic; }
+    strong { color: var(--anchor); font-weight: 600; }
+    a {
+      color: var(--coral);
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+      transition: color 0.18s ease;
+    }
+    a:hover { color: var(--burnt); }
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--paper-deeper);
+      color: var(--anchor);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(30, 50, 62, 0.10);
+    }
+
+    /* Lists — readable, indented, paced */
+    ul, ol {
+      margin: 0 0 1.4em;
+      padding-left: 1.5em;
+      color: var(--ink);
+    }
+    ul li, ol li {
+      margin-bottom: 0.55em;
+      line-height: 1.7;
+    }
+    ul li::marker { color: var(--coral); }
+
+    /* Rule between major sections (Opening / Section 1 / Section 2 …) — quiet,
+       matches the markdown source `---` */
+    hr.section-rule {
+      border: 0;
+      height: 1px;
+      background: var(--paper-deeper);
+      margin: 0;
+    }
+
+    /* =========================================================
+       Cue markers — *[CUE: ...]* / *[MOCKUP: ...]* / [THESIS CALLOUT: ...] etc.
+       Stage directions BG reads on screen; visually muted so prose scans clean.
+       Coral vertical bar on the left, ink-soft italic body, ▶ glyph anchor.
+       ========================================================= */
+    .cue {
+      display: block;
+      position: relative;
+      margin: 1.4em 0 1.8em;
+      padding: 6px 0 6px 18px;
+      border-left: 2px solid var(--coral);
+      color: var(--ink-soft);
+      font-style: italic;
+      font-size: 0.94rem;
+      line-height: 1.55;
+      font-family: var(--font-body);
+    }
+    .cue::before {
+      content: '▶';
+      font-style: normal;
+      color: var(--coral);
+      margin-right: 8px;
+      font-size: 0.74rem;
+      vertical-align: 0.12em;
+      letter-spacing: 0;
+    }
+    .cue .cue-label {
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      color: var(--coral);
+      margin-right: 8px;
+    }
+
+    /* =========================================================
+       Thesis callout — the pull-quote moment.
+       Display-scale Instrument Serif, anchor-blue on cream, generous breathing room.
+       ========================================================= */
+    .thesis {
+      margin: 3.2em 0 3em;
+      padding: 1.2em 0;
+      max-width: none;
+    }
+    .thesis blockquote {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(2rem, 4.6vw, 3.2rem);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      color: var(--anchor);
+    }
+    .thesis blockquote::before {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 2px;
+      background: var(--coral);
+      margin-bottom: 0.7em;
+      border-radius: 2px;
+    }
+
+    /* =========================================================
+       Mockup card — speaker-labeled transcript container.
+       Subtle paper-deep background, soft border, BG = coral, Alfred = anchor.
+       Internal **bold** sub-headers (e.g. "Calendar today") render as h4-shaped lines.
+       ========================================================= */
+    .mockup {
+      margin: 1.8em 0 2.2em;
+      padding: 26px 28px 22px;
+      background: var(--paper-deep);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 12px;
+      max-width: none;
+    }
+    .mockup .mockup-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1em;
+      padding: 3px 9px;
+      background: var(--paper);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 4px;
+    }
+    .turn {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 14px;
+      margin-bottom: 1.1em;
+      align-items: start;
+    }
+    .turn:last-child { margin-bottom: 0; }
+    .turn .speaker {
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
+      padding-top: 0.05em;
+    }
+    .turn.bg .speaker     { color: var(--coral); }
+    .turn.alfred .speaker { color: var(--anchor); }
+    .turn .said {
+      color: var(--ink);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+    .turn .said p { margin: 0 0 0.7em; }
+    .turn .said p:last-child { margin-bottom: 0; }
+    .turn .said h4 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.94rem;
+      color: var(--anchor);
+      margin: 1em 0 0.3em;
+      letter-spacing: 0.01em;
+    }
+    .turn .said h4:first-child { margin-top: 0; }
+    .turn .said ul {
+      margin: 0.2em 0 0.8em;
+      padding-left: 1.2em;
+      font-size: 0.96rem;
+    }
+    .turn .said ul li { margin-bottom: 0.3em; line-height: 1.6; }
+    .turn .said em.stage {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+      margin: 0.6em 0;
+    }
+    @media (max-width: 600px) {
+      .turn { grid-template-columns: 1fr; gap: 4px; }
+      .turn .speaker { padding-top: 0; }
+      .mockup { padding: 22px 20px 18px; }
+    }
+
+    /* =========================================================
+       Six-system table — branded, readable, no fanciness.
+       ========================================================= */
+    .table-wrap {
+      margin: 1.4em 0 1.8em;
+      overflow-x: auto;
+      max-width: none;
+    }
+    table.systems {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      background: var(--paper-near-white);
+      border: 1px solid var(--paper-deeper);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table.systems thead th {
+      background: var(--anchor);
+      color: var(--paper-near-white);
+      text-align: left;
+      padding: 12px 14px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    table.systems tbody td {
+      padding: 14px;
+      vertical-align: top;
+      border-top: 1px solid var(--paper-deeper);
+      color: var(--ink-mid);
+    }
+    table.systems tbody tr:first-child td { border-top: 0; }
+    table.systems tbody td:first-child {
+      color: var(--anchor);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    table.systems tbody tr.mine td:first-child::after {
+      content: 'mine';
+      display: inline-block;
+      margin-left: 6px;
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--coral);
+      padding: 1px 6px;
+      background: var(--paper-deep);
+      border-radius: 3px;
+      vertical-align: 0.12em;
+    }
+    @media (max-width: 600px) {
+      table.systems thead { display: none; }
+      table.systems tbody td {
+        display: block;
+        padding: 6px 14px;
+        border-top: 0;
+      }
+      table.systems tbody tr {
+        display: block;
+        padding: 14px 0;
+        border-top: 1px solid var(--paper-deeper);
+      }
+      table.systems tbody tr:first-child { border-top: 0; }
+      table.systems tbody td:first-child { padding-top: 14px; font-size: 1rem; }
+      table.systems tbody td:not(:first-child)::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--coral);
+        margin-bottom: 2px;
+        margin-top: 4px;
+      }
+    }
+
+    /* Numbered recap list at the end */
+    ol.recap {
+      counter-reset: recap;
+      list-style: none;
+      padding-left: 0;
+      margin: 1.4em 0 2em;
+    }
+    ol.recap > li {
+      counter-increment: recap;
+      position: relative;
+      padding-left: 56px;
+      margin-bottom: 1em;
+      min-height: 36px;
+    }
+    ol.recap > li::before {
+      content: counter(recap);
+      position: absolute;
+      left: 0;
+      top: -2px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 2.2rem;
+      color: var(--coral);
+      line-height: 1;
+      letter-spacing: -0.01em;
+      width: 40px;
+      text-align: left;
+    }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 96px;
+      padding-top: 28px;
+      border-top: 1px solid var(--paper-deeper);
+      color: var(--ink-soft);
+      font-size: 0.84rem;
+    }
+    .doc-footer a { color: var(--coral); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .doc { padding: 48px var(--gutter) 64px; }
+      section.doc-section { margin-top: 64px; }
+      .title-block { margin-bottom: 44px; }
+      .thesis { margin: 2.2em 0 2em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BRAND MARK — same masthead as the hub for continuity -->
+  <div class="brand-mark-masthead">
+    <a class="brand-mark" href="../index.html" aria-label="Automating A Better Life — back to Cohort Hub">
+      <svg class="brand-glyph" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="14" height="14" rx="2" stroke="#D9683F" stroke-width="1.5"/>
+        <rect x="5" y="5" width="6" height="6" rx="1" fill="#D9683F"/>
+      </svg>
+      <span class="brand-text">Automating A Better Life</span>
+    </a>
+  </div>
+
+  <!-- BACK TO HUB -->
+  <div class="back-bar">
+    <div class="back-bar-inner">
+      <a class="back-link" href="../index.html"><span class="arrow">←</span> Back to the Cohort Hub</a>
+    </div>
+  </div>
+
+  <main class="doc">
+
+    <!-- TITLE -->
+    <header class="title-block">
+      <span class="eyebrow">Follow-along Script</span>
+      <h1>A Day With Alfred</h1>
+      <div class="eyebrow title-eyebrow-under">Spring 2026 · Session 2 · May 30, 1:00 PM ET</div>
+    </header>
+
+    <hr class="section-rule">
+
+    <!-- OPENING -->
+    <section class="doc-section" id="opening">
+      <h2>Opening</h2>
+      <span class="section-h2-accent"></span>
+
+      <p>Welcome to Session 2. Three things today.</p>
+
+      <p>First, I'll walk you through my bullet journal practice. That's where I write down what I want to do, before I touch the AI. Without a direction, Alfred cannot help you. That's the principle the rest of the day stands on.</p>
+
+      <p>Second, you'll meet your AI team. There are nine of them and they live in your ABL folder. I'll introduce each one and tell you what you'd actually call them for.</p>
+
+      <p>Third, I'll show you a full day with Alfred. Morning, sprints, midday, evening. The five rituals. How they hold the structure of a day so I don't have to think about it.</p>
+
+      <p>By the end you'll see how I get from a blank morning to a closed-out evening, with Alfred running the structure for me.</p>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- SECTION 1 — BULLET JOURNAL -->
+    <section class="doc-section" id="section-1">
+      <h2>Section 1: My <em>Bullet Journal</em> Practice</h2>
+      <span class="section-h2-accent"></span>
+
+      <div class="sub">
+        <h3>What it is</h3>
+        <p>My bullet journal is an analog notebook. A5 size. I use a Leuchtturm1917 dot grid. I've been doing this for 2 years. It's where I plan and reflect.</p>
+
+        <p>It's three things stacked:</p>
+        <ul>
+          <li>Monthly intentions</li>
+          <li>Weekly action plan</li>
+          <li>Daily log</li>
+        </ul>
+
+        <p>Each one feeds the next. The month names what I want from the month. The week names what I want from the week. The day names what I want from the day.</p>
+
+        <div class="cue"><span class="cue-label">Cue</span>Flip through real pages on camera.</div>
+      </div>
+
+      <div class="sub">
+        <h3>The five signifiers</h3>
+        <p>I use five marks. They tell me what's happening with each line.</p>
+        <ul>
+          <li><code>•</code> task</li>
+          <li><code>○</code> event</li>
+          <li><code>=</code> intention</li>
+          <li><code>X</code> done</li>
+          <li><code>&gt;</code> migrated forward</li>
+        </ul>
+        <p>A task is a thing I want to do. An event is a thing that's happening at a time. An intention is a frame for the day, week, or month. X marks something done. The arrow means I moved it to another day.</p>
+      </div>
+
+      <div class="sub">
+        <h3>How it feeds the day</h3>
+        <p>On Sunday I write the Weekly Action Plan. I look at what got done last week, what didn't, and I decide what I want this week to be about. Three or four intentions for the week. Sometimes more, but not many.</p>
+
+        <p>Each morning, I open my notebook to today's page and write what I want to do today. That's not the same as what's on my calendar. The calendar is what's happening. My bullet journal is what I'm trying to do.</p>
+
+        <p>Then I tell Alfred I'm starting the day. He reads my journal folder and surfaces the day based on what I wrote there, what's on my calendar, what's in my inbox, and where my open projects stand.</p>
+      </div>
+
+      <!-- THESIS CALLOUT — display-scale serif pull-quote -->
+      <div class="thesis">
+        <blockquote>Without a direction, Alfred cannot help you.</blockquote>
+      </div>
+
+      <div class="sub">
+        <h3>The thesis</h3>
+        <p>If I don't write down what I want to do, Alfred has nothing to anchor on. He can't read my mind. He can't decide what matters this week. That's my job. The bullet journal is where I do it.</p>
+      </div>
+
+      <div class="sub">
+        <h3>If this isn't your shape</h3>
+        <p>This is my practice. You don't need a bullet journal. You need a place where you write down what you want to do.</p>
+
+        <p>If the analog notebook doesn't appeal, here are five other systems you may already recognize:</p>
+
+        <div class="table-wrap">
+          <table class="systems">
+            <thead>
+              <tr>
+                <th>System</th>
+                <th>What it is</th>
+                <th>Creator</th>
+                <th>Primary resource</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="mine">
+                <td>Bullet Journal</td>
+                <td data-label="What it is">Analog notebook with daily, weekly, monthly logs and signifiers.</td>
+                <td data-label="Creator">Ryder Carroll</td>
+                <td data-label="Primary resource">Book: The Bullet Journal Method (2018) · bulletjournal.com</td>
+              </tr>
+              <tr>
+                <td>Getting Things Done (GTD)</td>
+                <td data-label="What it is">Capture everything into an inbox, process into next-actions by context, weekly review.</td>
+                <td data-label="Creator">David Allen</td>
+                <td data-label="Primary resource">Book: Getting Things Done (2001, revised 2015) · gettingthingsdone.com</td>
+              </tr>
+              <tr>
+                <td>Pomodoro Technique</td>
+                <td data-label="What it is">25-minute focused work blocks separated by 5-minute breaks.</td>
+                <td data-label="Creator">Francesco Cirillo</td>
+                <td data-label="Primary resource">Book: The Pomodoro Technique · francescocirillo.com</td>
+              </tr>
+              <tr>
+                <td>Deep Work / Time-Blocking</td>
+                <td data-label="What it is">Schedule protected blocks of focused work on your calendar.</td>
+                <td data-label="Creator">Cal Newport</td>
+                <td data-label="Primary resource">Book: Deep Work (2016) · calnewport.com</td>
+              </tr>
+              <tr>
+                <td>Full Focus Planner</td>
+                <td data-label="What it is">Structured paper planner with daily, weekly, and quarterly pages.</td>
+                <td data-label="Creator">Michael Hyatt</td>
+                <td data-label="Primary resource">fullfocusplanner.com</td>
+              </tr>
+              <tr>
+                <td>Building a Second Brain (PARA)</td>
+                <td data-label="What it is">Digital filing system: Projects, Areas, Resources, Archives.</td>
+                <td data-label="Creator">Tiago Forte</td>
+                <td data-label="Primary resource">Book: Building a Second Brain (2022) · Tiago Forte's YouTube channel</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Honorable mentions you may also recognize: Eisenhower Matrix, OKRs, Franklin Covey, Zettelkasten.</p>
+
+        <p>Pick one that fits how you work. The point isn't the system. The point is having a place where you write down what you want to do.</p>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- SECTION 2 — YOUR AI TEAM -->
+    <section class="doc-section" id="section-2">
+      <h2>Section 2: Your <em>AI Team</em></h2>
+      <span class="section-h2-accent"></span>
+
+      <p>In your ABL folder, you have a team of nine. Each one has a specific job. They all live as text files on your computer, and they all run on Claude.</p>
+
+      <p>You talk to Alfred. He listens to what you ask, then routes the work to whoever on the team can do it. You don't have to know who does what — Alfred does. But it helps to know who's there.</p>
+
+      <p>Top to bottom:</p>
+
+      <p><strong>Alfred: Team Orchestrator.</strong> The one you talk to. He listens, routes, and holds the day's structure.</p>
+
+      <p><strong>Toby: HR.</strong> When you find work the team can't do, Toby finds and hires the new specialist who can.</p>
+
+      <p><strong>Archie: Researcher.</strong> When you need information you can trust, Archie checks multiple sources before reporting back.</p>
+
+      <p><strong>Ryter: Journal Writer.</strong> When you dump notes, voice memos, or screenshots, Ryter sorts them and writes them into your journal.</p>
+
+      <p><strong>Kevin: Automations.</strong> When you need to connect your AI team to other tools and services, Kevin handles the wiring.</p>
+
+      <p><strong>Gordon: Database Architect.</strong> Gordon keeps the files in your ABL folder clean and consistent, so the team can find what it needs.</p>
+
+      <p><strong>Page: Content.</strong> Page drafts and reviews everything that gets published in your name — social posts, emails, articles.</p>
+
+      <p><strong>Felix: Frontend.</strong> Felix builds and edits your websites and other visible pages. (This page you're reading is Felix's work.)</p>
+
+      <p><strong>Iris: Brand Visuals.</strong> Iris designs and produces the visual side of your brand — covers, headers, tiles, deck templates.</p>
+
+      <div class="cue"><span class="cue-label">Cue</span>Live demo — ask Alfred to do something visible. Show Alfred routing to a specialist, the specialist executing, Alfred synthesizing back.</div>
+
+      <p>This is your team. Same nine specialists in everyone's ABL folder. You'll work with all of them over time, but you only ever talk to Alfred.</p>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- SECTION 3 — A DAY WITH ALFRED -->
+    <section class="doc-section" id="section-3">
+      <h2>Section 3: A <em>Day</em> With Alfred</h2>
+      <span class="section-h2-accent"></span>
+
+      <p>Now I'll show you how a day actually runs.</p>
+
+      <div class="sub">
+        <h3>The five rituals</h3>
+        <p>Five rituals. Three daily, one weekly, one monthly.</p>
+        <ul>
+          <li><strong>Morning Ritual</strong>: at the start of the day</li>
+          <li><strong>Midday Ritual</strong>: around lunch</li>
+          <li><strong>Evening Ritual</strong>: before bed</li>
+          <li><strong>Weekly Ritual</strong>: Sunday</li>
+          <li><strong>Monthly Ritual</strong>: last day of the month</li>
+        </ul>
+        <p>Each one is a conversation with Alfred. The shape of the conversation is the same every time. Alfred surfaces what's relevant, I drive what we do with it.</p>
+      </div>
+
+      <div class="sub">
+        <h3>Morning Ritual</h3>
+        <p>I start with the bullet journal. Five minutes with the notebook. Then I tell Alfred I'm starting.</p>
+
+        <p>Here's what Alfred sends me back:</p>
+
+        <!-- MOCKUP CARD: Morning Ritual -->
+        <div class="mockup">
+          <span class="mockup-label">Mockup · Morning Ritual</span>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Morning Ritual</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>Good morning, BG. Monday, March 9th. Here's where the day stands.</p>
+
+              <h4>Calendar today</h4>
+              <ul>
+                <li>10:00 AM — coffee meeting downtown</li>
+                <li>1:00 PM — client call</li>
+                <li>6:30 PM — evening block reserved</li>
+              </ul>
+
+              <h4>Inbox since yesterday</h4>
+              <ul>
+                <li>4 new emails. Two reply to last week's outreach. One from a vendor needing a contract review. One newsletter you usually skim.</li>
+              </ul>
+
+              <h4>Bujo state</h4>
+              <ul>
+                <li>Yesterday: 3 intentions, 2 done, 1 migrated forward.</li>
+                <li>This week's action plan: 5 items, 1 done.</li>
+              </ul>
+
+              <h4>This week's intentions</h4>
+              <ul>
+                <li>Launch the new campaign</li>
+                <li>Finish the client report draft</li>
+                <li>Outreach: 25 new leads contacted</li>
+              </ul>
+
+              <h4>Active projects</h4>
+              <ul>
+                <li>Spring marketing push — campaign brief due Friday</li>
+                <li>Q1 client report — draft 80% complete</li>
+                <li>New website — Felix is on the landing page</li>
+              </ul>
+
+              <h4>Section 8 — Recommended day plan</h4>
+              <ul>
+                <li>Sprint 1 (11:00–11:45): finish the client report draft</li>
+                <li>Sprint 2 (2:00–2:45): outreach — 10 emails</li>
+                <li>Sprint 3 (3:00–3:45): campaign brief outline</li>
+                <li>Evening close at 9 PM</li>
+              </ul>
+
+              <p>How does this match what you had in mind?</p>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Looks good, but flip Sprints 2 and 3. I want to write the brief before the outreach. Also add a 30-minute call with the agency at 4 PM.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Updated. Sprint 2 is now the campaign brief, Sprint 3 is outreach. Agency call added at 4:00–4:30. Anything else?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Nope, let's go.</p></div>
+          </div>
+        </div>
+
+        <p>That's the surface. Calendar, inbox, bullet journal state, this week's intentions, active projects, and a recommended day plan. Section 8, that's what I call the recommendation block.</p>
+
+        <p>I read it. I redirect what needs redirecting. Then I start Sprint 1.</p>
+
+        <div class="cue"><span class="cue-label">Cue</span>Live demo — actual Morning Ritual output from today, with private bits scrubbed.</div>
+      </div>
+
+      <div class="sub">
+        <h3>45-minute sprints</h3>
+        <p>My day is built on 45-minute sprints. Top of the hour to forty-five minutes past. Then a 15-minute break. Then the next sprint, or the next ritual, or the next meeting.</p>
+
+        <p>Why 45 minutes? It's long enough to do real work, short enough that I don't burn out. The 15-minute break is non-negotiable. Stand up. Walk around. Get water. Then come back.</p>
+      </div>
+
+      <div class="sub">
+        <h3>Two sprint examples</h3>
+        <p>There are two kinds of sprints I run. A deep work sprint, where Alfred and I work one project together. And a team-dispatch sprint, where I ask Alfred to do something, he routes to a specialist, and that specialist runs while I do something else.</p>
+
+        <p>Here's a deep work sprint:</p>
+
+        <!-- MOCKUP CARD: Deep Work session -->
+        <div class="mockup">
+          <span class="mockup-label">Mockup · Deep Work sprint</span>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Let's work on the campaign brief.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Good. We've got 45 minutes. Last we touched it was Tuesday. You wrote the headline and the audience section. The middle (offer + proof) is still open. Want me to surface what we had?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Yes.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Headline: "[draft headline here]". Audience: small-business owners in the trades, 1–10 employees, doing $500K–$3M. Offer section is empty. Proof section has three case studies queued but not written.</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Let's start with the offer. I keep getting stuck on it.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>What's the stuck part?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>I can't decide between leading with the price or leading with the result.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Want to draft both versions and compare them side by side?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Yeah do that.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>Drafting now. Version A leads with the result. Version B leads with the price.</p>
+              <em class="stage">[Alfred surfaces both drafts]</em>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Version A is closer. But the third paragraph is doing too much. Cut it.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Cut. Version A now ends on the proof bridge. Want to see it clean?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Yes... actually no, I see it. Let's move to proof. Walk me through the three case studies and we'll pick two.</p></div>
+          </div>
+        </div>
+
+        <p>A team-dispatch sprint looks different. I tell Alfred what I want, he routes, the specialist runs, and they report back. I'll show one of those live.</p>
+
+        <div class="cue"><span class="cue-label">Cue</span>Live demo — team-dispatch sprint. Ask Felix to change something visible on the hub. Show the route, the work, the synthesis.</div>
+      </div>
+
+      <div class="sub">
+        <h3>Midday Ritual</h3>
+        <p>Around 1 PM, I check in. This is the Midday Ritual. It's shorter than the morning.</p>
+
+        <!-- MOCKUP CARD: Midday Ritual -->
+        <div class="mockup">
+          <span class="mockup-label">Mockup · Midday Ritual</span>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Midday check</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>Halfway through the day. Quick progress against the morning brief.</p>
+
+              <h4>What's done</h4>
+              <ul>
+                <li>Sprint 1 (client report draft) — done, you sent it for review at 11:42</li>
+                <li>Sprint 2 (campaign brief) — partial. You worked 25 minutes, then jumped to email.</li>
+              </ul>
+
+              <h4>Calendar remaining</h4>
+              <ul>
+                <li>1:00 PM — client call (in 15 minutes)</li>
+                <li>4:00 PM — agency call (30 min)</li>
+                <li>6:30 PM — evening block</li>
+              </ul>
+
+              <h4>Inbox since morning</h4>
+              <ul>
+                <li>6 new emails. Two from the client about the report. One needs a same-day reply.</li>
+              </ul>
+
+              <h4>Intentions check</h4>
+              <p>Campaign brief is the priority you set this morning. You're not on track to finish today at this pace.</p>
+
+              <h4>Section 8 — Afternoon adjustment</h4>
+              <ul>
+                <li>1:00–2:00 PM — client call + buffer</li>
+                <li>2:00–2:45 PM — campaign brief, refocused</li>
+                <li>3:00–3:45 PM — outreach</li>
+                <li>4:00 PM — agency call</li>
+                <li>5:00 PM — reply to client emails, close out</li>
+              </ul>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>I never started outreach. Skip that for today.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Pulled. Sprint 3 (3:00–3:45) is now open. Want me to fill it or leave it for breathing room?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Leave it open. I need a breather.</p></div>
+          </div>
+        </div>
+
+        <p>Alfred shows me what got done, what's still on the calendar, and any inbox that came in since morning. He'll flag if I'm off-track on an intention. I tell him what to keep, what to skip, what to defer.</p>
+      </div>
+
+      <div class="sub">
+        <h3>Evening Ritual</h3>
+        <p>At the end of the day, I run the Evening Ritual. This is where the day closes out.</p>
+
+        <!-- MOCKUP CARD: Evening Ritual -->
+        <div class="mockup">
+          <span class="mockup-label">Mockup · Evening Ritual</span>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Evening Ritual</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>End of the day. Let's close it out.</p>
+
+              <h4>Sprints today</h4>
+              <ul>
+                <li>Sprint 1 — client report draft → done</li>
+                <li>Sprint 2 — campaign brief → partial (25 min of 45)</li>
+                <li>Sprint 3 — open / breather</li>
+                <li>Agency call at 4 PM → done, notes captured in journal</li>
+              </ul>
+
+              <h4>Bujo signifiers from your A5</h4>
+              <p>Tell me what to flip from today's page.</p>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Client report is X. Campaign brief is the slash, migrated to tomorrow. Add: agency call X, took notes. Forgot to mention I called Mike at 3:30. That's X too.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>Flipped. Client report and agency call both done. Campaign brief migrated to tomorrow. Mike call logged at 3:30. Captured in today's journal.</p>
+
+              <h4>Tomorrow's intention</h4>
+              <p>What do you want tomorrow to be about?</p>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Finish the campaign brief. That's it. Don't add anything else until I see how the morning goes.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Locked. Tomorrow's intention is the campaign brief. No other items added.</p></div>
+          </div>
+        </div>
+
+        <p>I read my A5 notebook out loud to Alfred. He flips the signifiers in my journal files. We capture tomorrow's intention. Then I close the day.</p>
+      </div>
+
+      <div class="sub">
+        <h3>Weekly Ritual</h3>
+        <p>On Sunday I run the Weekly Ritual. Same shape, broader frame.</p>
+
+        <!-- MOCKUP CARD: Weekly Ritual -->
+        <div class="mockup">
+          <span class="mockup-label">Mockup · Weekly Ritual</span>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Weekly Ritual</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>Sunday. Closing out Week 10. Let's look at the week.</p>
+
+              <h4>Week 10 intentions you set</h4>
+              <ul>
+                <li>Launch the new campaign — done, soft-launched Thursday</li>
+                <li>Finish client report — done, sent Monday</li>
+                <li>25 leads contacted — 8 contacted, 17 didn't happen</li>
+              </ul>
+
+              <h4>What didn't get done</h4>
+              <p>Outreach slipped four days running. Each day it got bumped to a later sprint or pulled entirely.</p>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Yeah I know. I kept putting it off.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>What's the friction with it?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>I don't have a good list. Every time I sit down for outreach I spend the sprint cleaning the list instead of sending emails.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Want to make list cleanup its own intention for Week 11, so outreach isn't blocked on it?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Yes. Separate them.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>Week 11 intentions:</p>
+              <ul>
+                <li>Clean the outreach list (Monday sprint)</li>
+                <li>25 leads contacted (Tue–Fri sprints)</li>
+                <li>Campaign — measure first-week response</li>
+                <li>One date night with my wife</li>
+              </ul>
+              <p>Anything else?</p>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Nope.</p></div>
+          </div>
+        </div>
+
+        <p>What got done. What didn't. What was the friction. What I want next week to be about. The Weekly Action Plan comes out of this.</p>
+      </div>
+
+      <div class="sub">
+        <h3>Monthly Ritual</h3>
+        <p>On the last day of the month I run the Monthly Ritual. Same shape again, biggest frame.</p>
+
+        <!-- MOCKUP CARD: Monthly Ritual -->
+        <div class="mockup">
+          <span class="mockup-label">Mockup · Monthly Ritual</span>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Monthly Ritual</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>Last day of March. Let's look at the month.</p>
+
+              <h4>March intentions you set</h4>
+              <ul>
+                <li>Q1 client report delivered — done</li>
+                <li>Campaign launched — done</li>
+                <li>Outreach: 100 leads contacted — 47 contacted</li>
+                <li>Three date nights — two happened</li>
+              </ul>
+
+              <h4>What worked</h4>
+              <p>Q1 report and campaign both shipped on time. Both had a clear deadline driving them.</p>
+
+              <h4>What slipped</h4>
+              <p>Outreach is the recurring pattern. Slipped each week (you flagged it Week 10). Date nights slipped when work ran late.</p>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>The outreach thing is frustrating. I keep setting it and missing it.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>The Week 11 fix was to separate list cleanup from sending. Did that change anything?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>A little. Got further on the list. But sending still felt like a slog.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said"><p>Want to try a different shape for April? Batching outreach into one longer block once a week instead of daily sprints?</p></div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Maybe. Let me think on it. Set April intentions without an outreach target for now. I'll add it back when I figure out what I want it to look like.</p></div>
+          </div>
+          <div class="turn alfred">
+            <div class="speaker">Alfred:</div>
+            <div class="said">
+              <p>April intentions:</p>
+              <ul>
+                <li>Onboard the new client</li>
+                <li>Refresh the website (Felix on landing page)</li>
+                <li>Run the campaign through measurement, decide on a second push</li>
+                <li>Three date nights</li>
+              </ul>
+              <p>Outreach is open. You'll add it when you've decided the shape.</p>
+            </div>
+          </div>
+          <div class="turn bg">
+            <div class="speaker">BG:</div>
+            <div class="said"><p>Good.</p></div>
+          </div>
+        </div>
+
+        <p>What worked. What slipped. What pattern is showing up. What I want next month to be about.</p>
+      </div>
+
+      <div class="sub">
+        <h3>The point</h3>
+        <p>Same shape every day. Same shape every week. Same shape every month.</p>
+
+        <p>The shape doesn't change. What I do inside the shape changes.</p>
+
+        <p>That's the point of the rituals. They give me a place to stand so the work inside them can be different every time.</p>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- CLOSING -->
+    <section class="doc-section" id="closing">
+      <h2>Closing</h2>
+      <span class="section-h2-accent"></span>
+
+      <p>Quick recap of the three things:</p>
+
+      <ol class="recap">
+        <li>The bullet journal practice, or whatever system you pick, is where you write down what you want to do.</li>
+        <li>Your AI team is nine specialists in your ABL folder. You talk to Alfred.</li>
+        <li>The rituals are the structure of the day, week, and month.</li>
+      </ol>
+
+      <p>Office Hours is Tuesday at 2:00 PM ET. Same Zoom link. Drop in.</p>
+
+      <p>Next week I'll start sharing the specific prompts I've built with the team. Running Gmail, running your calendar, drafting social media, tracking your health, and more. I haven't picked the first one yet. Tell me in chat or at Office Hours which one you want to see first.</p>
+
+      <p>Questions?</p>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      <p>Spring 2026 · Session 2 · <a href="../index.html">Back to the Cohort Hub</a></p>
+    </div>
+
+  </main>
+
+</body>
+</html>
