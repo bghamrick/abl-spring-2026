@@ -27,6 +27,8 @@
       --line:rgba(0,3,33,.10);
       --shadow:0 24px 60px -28px rgba(0,3,33,.30);
       --shadow-soft:0 10px 40px -22px rgba(0,3,33,.18);
+      --shadow-lift:0 40px 80px -34px rgba(0,3,33,.40);
+      --glow:0 26px 70px -30px rgba(0,56,255,.55);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
@@ -41,7 +43,7 @@
       overflow-x:hidden;
     }
     .wrap{max-width:760px;margin:0 auto;padding:0 28px}
-    .wrap-wide{max-width:1040px;margin:0 auto;padding:0 28px}
+    .wrap-wide{max-width:1100px;margin:0 auto;padding:0 28px}
 
     h1,h2,h3{font-family:'Inter',system-ui,sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--ink)}
     h1{font-size:clamp(2.5rem,6.2vw,4.6rem);font-weight:900}
@@ -50,24 +52,41 @@
     p{font-weight:400}
     em,.serif-em{font-family:'Bodoni Moda',Georgia,serif;font-style:italic;font-weight:400}
 
+    /* animated marker underline on key phrase */
+    .mark{position:relative;color:var(--ink);white-space:nowrap}
+    .mark::after{
+      content:"";position:absolute;left:-2px;right:100%;bottom:.06em;height:.46em;
+      background:rgba(0,56,255,.16);border-radius:3px;z-index:-1;
+      transition:right 1.1s cubic-bezier(.2,.8,.2,1) .15s;
+    }
+    .in .mark::after,.mark.lit::after{right:-3px}
+
     /* ---------- buttons ---------- */
     .btn{
-      display:inline-block;
+      display:inline-block;position:relative;
       font-family:'Inter',sans-serif;
       font-weight:700;
       font-size:1.02rem;
       letter-spacing:.005em;
       color:#FFFFFF;
-      background:var(--cobalt);
+      background:linear-gradient(135deg,#1b56ff 0%,var(--cobalt) 55%,var(--cobalt-deep) 100%);
       padding:18px 40px;
-      border-radius:4px;
+      border-radius:6px;
       text-decoration:none;
       box-shadow:0 14px 34px -16px rgba(0,56,255,.6);
-      transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,background .25s ease;
+      transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,filter .25s ease;
       cursor:pointer;
       border:none;
+      overflow:hidden;
     }
-    .btn:hover{transform:translateY(-4px);background:var(--cobalt-deep);box-shadow:0 22px 44px -16px rgba(0,56,255,.7)}
+    .btn::before{
+      content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+      background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+      transform:skewX(-18deg);
+    }
+    .btn:hover::before{animation:sheen .9s ease}
+    @keyframes sheen{to{left:140%}}
+    .btn:hover{transform:translateY(-4px);filter:brightness(1.05);box-shadow:0 26px 50px -16px rgba(0,56,255,.7)}
     .btn:active{transform:translateY(-1px)}
     .micro{display:block;margin-top:16px;font-size:.92rem;color:var(--ink-faint);font-weight:400}
 
@@ -80,40 +99,93 @@
       margin-bottom:22px;
     }
 
+    /* floating accent shapes */
+    .blob{position:absolute;border-radius:50%;filter:blur(46px);pointer-events:none;z-index:0;opacity:.6}
+
     /* ---------- HERO ---------- */
     .hero{
-      min-height:100vh;
+      position:relative;min-height:100vh;
       display:flex;align-items:center;
-      padding:120px 0 100px;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 6%, rgba(0,56,255,.18), transparent 60%),
-        radial-gradient(ellipse 70% 50% at 85% 95%, rgba(106,134,255,.16), transparent 55%),
-        linear-gradient(165deg,#FFFFFF 0%,#F4F5FF 45%,#E9EBFF 100%);
-      text-align:center;
+      padding:120px 0 90px;
+      background:linear-gradient(165deg,#FFFFFF 0%,#F4F5FF 48%,#E9EBFF 100%);
       overflow:hidden;
     }
-    .hero .wrap{position:relative;z-index:2}
+    /* animated cobalt gradient mesh */
+    .mesh{position:absolute;inset:-15%;z-index:0;pointer-events:none}
+    .mesh span{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;will-change:transform}
+    .mesh .m1{width:46vw;height:46vw;left:-6%;top:-8%;background:radial-gradient(circle,rgba(0,56,255,.42),transparent 68%);animation:drift1 22s ease-in-out infinite}
+    .mesh .m2{width:42vw;height:42vw;right:-8%;top:14%;background:radial-gradient(circle,rgba(106,134,255,.45),transparent 66%);animation:drift2 26s ease-in-out infinite}
+    .mesh .m3{width:38vw;height:38vw;left:24%;bottom:-14%;background:radial-gradient(circle,rgba(0,56,255,.30),transparent 64%);animation:drift3 30s ease-in-out infinite}
+    @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(8vw,5vw) scale(1.12)}66%{transform:translate(3vw,-4vw) scale(.95)}}
+    @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-7vw,6vw) scale(1.08)}66%{transform:translate(-2vw,-5vw) scale(1.16)}}
+    @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6vw,-6vw) scale(1.14)}}
+
+    .hero-grid{
+      position:relative;z-index:2;
+      display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,72px);align-items:center;
+      max-width:1100px;margin:0 auto;padding:0 28px;width:100%;
+    }
+    .hero-copy{text-align:left}
     .hero-mark{
-      width:64px;height:64px;margin:0 auto 38px;display:block;
+      width:52px;height:52px;margin:0 0 26px;display:block;
       animation:floaty 7s ease-in-out infinite;
     }
     @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-    .hero h1{margin-bottom:28px}
-    .hero h1 .quote{color:var(--cobalt)}
+    .hero h1{margin-bottom:24px}
+    .hero h1 .quote{
+      color:var(--cobalt);
+      background:linear-gradient(120deg,var(--cobalt),var(--cobalt-soft));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    }
     .hero-sub{
       font-family:'Inter',sans-serif;font-weight:400;
-      font-size:clamp(1.25rem,2.6vw,1.7rem);
+      font-size:clamp(1.25rem,2.4vw,1.6rem);
       color:var(--ink-soft);
-      max-width:560px;margin:0 auto 44px;line-height:1.5;
+      max-width:480px;margin:0 0 38px;line-height:1.5;
     }
+    .hero-cta-row{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+    /* hero portrait */
+    .hero-art{position:relative;justify-self:center;width:100%;max-width:420px}
+    .portrait-frame{
+      position:relative;border-radius:24px;overflow:hidden;
+      box-shadow:var(--shadow-lift);
+      border:1px solid rgba(255,255,255,.6);
+      animation:portraitFloat 9s ease-in-out infinite;
+      will-change:transform;
+    }
+    @keyframes portraitFloat{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-14px) rotate(.4deg)}}
+    .portrait-frame img{width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover}
+    .portrait-frame .ph{
+      width:100%;aspect-ratio:4/5;
+      background:radial-gradient(circle at 38% 30%,rgba(0,56,255,.45),transparent 60%),linear-gradient(145deg,#0a0e3a,#000321);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Bodoni Moda',serif;font-style:italic;font-size:4rem;color:var(--cobalt-soft);
+    }
+    .portrait-frame::after{
+      content:"";position:absolute;inset:0;border-radius:24px;pointer-events:none;
+      box-shadow:inset 0 0 0 1px rgba(0,56,255,.18),inset 0 -90px 80px -60px rgba(0,3,33,.35);
+    }
+    .portrait-accent{
+      position:absolute;inset:-14px;border:1.5px solid rgba(0,56,255,.35);border-radius:30px;z-index:-1;
+      animation:portraitFloat 9s ease-in-out infinite reverse;
+    }
+    .portrait-badge{
+      position:absolute;left:-22px;bottom:26px;
+      background:var(--surface);border:1px solid var(--line);
+      border-radius:14px;padding:13px 18px;box-shadow:var(--shadow);
+      font-family:'Inter',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--cobalt);animation:floaty 6s ease-in-out infinite .8s;
+    }
+    .portrait-badge small{display:block;color:var(--ink-faint);font-weight:600;letter-spacing:.1em;margin-top:3px;font-size:.66rem}
+
     .scroll-hint{
-      position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+      position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
       color:var(--cobalt-soft);font-size:1.5rem;animation:bob 2.4s ease-in-out infinite;z-index:2;
     }
     @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
     /* ---------- VIDEO ---------- */
-    .sec-video{background:var(--ink);color:#FFFFFF;text-align:center}
+    .sec-video{background:var(--ink);color:#FFFFFF;text-align:center;overflow:hidden}
     .sec-video .kicker{color:var(--cobalt-soft)}
     .sec-video .caption{
       font-family:'Inter',sans-serif;font-weight:600;
@@ -121,23 +193,25 @@
       margin-bottom:46px;
     }
     .sec-video h2,.sec-video h3{color:#FFFFFF}
+    .sec-video .blob{background:radial-gradient(circle,rgba(0,56,255,.5),transparent 70%);width:520px;height:520px;top:-180px;right:-140px;opacity:.4}
     .video-frame{
-      position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+      position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;
       background:
         radial-gradient(circle at 50% 42%, rgba(0,56,255,.30), transparent 60%),
         linear-gradient(160deg,#0a0e3a 0%,#000321 100%);
       box-shadow:0 40px 90px -40px rgba(0,0,0,.7);
       border:1px solid rgba(106,134,255,.22);
       display:flex;align-items:center;justify-content:center;
-      margin-bottom:46px;
+      margin-bottom:46px;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s ease;
     }
+    .video-frame:hover{transform:translateY(-6px);box-shadow:0 56px 110px -40px rgba(0,56,255,.5)}
     .play-btn{
       width:88px;height:88px;border-radius:50%;
       background:rgba(0,56,255,.18);
       border:2px solid var(--cobalt-soft);
       display:flex;align-items:center;justify-content:center;
       backdrop-filter:blur(2px);
-      transition:transform .4s ease,background .4s ease;
+      transition:transform .4s ease,background .4s ease;z-index:2;
     }
     .video-frame:hover .play-btn{transform:scale(1.08);background:rgba(0,56,255,.32)}
     .play-btn::after{
@@ -152,20 +226,27 @@
     @keyframes pulse{0%{transform:scale(.7);opacity:.8}100%{transform:scale(1.4);opacity:0}}
 
     /* ---------- IS THIS YOU ---------- */
-    .sec-aches{background:var(--base-deep)}
-    .sec-aches h2{margin-bottom:46px;max-width:600px}
-    .ache-list{list-style:none;margin:0 0 44px}
-    .ache-list li{
-      position:relative;padding:22px 0 22px 44px;
-      border-bottom:1px solid var(--line);
-      font-size:1.18rem;color:var(--ink-soft);font-weight:400;
+    .sec-aches{background:var(--base-deep);overflow:hidden}
+    .sec-aches .blob{background:radial-gradient(circle,rgba(0,56,255,.18),transparent 70%);width:460px;height:460px;left:-180px;bottom:-160px}
+    .sec-aches h2{margin-bottom:50px;max-width:600px}
+    .ache-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:50px}
+    .ache-card{
+      position:relative;background:rgba(255,255,255,.72);backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.7);border-radius:16px;
+      padding:30px 28px 30px 30px;box-shadow:var(--shadow-soft);
+      display:flex;gap:18px;align-items:flex-start;
+      transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease;
     }
-    .ache-list li::before{
-      content:"";position:absolute;left:0;top:31px;
-      width:11px;height:11px;border-radius:50%;
-      background:var(--cobalt);
+    .ache-card:hover{transform:translateY(-6px);box-shadow:var(--glow)}
+    .ache-ico{
+      flex:0 0 auto;width:44px;height:44px;border-radius:11px;
+      background:linear-gradient(140deg,rgba(0,56,255,.12),rgba(106,134,255,.16));
+      display:flex;align-items:center;justify-content:center;
     }
+    .ache-ico svg{width:24px;height:24px;stroke:var(--cobalt);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .ache-card p{font-size:1.08rem;color:var(--ink-soft);font-weight:400;margin:0}
     .ache-close{
+      position:relative;z-index:1;
       font-family:'Inter',sans-serif;font-weight:500;
       font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.5;color:var(--ink);
       border-left:3px solid var(--cobalt);padding-left:28px;
@@ -173,16 +254,31 @@
     .ache-close .yes{color:var(--cobalt);font-weight:700}
 
     /* ---------- WHAT YOU GET ---------- */
-    .sec-gives{text-align:center}
+    .sec-gives{text-align:center;overflow:hidden}
     .sec-gives h2{margin-bottom:60px}
-    .benefits{display:grid;grid-template-columns:1fr 1fr;gap:30px;text-align:left;margin-bottom:54px}
+    .benefits{display:grid;grid-template-columns:1fr 1fr;gap:26px;text-align:left;margin-bottom:54px}
     .benefit{
-      background:var(--surface);border:1px solid var(--line);border-radius:16px;
+      position:relative;overflow:hidden;
+      background:var(--surface);border:1px solid var(--line);border-radius:18px;
       padding:38px 34px;box-shadow:var(--shadow-soft);
+      transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease;
     }
+    .benefit::before{
+      content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+      background:linear-gradient(90deg,var(--cobalt),var(--cobalt-soft));
+      transform:scaleX(0);transform-origin:left;transition:transform .5s ease;
+    }
+    .benefit:hover{transform:translateY(-8px);box-shadow:var(--glow)}
+    .benefit:hover::before{transform:scaleX(1)}
+    .benefit .b-ico{
+      width:52px;height:52px;border-radius:13px;margin-bottom:20px;
+      background:linear-gradient(140deg,rgba(0,56,255,.10),rgba(106,134,255,.18));
+      display:flex;align-items:center;justify-content:center;
+    }
+    .benefit .b-ico svg{width:27px;height:27px;stroke:var(--cobalt);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
     .benefit .num{
-      font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.3rem;
-      color:var(--cobalt);display:block;margin-bottom:14px;
+      font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.05rem;
+      color:var(--cobalt-soft);display:block;margin-bottom:8px;
     }
     .benefit h3{font-size:1.4rem;margin-bottom:12px;line-height:1.2}
     .benefit p{color:var(--ink-soft);font-size:1.02rem}
@@ -191,49 +287,94 @@
       font-size:1.4rem;color:var(--ink);margin-bottom:40px;
     }
 
+    /* ---------- RESOURCES / BOOKS ---------- */
+    .sec-books{background:linear-gradient(180deg,#FFFFFF 0%,#F4F5FF 100%);text-align:center;overflow:hidden}
+    .sec-books h2{margin-bottom:14px}
+    .books-sub{max-width:520px;margin:0 auto 52px;color:var(--ink-soft);font-size:1.08rem}
+    .book-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px;margin-bottom:36px}
+    .book{
+      position:relative;border-radius:12px;overflow:hidden;aspect-ratio:2/3;
+      box-shadow:var(--shadow-soft);background:var(--base-deep);
+      transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s ease;
+    }
+    .book img{width:100%;height:100%;object-fit:cover;display:block}
+    .book .ph{
+      width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+      padding:14px;text-align:center;
+      background:linear-gradient(150deg,#0a0e3a,#000321);
+      color:var(--cobalt-soft);font-family:'Bodoni Moda',serif;font-style:italic;font-size:.82rem;line-height:1.3;
+    }
+    .book:hover{transform:translateY(-12px) rotate(-1.2deg);box-shadow:var(--glow);z-index:2}
+    .book::after{
+      content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;
+      box-shadow:inset 0 0 0 1px rgba(0,3,33,.06),inset 6px 0 14px -8px rgba(0,0,0,.35);
+    }
+    .books-label{
+      display:inline-block;font-family:'Inter',sans-serif;font-weight:700;
+      letter-spacing:.18em;text-transform:uppercase;font-size:.74rem;color:var(--cobalt);
+      border-bottom:1.5px solid transparent;transition:border-color .3s,gap .3s;text-decoration:none;
+    }
+    .books-label:hover{border-color:var(--cobalt)}
+
     /* ---------- FORM ---------- */
     .sec-form{
+      position:relative;overflow:hidden;
       background:
         radial-gradient(ellipse 70% 80% at 50% 0%, rgba(0,56,255,.16), transparent 60%),
         linear-gradient(170deg,#F4F5FF 0%,#E9EBFF 100%);
       text-align:center;
     }
+    .sec-form .blob{background:radial-gradient(circle,rgba(106,134,255,.32),transparent 70%);width:420px;height:420px;right:-150px;top:-120px}
     .form-card{
+      position:relative;z-index:1;
       max-width:520px;margin:0 auto;background:var(--surface);
-      border:1px solid var(--line);border-radius:22px;
-      padding:clamp(40px,6vw,64px);box-shadow:var(--shadow);
+      border:1px solid var(--line);border-radius:24px;
+      padding:clamp(40px,6vw,64px);box-shadow:var(--shadow-lift);
     }
-    .form-card h2{margin-bottom:34px;font-size:clamp(1.8rem,4vw,2.6rem)}
+    .form-card::before{
+      content:"";position:absolute;inset:0;border-radius:24px;padding:1px;pointer-events:none;
+      background:linear-gradient(140deg,rgba(0,56,255,.4),transparent 55%);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+    }
+    .form-card h2{margin-bottom:10px;font-size:clamp(1.8rem,4vw,2.6rem)}
+    .form-lead{margin-bottom:30px;color:var(--ink-soft);font-size:1.02rem}
     .field{margin-bottom:18px;text-align:left}
     .field input{
       width:100%;padding:17px 22px;font-family:'Inter',sans-serif;font-size:1.02rem;
       color:var(--ink);background:var(--base);
-      border:1px solid var(--line);border-radius:8px;
-      transition:border-color .3s ease,box-shadow .3s ease;
+      border:1px solid var(--line);border-radius:10px;
+      transition:border-color .3s ease,box-shadow .3s ease,background .3s ease;
     }
     .field input::placeholder{color:var(--ink-faint)}
-    .field input:focus{outline:none;border-color:var(--cobalt);box-shadow:0 0 0 4px rgba(0,56,255,.14)}
+    .field input:focus{outline:none;border-color:var(--cobalt);background:#FFFFFF;box-shadow:0 0 0 4px rgba(0,56,255,.14)}
     .form-card .btn{width:100%;margin-top:10px}
 
     /* ---------- ABOUT ---------- */
-    .sec-about{background:var(--ink);color:#FFFFFF}
-    .about-grid{display:grid;grid-template-columns:220px 1fr;gap:56px;align-items:center}
+    .sec-about{background:var(--ink);color:#FFFFFF;overflow:hidden}
+    .sec-about .blob{background:radial-gradient(circle,rgba(0,56,255,.4),transparent 70%);width:480px;height:480px;left:-160px;top:-140px;opacity:.4}
+    .about-grid{position:relative;z-index:1;display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:center}
     .sec-about .kicker{color:var(--cobalt-soft)}
+    .about-art{position:relative;width:300px;justify-self:center}
     .about-photo{
-      width:220px;height:260px;border-radius:16px;object-fit:cover;display:block;
-      border:1px solid rgba(106,134,255,.3);
-      box-shadow:0 30px 70px -34px rgba(0,0,0,.7);
+      width:100%;border-radius:18px;aspect-ratio:5/6;object-fit:cover;display:block;
+      box-shadow:0 40px 90px -40px rgba(0,0,0,.8);position:relative;z-index:1;
+    }
+    .about-art .frame{position:absolute;inset:-14px;border:1.5px solid rgba(106,134,255,.4);border-radius:24px;z-index:0}
+    .about-art .badge{
+      position:absolute;right:-18px;bottom:30px;z-index:2;
+      background:var(--surface);color:var(--cobalt);
+      border-radius:13px;padding:12px 17px;box-shadow:var(--shadow);
+      font-family:'Inter',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+      animation:floaty 6.5s ease-in-out infinite;
     }
     .monogram{
-      width:220px;height:260px;border-radius:16px;
-      background:
-        radial-gradient(circle at 35% 30%, rgba(0,56,255,.4), transparent 60%),
-        linear-gradient(145deg,#0a0e3a,#000321);
-      border:1px solid rgba(106,134,255,.3);
+      width:100%;aspect-ratio:5/6;border-radius:18px;
+      background:radial-gradient(circle at 35% 30%, rgba(0,56,255,.4), transparent 60%),linear-gradient(145deg,#0a0e3a,#000321);
       display:flex;align-items:center;justify-content:center;
       font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
       font-size:3.4rem;color:var(--cobalt-soft);
-      box-shadow:0 30px 70px -34px rgba(0,0,0,.7);
+      box-shadow:0 40px 90px -40px rgba(0,0,0,.8);
     }
     .about-body p{color:rgba(255,255,255,.82);font-size:1.12rem;margin-bottom:22px}
     .about-body h3{color:#FFFFFF;margin-bottom:24px}
@@ -243,15 +384,17 @@
     }
 
     /* ---------- CLOSING ---------- */
-    .sec-close{text-align:center;background:var(--base-deep)}
+    .sec-close{text-align:center;background:var(--base-deep);overflow:hidden}
+    .sec-close .blob{background:radial-gradient(circle,rgba(0,56,255,.16),transparent 70%);width:440px;height:440px;right:-160px;bottom:-150px}
     .sec-close h2{max-width:620px;margin:0 auto 40px}
     .verse{
+      position:relative;z-index:1;
       font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
       font-size:clamp(1.5rem,3.4vw,2.2rem);color:var(--cobalt);
       line-height:1.4;max-width:560px;margin:0 auto 22px;
     }
     .verse-ref{display:block;font-size:.95rem;font-style:normal;font-family:'Inter',sans-serif;color:var(--ink-faint);letter-spacing:.04em;margin-top:14px}
-    .close-body{font-size:1.15rem;color:var(--ink-soft);max-width:540px;margin:0 auto 46px}
+    .close-body{position:relative;z-index:1;font-size:1.15rem;color:var(--ink-soft);max-width:540px;margin:0 auto 46px}
 
     /* ---------- FOOTER ---------- */
     footer{background:var(--ink);color:rgba(255,255,255,.55);text-align:center;padding:54px 0}
@@ -260,21 +403,52 @@
     footer .links a:hover{border-color:var(--cobalt-soft)}
     footer .footmark{width:30px;height:30px;margin:0 auto 18px;opacity:.7;display:block}
 
+    /* ---------- floating sticky CTA ---------- */
+    .sticky-cta{
+      position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);
+      z-index:50;opacity:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s ease;
+      box-shadow:0 22px 50px -18px rgba(0,56,255,.7);
+    }
+    .sticky-cta.show{transform:translate(-50%,0);opacity:1}
+
     /* ---------- reveal motion ---------- */
     .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
     .reveal.in{opacity:1;transform:none}
+    .stagger > *{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+    .stagger.in > *{opacity:1;transform:none}
+    .stagger.in > *:nth-child(1){transition-delay:.04s}
+    .stagger.in > *:nth-child(2){transition-delay:.12s}
+    .stagger.in > *:nth-child(3){transition-delay:.20s}
+    .stagger.in > *:nth-child(4){transition-delay:.28s}
+    .stagger.in > *:nth-child(5){transition-delay:.36s}
+    .stagger.in > *:nth-child(6){transition-delay:.44s}
 
+    @media (max-width:920px){
+      .hero-grid{grid-template-columns:1fr;gap:48px;text-align:center}
+      .hero-copy{text-align:center}
+      .hero-cta-row{align-items:center}
+      .hero-mark{margin:0 auto 22px}
+      .hero-sub{margin-left:auto;margin-right:auto}
+      .hero-art{max-width:340px}
+      .about-grid{grid-template-columns:1fr;gap:48px;text-align:center;justify-items:center}
+      .about-art{width:280px}
+      .book-grid{grid-template-columns:repeat(3,1fr)}
+    }
     @media (max-width:680px){
       body{font-size:17px}
       .benefits{grid-template-columns:1fr}
-      .about-grid{grid-template-columns:1fr;gap:34px;text-align:center;justify-items:center}
+      .ache-grid{grid-template-columns:1fr}
       .btn{padding:17px 32px;width:100%;max-width:340px}
+      .sticky-cta{width:auto;max-width:none}
       .ache-close{padding-left:20px}
+      .book-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+      .portrait-badge{left:50%;transform:translateX(-50%);bottom:-18px}
     }
     @media (prefers-reduced-motion:reduce){
       *{animation:none!important}
       html{scroll-behavior:auto}
-      .reveal{opacity:1;transform:none;transition:none}
+      .reveal,.stagger>*{opacity:1;transform:none;transition:none}
+      .mark::after{right:-3px;transition:none}
     }
   </style>
 </head>
@@ -282,22 +456,35 @@
 
 <!-- ===================== 1. HERO ===================== -->
 <section class="hero">
-  <div class="wrap">
-    <svg class="hero-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="32" cy="32" r="30" fill="none" stroke="#6A86FF" stroke-width="1.4" opacity=".6"/>
-      <path d="M32 14 V50 M20 26 H44" stroke="#0038FF" stroke-width="2.6" stroke-linecap="round"/>
-      <circle cx="32" cy="32" r="5.4" fill="#0038FF"/>
-    </svg>
-    <h1>You're allowed to say it:<br><span class="quote">&ldquo;I'm not okay.&rdquo;</span></h1>
-    <p class="hero-sub">And you're not the only one who's felt this.</p>
-    <a href="#opt-in" class="btn">Send Me the Free Course</a>
-    <span class="micro">Free. Just your name and email &mdash; no strings.</span>
+  <div class="mesh" aria-hidden="true"><span class="m1"></span><span class="m2"></span><span class="m3"></span></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <svg class="hero-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="#6A86FF" stroke-width="1.4" opacity=".6"/>
+        <path d="M32 14 V50 M20 26 H44" stroke="#0038FF" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="32" cy="32" r="5.4" fill="#0038FF"/>
+      </svg>
+      <h1>You're allowed to say it:<br><span class="quote">&ldquo;I'm not okay.&rdquo;</span></h1>
+      <p class="hero-sub">And you're <span class="mark lit">not the only one</span> who's felt this.</p>
+      <div class="hero-cta-row">
+        <a href="#opt-in" class="btn">Send Me the Free Course</a>
+        <span class="micro">Free. Just your name and email &mdash; no strings.</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="portrait-accent" aria-hidden="true"></div>
+      <div class="portrait-frame">
+        <img src="https://assets.cdn.filesafe.space/EYFl7yP7SHl4xHF9NXtt/media/693f798296e7537c0faf2d5e.webp" alt="John Fowler" loading="eager" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;JF&lt;/div&gt;'">
+      </div>
+      <span class="portrait-badge">John Fowler<small>Pastor · Author · Podcast</small></span>
+    </div>
   </div>
   <div class="scroll-hint" aria-hidden="true">&darr;</div>
 </section>
 
 <!-- ===================== 2. WELCOME VIDEO ===================== -->
 <section class="sec-video">
+  <div class="blob" aria-hidden="true"></div>
   <div class="wrap">
     <p class="kicker reveal">Welcome</p>
     <p class="caption reveal">A word from John before you begin.</p>
@@ -311,16 +498,36 @@
 
 <!-- ===================== 3. IS THIS YOU ===================== -->
 <section class="sec-aches">
-  <div class="wrap">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="wrap-wide">
     <p class="kicker reveal">Is this you?</p>
     <h2 class="reveal">Maybe this is where you are right now:</h2>
-    <ul class="ache-list">
-      <li class="reveal">You smile on Sunday and fall apart on Monday.</li>
-      <li class="reveal">You're tired in a way sleep doesn't fix.</li>
-      <li class="reveal">You keep telling people you're fine because you don't know how to explain that you're not.</li>
-      <li class="reveal">You believe God is good &mdash; and you still feel far from okay.</li>
-      <li class="reveal">You're carrying something heavy, and you've been carrying it alone.</li>
-    </ul>
+    <div class="ache-grid stagger">
+      <div class="ache-card">
+        <span class="ache-ico"><svg viewBox="0 0 24 24"><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <p>You smile on Sunday and fall apart on Monday.</p>
+      </div>
+      <div class="ache-card">
+        <span class="ache-ico"><svg viewBox="0 0 24 24"><path d="M12 22a8 8 0 0 0 8-8c0-3-2-5-4-9-2 4-4 6-4 9a4 4 0 0 0 4 4"/><path d="M4 14a8 8 0 0 0 8 8"/></svg></span>
+        <p>You're tired in a way sleep doesn't fix.</p>
+      </div>
+      <div class="ache-card">
+        <span class="ache-ico"><svg viewBox="0 0 24 24"><path d="M3 11l8-8 8 8M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M9 21v-6h6v6"/></svg></span>
+        <p>You keep telling people you're fine because you don't know how to explain that you're not.</p>
+      </div>
+      <div class="ache-card">
+        <span class="ache-ico"><svg viewBox="0 0 24 24"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+        <p>You believe God is good &mdash; and you still feel far from okay.</p>
+      </div>
+      <div class="ache-card">
+        <span class="ache-ico"><svg viewBox="0 0 24 24"><path d="M12 3v6m0 0l9 4-9 4-9-4 9-4z"/><path d="M3 17l9 4 9-4"/></svg></span>
+        <p>You're carrying something heavy, and you've been carrying it alone.</p>
+      </div>
+      <div class="ache-card">
+        <span class="ache-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <p>The mornings feel longer, and you're not sure who to tell.</p>
+      </div>
+    </div>
     <p class="ache-close reveal">If you read that and something in you went <span class="yes">yes</span> &mdash; this is for you. You're not weak. You're not failing. You're human, and you're worn out, and there's no shame in any of it.</p>
   </div>
 </section>
@@ -330,23 +537,27 @@
   <div class="wrap-wide">
     <p class="kicker reveal">What's inside</p>
     <h2 class="reveal">Inside this free course, you'll find:</h2>
-    <div class="benefits">
-      <div class="benefit reveal">
+    <div class="benefits stagger">
+      <div class="benefit">
+        <span class="b-ico"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
         <span class="num">i.</span>
         <h3>Permission to stop pretending</h3>
         <p>And language for what you've been feeling but couldn't name.</p>
       </div>
-      <div class="benefit reveal">
+      <div class="benefit">
+        <span class="b-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg></span>
         <span class="num">ii.</span>
         <h3>The truth that you're not alone</h3>
         <p>Others have stood exactly where you're standing.</p>
       </div>
-      <div class="benefit reveal">
+      <div class="benefit">
+        <span class="b-ico"><svg viewBox="0 0 24 24"><path d="M3 12h13l-4-4m4 4l-4 4"/><path d="M20 4v16"/></svg></span>
         <span class="num">iii.</span>
         <h3>A first step toward okay</h3>
         <p>Small, honest, doable. Not a fix. A way forward.</p>
       </div>
-      <div class="benefit reveal">
+      <div class="benefit">
+        <span class="b-ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span>
         <span class="num">iv.</span>
         <h3>Something steady to hold onto</h3>
         <p>Hope rooted in faith, spoken by someone who's been in the dark too.</p>
@@ -359,9 +570,11 @@
 
 <!-- ===================== 5. OPT-IN FORM ===================== -->
 <section class="sec-form" id="opt-in">
+  <div class="blob" aria-hidden="true"></div>
   <div class="wrap">
     <div class="form-card reveal">
       <h2>Where should I send it?</h2>
+      <p class="form-lead">Tell me where, and the free course is on its way.</p>
       <form onsubmit="return false;">
         <div class="field"><input type="text" placeholder="First name" aria-label="First name"></div>
         <div class="field"><input type="email" placeholder="Your email" aria-label="Your email"></div>
@@ -374,9 +587,14 @@
 
 <!-- ===================== 6. ABOUT JOHN ===================== -->
 <section class="sec-about">
+  <div class="blob" aria-hidden="true"></div>
   <div class="wrap-wide">
     <div class="about-grid">
-      <img class="about-photo reveal" src="https://assets.cdn.filesafe.space/EYFl7yP7SHl4xHF9NXtt/media/693f798296e7537c0faf2d5e.webp" alt="John Fowler" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;monogram reveal in&quot; aria-label=&quot;John Fowler&quot;&gt;JF&lt;/div&gt;'">
+      <div class="about-art reveal">
+        <div class="frame" aria-hidden="true"></div>
+        <img class="about-photo" src="https://assets.cdn.filesafe.space/EYFl7yP7SHl4xHF9NXtt/media/693f798296e7537c0faf2d5e.webp" alt="John Fowler" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;monogram&quot; aria-label=&quot;John Fowler&quot;&gt;JF&lt;/div&gt;'">
+        <span class="badge">Pastor · Author</span>
+      </div>
       <div class="about-body reveal">
         <p class="kicker">Who's behind this</p>
         <p>I'm John Fowler &mdash; a pastor, writer, and dad. I'm not here because I've got it all figured out. I'm here because I've sat in the dark myself, and I know how lonely &ldquo;I'm not okay&rdquo; can feel when you're afraid to say it out loud.</p>
@@ -387,8 +605,27 @@
   </div>
 </section>
 
-<!-- ===================== 7. CLOSING CTA ===================== -->
+<!-- ===================== 7. RESOURCES FROM JOHN ===================== -->
+<section class="sec-books">
+  <div class="wrap-wide">
+    <p class="kicker reveal">Resources from John</p>
+    <h2 class="reveal">More from the same heart.</h2>
+    <p class="books-sub reveal">A few of the books John has written along the way &mdash; for kids, for grown-ups, for anyone finding their way back.</p>
+    <div class="book-grid stagger">
+      <div class="book"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/EYFl7yP7SHl4xHF9NXtt/media/6970fd24fc6c32440311aabb.jpg" alt="Frankie The Honey Bee" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Frankie The Honey Bee&lt;/div&gt;'"></div>
+      <div class="book"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/EYFl7yP7SHl4xHF9NXtt/media/697219d0d4fb9053c50a56ca.jpg" alt="Frankie's Christmas Adventure" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Frankie&amp;rsquo;s Christmas Adventure&lt;/div&gt;'"></div>
+      <div class="book"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/EYFl7yP7SHl4xHF9NXtt/media/69721a53f494196b301e3de7.jpg" alt="The Adventures of Jack and Catfish Mike" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Jack and Catfish Mike&lt;/div&gt;'"></div>
+      <div class="book"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/EYFl7yP7SHl4xHF9NXtt/media/69763506a87beb5c96ce7a51.jpeg" alt="Pickled in The Word" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Pickled in The Word&lt;/div&gt;'"></div>
+      <div class="book"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/EYFl7yP7SHl4xHF9NXtt/media/69763560d4fb9033bbd3b09a.jpeg" alt="Set Free to Live Free" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Set Free to Live Free&lt;/div&gt;'"></div>
+      <div class="book"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_800/u_https://storage.googleapis.com/msgsndr/EYFl7yP7SHl4xHF9NXtt/media/69721bbceb392b8e1485320c.jpg" alt="31 Days of Healing Prayer" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;31 Days of Healing Prayer&lt;/div&gt;'"></div>
+    </div>
+    <a href="#opt-in" class="books-label reveal">Explore John's books</a>
+  </div>
+</section>
+
+<!-- ===================== 8. CLOSING CTA ===================== -->
 <section class="sec-close">
+  <div class="blob" aria-hidden="true"></div>
   <div class="wrap">
     <p class="kicker reveal">One small step</p>
     <h2 class="reveal">You don't have to have the words. You just have to start.</h2>
@@ -399,7 +636,7 @@
   </div>
 </section>
 
-<!-- ===================== 8. FOOTER ===================== -->
+<!-- ===================== 9. FOOTER ===================== -->
 <footer>
   <div class="wrap">
     <svg class="footmark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -411,19 +648,46 @@
   </div>
 </footer>
 
+<!-- floating sticky CTA -->
+<a href="#opt-in" class="btn sticky-cta" id="stickyCta">Send Me the Free Course</a>
+
 <script>
   (function(){
-    var els = document.querySelectorAll('.reveal');
+    var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal, .stagger');
     if (!('IntersectionObserver' in window)) {
       els.forEach(function(el){ el.classList.add('in'); });
-      return;
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function(el){ io.observe(el); });
     }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
-    els.forEach(function(el){ io.observe(el); });
+
+    // floating sticky CTA: appears after hero, hides over the form section
+    var sticky = document.getElementById('stickyCta');
+    var optin = document.getElementById('opt-in');
+    function onScroll(){
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      var pastHero = y > window.innerHeight * 0.85;
+      var formRect = optin.getBoundingClientRect();
+      var overForm = formRect.top < window.innerHeight && formRect.bottom > 0;
+      if (pastHero && !overForm){ sticky.classList.add('show'); }
+      else { sticky.classList.remove('show'); }
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+
+    // gentle parallax on hero portrait (skip if reduced motion)
+    if (!prefersReduced){
+      var art = document.querySelector('.hero-art');
+      window.addEventListener('scroll', function(){
+        var y = window.pageYOffset || 0;
+        if (y < window.innerHeight){ art.style.transform = 'translateY(' + (y * 0.08) + 'px)'; }
+      }, { passive:true });
+    }
   })();
 </script>
 
