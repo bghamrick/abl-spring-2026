@@ -6,34 +6,34 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Help, I'm Not Okay — A Free Course with John Fowler</title>
   <meta name="description" content="You're allowed to say it: I'm not okay. A free, gentle, faith-rooted course for the moment you can't pretend anymore. From John Fowler.">
-  <meta name="theme-color" content="#2A2622">
+  <meta name="theme-color" content="#0038FF">
   <meta property="og:title" content="Help, I'm Not Okay — A Free Course with John Fowler">
   <meta property="og:description" content="You're allowed to say it: I'm not okay. And you're not the only one who's felt this.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bone:#F6F1E7;
-      --bone-deep:#EFE7D6;
-      --sand:#E8DDC7;
-      --ink:#2A2622;
-      --ink-soft:#5A5249;
-      --ink-faint:#867C6F;
-      --gold:#C08A3E;
-      --gold-deep:#A6722D;
-      --gold-soft:#D9B477;
-      --line:rgba(42,38,34,.12);
-      --shadow:0 24px 60px -28px rgba(42,38,34,.35);
-      --shadow-soft:0 10px 40px -22px rgba(42,38,34,.28);
+      --base:#F4F5FF;
+      --base-deep:#E9EBFF;
+      --surface:#FFFFFF;
+      --ink:#000321;
+      --ink-soft:#565A7C;
+      --ink-faint:#8A8DA8;
+      --cobalt:#0038FF;
+      --cobalt-deep:#002BCC;
+      --cobalt-soft:#6A86FF;
+      --line:rgba(0,3,33,.10);
+      --shadow:0 24px 60px -28px rgba(0,3,33,.30);
+      --shadow-soft:0 10px 40px -22px rgba(0,3,33,.18);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
-      font-family:'Mulish',system-ui,sans-serif;
-      background:var(--bone);
-      color:var(--ink);
+      font-family:'Inter',system-ui,sans-serif;
+      background:var(--base);
+      color:var(--ink-soft);
       line-height:1.7;
       font-size:18px;
       -webkit-font-smoothing:antialiased;
@@ -43,40 +43,40 @@
     .wrap{max-width:760px;margin:0 auto;padding:0 28px}
     .wrap-wide{max-width:1040px;margin:0 auto;padding:0 28px}
 
-    h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:400;line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
-    h1{font-size:clamp(2.5rem,6.2vw,4.6rem)}
+    h1,h2,h3{font-family:'Inter',system-ui,sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--ink)}
+    h1{font-size:clamp(2.5rem,6.2vw,4.6rem);font-weight:900}
     h2{font-size:clamp(2rem,4.4vw,3.2rem)}
     h3{font-size:clamp(1.5rem,3vw,2.1rem)}
-    p{font-weight:300}
-    em,.serif-em{font-family:'Fraunces',serif;font-style:italic}
+    p{font-weight:400}
+    em,.serif-em{font-family:'Bodoni Moda',Georgia,serif;font-style:italic;font-weight:400}
 
     /* ---------- buttons ---------- */
     .btn{
       display:inline-block;
-      font-family:'Mulish',sans-serif;
-      font-weight:600;
+      font-family:'Inter',sans-serif;
+      font-weight:700;
       font-size:1.02rem;
-      letter-spacing:.01em;
-      color:#FFFDF7;
-      background:linear-gradient(135deg,var(--gold) 0%,var(--gold-deep) 100%);
+      letter-spacing:.005em;
+      color:#FFFFFF;
+      background:var(--cobalt);
       padding:18px 40px;
-      border-radius:999px;
+      border-radius:4px;
       text-decoration:none;
-      box-shadow:0 14px 34px -14px rgba(166,114,45,.7);
-      transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;
+      box-shadow:0 14px 34px -16px rgba(0,56,255,.6);
+      transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,background .25s ease;
       cursor:pointer;
       border:none;
     }
-    .btn:hover{transform:translateY(-4px);box-shadow:0 22px 44px -16px rgba(166,114,45,.78)}
+    .btn:hover{transform:translateY(-4px);background:var(--cobalt-deep);box-shadow:0 22px 44px -16px rgba(0,56,255,.7)}
     .btn:active{transform:translateY(-1px)}
-    .micro{display:block;margin-top:16px;font-size:.92rem;color:var(--ink-faint);font-weight:400;font-style:italic}
+    .micro{display:block;margin-top:16px;font-size:.92rem;color:var(--ink-faint);font-weight:400}
 
     /* ---------- sections ---------- */
     section{padding:clamp(72px,11vw,140px) 0;position:relative}
     .kicker{
-      font-family:'Mulish',sans-serif;font-weight:700;
+      font-family:'Inter',sans-serif;font-weight:700;
       text-transform:uppercase;letter-spacing:.22em;
-      font-size:.74rem;color:var(--gold-deep);
+      font-size:.74rem;color:var(--cobalt);
       margin-bottom:22px;
     }
 
@@ -86,16 +86,11 @@
       display:flex;align-items:center;
       padding:120px 0 100px;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 8%, rgba(216,180,119,.38), transparent 60%),
-        radial-gradient(ellipse 70% 50% at 85% 95%, rgba(192,138,62,.16), transparent 55%),
-        linear-gradient(165deg,#FBF7EF 0%,#F4ECDC 45%,#EADCC2 100%);
+        radial-gradient(ellipse 80% 60% at 50% 6%, rgba(0,56,255,.18), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 85% 95%, rgba(106,134,255,.16), transparent 55%),
+        linear-gradient(165deg,#FFFFFF 0%,#F4F5FF 45%,#E9EBFF 100%);
       text-align:center;
       overflow:hidden;
-    }
-    .hero::after{
-      content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
-      mix-blend-mode:multiply;
     }
     .hero .wrap{position:relative;z-index:2}
     .hero-mark{
@@ -104,159 +99,165 @@
     }
     @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
     .hero h1{margin-bottom:28px}
-    .hero h1 .quote{color:var(--gold-deep)}
+    .hero h1 .quote{color:var(--cobalt)}
     .hero-sub{
-      font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+      font-family:'Inter',sans-serif;font-weight:400;
       font-size:clamp(1.25rem,2.6vw,1.7rem);
       color:var(--ink-soft);
       max-width:560px;margin:0 auto 44px;line-height:1.5;
     }
     .scroll-hint{
       position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
-      color:var(--ink-faint);font-size:1.5rem;animation:bob 2.4s ease-in-out infinite;z-index:2;
+      color:var(--cobalt-soft);font-size:1.5rem;animation:bob 2.4s ease-in-out infinite;z-index:2;
     }
     @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
     /* ---------- VIDEO ---------- */
-    .sec-video{background:var(--ink);color:var(--bone);text-align:center}
-    .sec-video .kicker{color:var(--gold-soft)}
+    .sec-video{background:var(--ink);color:#FFFFFF;text-align:center}
+    .sec-video .kicker{color:var(--cobalt-soft)}
     .sec-video .caption{
-      font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-      font-size:clamp(1.4rem,3vw,2rem);color:var(--bone);
+      font-family:'Inter',sans-serif;font-weight:600;
+      font-size:clamp(1.4rem,3vw,2rem);color:#FFFFFF;
       margin-bottom:46px;
     }
+    .sec-video h2,.sec-video h3{color:#FFFFFF}
     .video-frame{
       position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
       background:
-        radial-gradient(circle at 50% 42%, rgba(216,180,119,.22), transparent 60%),
-        linear-gradient(160deg,#3a342d 0%,#241f1b 100%);
+        radial-gradient(circle at 50% 42%, rgba(0,56,255,.30), transparent 60%),
+        linear-gradient(160deg,#0a0e3a 0%,#000321 100%);
       box-shadow:0 40px 90px -40px rgba(0,0,0,.7);
-      border:1px solid rgba(216,180,119,.18);
+      border:1px solid rgba(106,134,255,.22);
       display:flex;align-items:center;justify-content:center;
       margin-bottom:46px;
     }
     .play-btn{
       width:88px;height:88px;border-radius:50%;
-      background:rgba(246,241,231,.06);
-      border:2px solid var(--gold-soft);
+      background:rgba(0,56,255,.18);
+      border:2px solid var(--cobalt-soft);
       display:flex;align-items:center;justify-content:center;
       backdrop-filter:blur(2px);
       transition:transform .4s ease,background .4s ease;
     }
-    .video-frame:hover .play-btn{transform:scale(1.08);background:rgba(216,180,119,.16)}
+    .video-frame:hover .play-btn{transform:scale(1.08);background:rgba(0,56,255,.32)}
     .play-btn::after{
       content:"";display:block;width:0;height:0;margin-left:6px;
-      border-left:24px solid var(--gold-soft);
+      border-left:24px solid #FFFFFF;
       border-top:15px solid transparent;border-bottom:15px solid transparent;
     }
     .play-ring{
       position:absolute;width:140px;height:140px;border-radius:50%;
-      border:1px solid rgba(216,180,119,.3);animation:pulse 3.5s ease-out infinite;
+      border:1px solid rgba(106,134,255,.35);animation:pulse 3.5s ease-out infinite;
     }
     @keyframes pulse{0%{transform:scale(.7);opacity:.8}100%{transform:scale(1.4);opacity:0}}
 
     /* ---------- IS THIS YOU ---------- */
-    .sec-aches{background:var(--bone-deep)}
+    .sec-aches{background:var(--base-deep)}
     .sec-aches h2{margin-bottom:46px;max-width:600px}
     .ache-list{list-style:none;margin:0 0 44px}
     .ache-list li{
       position:relative;padding:22px 0 22px 44px;
       border-bottom:1px solid var(--line);
-      font-size:1.18rem;color:var(--ink-soft);font-weight:300;
+      font-size:1.18rem;color:var(--ink-soft);font-weight:400;
     }
     .ache-list li::before{
       content:"";position:absolute;left:0;top:31px;
       width:11px;height:11px;border-radius:50%;
-      background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+      background:var(--cobalt);
     }
     .ache-close{
-      font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-      font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.55;color:var(--ink);
-      border-left:3px solid var(--gold);padding-left:28px;
+      font-family:'Inter',sans-serif;font-weight:500;
+      font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.5;color:var(--ink);
+      border-left:3px solid var(--cobalt);padding-left:28px;
     }
-    .ache-close .yes{color:var(--gold-deep);font-weight:400}
+    .ache-close .yes{color:var(--cobalt);font-weight:700}
 
     /* ---------- WHAT YOU GET ---------- */
     .sec-gives{text-align:center}
     .sec-gives h2{margin-bottom:60px}
     .benefits{display:grid;grid-template-columns:1fr 1fr;gap:30px;text-align:left;margin-bottom:54px}
     .benefit{
-      background:#FCF9F2;border:1px solid var(--line);border-radius:16px;
+      background:var(--surface);border:1px solid var(--line);border-radius:16px;
       padding:38px 34px;box-shadow:var(--shadow-soft);
     }
     .benefit .num{
-      font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;
-      color:var(--gold-deep);display:block;margin-bottom:14px;
+      font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.3rem;
+      color:var(--cobalt);display:block;margin-bottom:14px;
     }
     .benefit h3{font-size:1.4rem;margin-bottom:12px;line-height:1.2}
     .benefit p{color:var(--ink-soft);font-size:1.02rem}
     .gives-closer{
-      font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+      font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
       font-size:1.4rem;color:var(--ink);margin-bottom:40px;
     }
 
     /* ---------- FORM ---------- */
     .sec-form{
       background:
-        radial-gradient(ellipse 70% 80% at 50% 0%, rgba(216,180,119,.3), transparent 60%),
-        linear-gradient(170deg,#F4ECDC 0%,#EADCC2 100%);
+        radial-gradient(ellipse 70% 80% at 50% 0%, rgba(0,56,255,.16), transparent 60%),
+        linear-gradient(170deg,#F4F5FF 0%,#E9EBFF 100%);
       text-align:center;
     }
     .form-card{
-      max-width:520px;margin:0 auto;background:#FCF9F2;
+      max-width:520px;margin:0 auto;background:var(--surface);
       border:1px solid var(--line);border-radius:22px;
       padding:clamp(40px,6vw,64px);box-shadow:var(--shadow);
     }
     .form-card h2{margin-bottom:34px;font-size:clamp(1.8rem,4vw,2.6rem)}
     .field{margin-bottom:18px;text-align:left}
     .field input{
-      width:100%;padding:17px 22px;font-family:'Mulish',sans-serif;font-size:1.02rem;
-      color:var(--ink);background:var(--bone);
-      border:1px solid var(--line);border-radius:12px;
+      width:100%;padding:17px 22px;font-family:'Inter',sans-serif;font-size:1.02rem;
+      color:var(--ink);background:var(--base);
+      border:1px solid var(--line);border-radius:8px;
       transition:border-color .3s ease,box-shadow .3s ease;
     }
     .field input::placeholder{color:var(--ink-faint)}
-    .field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(192,138,62,.14)}
+    .field input:focus{outline:none;border-color:var(--cobalt);box-shadow:0 0 0 4px rgba(0,56,255,.14)}
     .form-card .btn{width:100%;margin-top:10px}
 
     /* ---------- ABOUT ---------- */
-    .sec-about{background:var(--ink);color:var(--bone)}
-    .about-grid{display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:center}
-    .sec-about .kicker{color:var(--gold-soft)}
-    .monogram{
-      width:200px;height:200px;border-radius:50%;
-      background:
-        radial-gradient(circle at 35% 30%, rgba(216,180,119,.4), transparent 60%),
-        linear-gradient(145deg,#3a342d,#241f1b);
-      border:1px solid rgba(216,180,119,.3);
-      display:flex;align-items:center;justify-content:center;
-      font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-      font-size:3.4rem;color:var(--gold-soft);
+    .sec-about{background:var(--ink);color:#FFFFFF}
+    .about-grid{display:grid;grid-template-columns:220px 1fr;gap:56px;align-items:center}
+    .sec-about .kicker{color:var(--cobalt-soft)}
+    .about-photo{
+      width:220px;height:260px;border-radius:16px;object-fit:cover;display:block;
+      border:1px solid rgba(106,134,255,.3);
       box-shadow:0 30px 70px -34px rgba(0,0,0,.7);
     }
-    .about-body p{color:rgba(246,241,231,.86);font-size:1.12rem;margin-bottom:22px}
-    .about-body h3{color:var(--bone);margin-bottom:24px}
+    .monogram{
+      width:220px;height:260px;border-radius:16px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(0,56,255,.4), transparent 60%),
+        linear-gradient(145deg,#0a0e3a,#000321);
+      border:1px solid rgba(106,134,255,.3);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
+      font-size:3.4rem;color:var(--cobalt-soft);
+      box-shadow:0 30px 70px -34px rgba(0,0,0,.7);
+    }
+    .about-body p{color:rgba(255,255,255,.82);font-size:1.12rem;margin-bottom:22px}
+    .about-body h3{color:#FFFFFF;margin-bottom:24px}
     .about-sig{
-      font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-      color:var(--gold-soft);font-size:1.15rem;
+      font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
+      color:var(--cobalt-soft);font-size:1.15rem;
     }
 
     /* ---------- CLOSING ---------- */
-    .sec-close{text-align:center;background:var(--bone-deep)}
+    .sec-close{text-align:center;background:var(--base-deep)}
     .sec-close h2{max-width:620px;margin:0 auto 40px}
     .verse{
-      font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-      font-size:clamp(1.5rem,3.4vw,2.2rem);color:var(--gold-deep);
+      font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
+      font-size:clamp(1.5rem,3.4vw,2.2rem);color:var(--cobalt);
       line-height:1.4;max-width:560px;margin:0 auto 22px;
     }
-    .verse-ref{display:block;font-size:.95rem;font-style:normal;color:var(--ink-faint);letter-spacing:.04em;margin-top:14px}
+    .verse-ref{display:block;font-size:.95rem;font-style:normal;font-family:'Inter',sans-serif;color:var(--ink-faint);letter-spacing:.04em;margin-top:14px}
     .close-body{font-size:1.15rem;color:var(--ink-soft);max-width:540px;margin:0 auto 46px}
 
     /* ---------- FOOTER ---------- */
-    footer{background:var(--ink);color:rgba(246,241,231,.6);text-align:center;padding:54px 0}
+    footer{background:var(--ink);color:rgba(255,255,255,.55);text-align:center;padding:54px 0}
     footer p{font-size:.9rem;font-weight:400;margin-bottom:8px}
-    footer .links a{color:rgba(246,241,231,.6);text-decoration:none;font-size:.86rem;margin:0 10px;border-bottom:1px solid transparent;transition:border-color .3s}
-    footer .links a:hover{border-color:var(--gold-soft)}
+    footer .links a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.86rem;margin:0 10px;border-bottom:1px solid transparent;transition:border-color .3s}
+    footer .links a:hover{border-color:var(--cobalt-soft)}
     footer .footmark{width:30px;height:30px;margin:0 auto 18px;opacity:.7;display:block}
 
     /* ---------- reveal motion ---------- */
@@ -283,9 +284,9 @@
 <section class="hero">
   <div class="wrap">
     <svg class="hero-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="32" cy="32" r="30" fill="none" stroke="#C08A3E" stroke-width="1.4" opacity=".55"/>
-      <path d="M32 14 V50 M20 26 H44" stroke="#A6722D" stroke-width="2.6" stroke-linecap="round"/>
-      <circle cx="32" cy="32" r="5.4" fill="#D9B477"/>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#6A86FF" stroke-width="1.4" opacity=".6"/>
+      <path d="M32 14 V50 M20 26 H44" stroke="#0038FF" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="32" cy="32" r="5.4" fill="#0038FF"/>
     </svg>
     <h1>You're allowed to say it:<br><span class="quote">&ldquo;I'm not okay.&rdquo;</span></h1>
     <p class="hero-sub">And you're not the only one who's felt this.</p>
@@ -375,7 +376,7 @@
 <section class="sec-about">
   <div class="wrap-wide">
     <div class="about-grid">
-      <div class="monogram reveal" aria-label="John Fowler">JF</div>
+      <img class="about-photo reveal" src="https://assets.cdn.filesafe.space/EYFl7yP7SHl4xHF9NXtt/media/693f798296e7537c0faf2d5e.webp" alt="John Fowler" loading="lazy" onerror="this.outerHTML='&lt;div class=&quot;monogram reveal in&quot; aria-label=&quot;John Fowler&quot;&gt;JF&lt;/div&gt;'">
       <div class="about-body reveal">
         <p class="kicker">Who's behind this</p>
         <p>I'm John Fowler &mdash; a pastor, writer, and dad. I'm not here because I've got it all figured out. I'm here because I've sat in the dark myself, and I know how lonely &ldquo;I'm not okay&rdquo; can feel when you're afraid to say it out loud.</p>
@@ -402,8 +403,8 @@
 <footer>
   <div class="wrap">
     <svg class="footmark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="32" cy="32" r="30" fill="none" stroke="#D9B477" stroke-width="1.6"/>
-      <path d="M32 16 V48 M22 27 H42" stroke="#D9B477" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#6A86FF" stroke-width="1.6"/>
+      <path d="M32 16 V48 M22 27 H42" stroke="#6A86FF" stroke-width="2.6" stroke-linecap="round"/>
     </svg>
     <p>&copy; 2026 John Fowler. All rights reserved.</p>
     <p class="links"><a href="#">Privacy Policy</a> &middot; <a href="#">Contact</a></p>
