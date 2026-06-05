@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Help, I'm Not Okay. — A free program with John Fowler</title>
+<meta name="description" content="You don't have to have it all together to be okay. A free, honest look at faith for the seasons when you're not okay. Sign up to hear when the beta opens." />
+
+<!--
+  ============================================================
+  "Help, I'm Not Okay." — landing page (DRAFT for BG to review)
+  Built for John Fowler's free beta sign-up. John's brand, not BG's.
+
+  PALETTE NOTE: This palette is a PLACEHOLDER pending John's real brand.
+  Warm cream background, deep warm charcoal text. The accent was changed
+  to a warm rust/clay-red (--accent) drawn directly from the hero image
+  (the red "OK" lettering), so the CTA reads as intentional against the
+  photo instead of clashing with it. The same rust now carries through the
+  calm cream sections below for a coherent, deliberate palette. All button
+  and text colors hold WCAG AA contrast.
+
+  DRAFT-COPY NOTE: Spots that still need John's real words are wrapped in
+  a .fillin treatment (faint highlight + italic + a small "needs John's
+  words" tag) so it's obvious at a glance what John still has to make true.
+
+  FORM NOTE: see the comment at the form. It's a non-functional placeholder
+  to be wired to BG's email/forms tool later.
+  ============================================================
+-->
+
+<!-- Google Fonts: warm serif (Fraunces) + clean sans (Inter). Degrades to
+     a system serif / sans stack if the fonts don't load. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* --- PLACEHOLDER PALETTE (pending John's real brand) --- */
+    --cream:        #f7f3ec;  /* warm off-white background */
+    --cream-deep:   #efe8dc;  /* slightly deeper cream for section contrast */
+    --card:         #fffdf9;  /* near-white card surface */
+    --charcoal:     #2c2925;  /* deep warm charcoal text (AA on cream) */
+    --charcoal-soft:#524d46;  /* softer body text */
+    /* Accent = warm rust/clay-red pulled from the hero image's red "OK".
+       --accent passes WCAG AA for white button text (contrast ~4.7:1);
+       --accent-deep is the hover + the AA-safe color for text/links on cream. */
+    --accent:       #b34a32;  /* warm rust/clay-red — buttons/accents */
+    --accent-deep:  #8f3a27;  /* hover / darker accent (AA text on cream) */
+    --accent-soft:  #f3e3dd;  /* faint rust wash for blocks */
+    --line:         #e2d9ca;  /* hairline dividers */
+    --fillin-bg:    #fcf3df;  /* faint highlight for draft fill-in spots */
+    --fillin-line:  #e6c87a;  /* warm marker line for fill-in spots */
+    --fillin-text:  #7a5c1e;  /* readable label color on the fill-in tag */
+
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --maxw: 680px;
+    --maxw-wide: 980px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  /* Visually hidden but available to screen readers + SEO (the h1). */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    color: var(--charcoal);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5em;
+  }
+
+  p { margin: 0 0 1.15em; color: var(--charcoal-soft); }
+
+  a { color: var(--accent-deep); }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .wrap-wide { max-width: var(--maxw-wide); }
+
+  section { padding: 68px 0; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1;
+    text-decoration: none;
+    padding: 18px 30px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease;
+    box-shadow: 0 2px 10px rgba(143, 58, 39, 0.22);
+  }
+  .btn:hover { background: var(--accent-deep); transform: translateY(-1px); }
+  .btn:focus-visible { outline: 3px solid var(--accent-deep); outline-offset: 3px; }
+  .btn:active { transform: translateY(0); }
+  .btn--full { width: 100%; text-align: center; padding: 19px 30px; }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin: 0 0 18px;
+  }
+
+  /* ---------- Hero ----------
+     James Smith structure: a text headline stack sits ABOVE the video.
+     The content now flows from the TOP of the hero (headline -> pain ->
+     promise -> video -> subhead -> CTA) as one tight column. A dark scrim
+     covers the whole hero (stronger top + bottom) so heavy text reads
+     crisply over the busy handwritten wall. */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    isolation: isolate;
+    overflow: hidden;
+    text-align: center;
+    padding: 0;
+  }
+  /* Full-bleed background image — object-fit: cover behavior via an <img>
+     so it never distorts and scales cleanly on phones. */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+  }
+  /* Legibility scrim: darker at top (where the headline stack now sits) and
+     at the bottom (where the CTA sits), letting the middle of the wall show. */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to bottom,
+      rgba(15, 10, 9,  0.78) 0%,
+      rgba(18, 12, 10, 0.52) 24%,
+      rgba(20, 14, 12, 0.30) 46%,
+      rgba(18, 12, 10, 0.55) 74%,
+      rgba(15, 10, 9,  0.86) 100%
+    );
+  }
+  .hero__inner {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 34px 22px 48px;
+  }
+
+  /* ---------- Hero headline stack (above the video) ----------
+     Rides on its own darker scrim panel so it reads effortlessly over the
+     busy image. Headline is the visual lead; pain + promise are smaller and
+     lighter beneath. The promise line points down into the video. */
+  .hero__lead {
+    max-width: 30ch;
+    margin: 0 auto 22px;
+    padding: 22px 22px 20px;
+    border-radius: 16px;
+    /* Soft darkened band behind the text — a subtle blurred scrim panel that
+       lifts the words off the handwriting without looking like a hard box. */
+    background: radial-gradient(
+      120% 130% at 50% 38%,
+      rgba(12, 8, 7, 0.62) 0%,
+      rgba(12, 8, 7, 0.40) 55%,
+      rgba(12, 8, 7, 0) 100%
+    );
+  }
+  .hero__headline {
+    font-size: clamp(2.05rem, 8.6vw, 3.1rem);
+    font-weight: 600;
+    color: #fdf8f2;
+    line-height: 1.08;
+    margin: 0 0 0.42em;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), 0 1px 4px rgba(0, 0, 0, 0.6);
+  }
+  .hero__pain {
+    font-family: var(--serif);
+    font-size: clamp(1.04rem, 4vw, 1.28rem);
+    font-weight: 400;
+    color: #f3e9df;
+    line-height: 1.4;
+    margin: 0 0 0.5em;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
+  }
+  .hero__promise {
+    font-family: var(--sans);
+    font-size: clamp(0.96rem, 3.6vw, 1.1rem);
+    font-weight: 500;
+    color: #eaddd2;
+    line-height: 1.45;
+    margin: 0;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
+  }
+  /* Small down-cue tying the promise line to the video below. */
+  .hero__promise::after {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin: 10px auto 0;
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    transform: rotate(45deg);
+    opacity: 0.9;
+  }
+
+  /* Click-to-play video — poster shows first, nothing downloads until
+     the visitor presses play (preload="none"). The big file never
+     autoplays, so mobile data is protected. */
+  .hero__video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 22px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0d0908;
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .hero__video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #0d0908;
+  }
+
+  .hero .subhead {
+    font-family: var(--serif);
+    font-size: clamp(1.12rem, 4.2vw, 1.45rem);
+    font-weight: 400;
+    color: #f6efe7;
+    max-width: 30ch;
+    margin: 0 auto 1.4em;
+    line-height: 1.45;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+  }
+  /* Below-video subhead made secondary so it doesn't compete with the
+     headline stack now sitting above the video. */
+  .hero .subhead--secondary {
+    font-size: clamp(1rem, 3.6vw, 1.18rem);
+    color: #ece2d8;
+    max-width: 32ch;
+    margin: 0 auto 1.15em;
+    line-height: 1.42;
+  }
+  .hero .btn {
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+  }
+  .hero .reassure {
+    margin: 18px 0 0;
+    font-size: 0.9rem;
+    color: rgba(246, 239, 231, 0.82);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  /* ---------- Generic section type ---------- */
+  .section-alt { background: var(--cream-deep); }
+
+  h2.section-title {
+    font-size: clamp(1.7rem, 6vw, 2.3rem);
+    margin-bottom: 0.7em;
+  }
+
+  .lead { font-size: 1.22rem; color: var(--charcoal); }
+
+  /* ---------- Empathy / honest scene ---------- */
+  .empathy p:first-of-type {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    color: var(--charcoal);
+    line-height: 1.35;
+    margin-bottom: 1.1em;
+  }
+
+  /* ---------- What you'll get ---------- */
+  .gifts {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+  }
+  .gift {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px 22px 60px;
+    position: relative;
+  }
+  .gift::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 26px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 2px solid var(--accent);
+  }
+  .gift::after {
+    content: "";
+    position: absolute;
+    left: 29px;
+    top: 31px;
+    width: 9px;
+    height: 5px;
+    border-left: 2.5px solid var(--accent-deep);
+    border-bottom: 2.5px solid var(--accent-deep);
+    transform: rotate(-45deg);
+  }
+  .gift p { margin: 0; color: var(--charcoal); font-size: 1.05rem; }
+
+  /* ---------- About John ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+  .portrait {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .portrait-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    background:
+      linear-gradient(160deg, #eef0f2 0%, #e3e7ec 60%, #dfe6ee 100%);
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 30px rgba(44, 41, 37, 0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-deep);
+    text-align: center;
+    padding: 24px;
+  }
+  .portrait-frame svg { opacity: 0.55; margin-bottom: 12px; }
+  .portrait-frame .ph-label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--accent-deep);
+  }
+  .portrait-frame .ph-sub {
+    font-size: 0.78rem;
+    color: var(--charcoal-soft);
+    margin-top: 4px;
+    max-width: 22ch;
+    line-height: 1.4;
+  }
+
+  /* ---------- CTA / form section ---------- */
+  .cta-section {
+    background:
+      radial-gradient(120% 100% at 50% 0%, var(--accent-soft) 0%, rgba(231,238,244,0) 60%),
+      var(--cream-deep);
+    text-align: center;
+  }
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 32px 26px;
+    max-width: 460px;
+    margin: 28px auto 0;
+    box-shadow: 0 12px 34px rgba(44, 41, 37, 0.08);
+    text-align: left;
+  }
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    margin-bottom: 7px;
+  }
+  .field input {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 1.02rem;
+    color: var(--charcoal);
+    padding: 14px 15px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field input::placeholder { color: #a89e8f; }
+  .field input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .form-reassure {
+    margin: 16px 0 0;
+    font-size: 0.86rem;
+    color: var(--charcoal-soft);
+    text-align: center;
+  }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 8px 4px 4px;
+  }
+  .form-success.show { display: block; }
+  .form-success .check {
+    width: 52px; height: 52px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .form-success h3 { font-size: 1.4rem; margin-bottom: 0.3em; }
+  .form-success p { margin: 0; }
+
+  /* ---------- Draft fill-in treatment ---------- */
+  .fillin {
+    display: block;
+    position: relative;
+    background: var(--fillin-bg);
+    border: 1px dashed var(--fillin-line);
+    border-radius: 10px;
+    padding: 16px 18px 18px;
+    margin: 0 0 1.15em;
+    font-style: italic;
+    color: var(--charcoal-soft);
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+  .fillin .tag {
+    display: inline-block;
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fillin-text);
+    background: rgba(230, 200, 122, 0.30);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 9px;
+  }
+  .fillin.inline {
+    display: inline;
+    padding: 1px 7px;
+    margin: 0;
+    border-radius: 6px;
+    font-size: inherit;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--charcoal);
+    color: #cfc7ba;
+    text-align: center;
+    padding: 44px 24px;
+    font-size: 0.9rem;
+  }
+  footer .f-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: #f3ede2;
+    margin-bottom: 8px;
+  }
+  footer p { color: #b4ab9d; margin: 0 0 6px; }
+  footer .micro { font-size: 0.8rem; color: #8f877b; margin-top: 14px; }
+
+  /* ---------- Responsive ---------- */
+  @media (min-width: 760px) {
+    section { padding: 88px 0; }
+    .hero { min-height: 92vh; }
+    .hero__inner { max-width: 720px; padding: 48px 22px 64px; }
+    .hero__lead { max-width: 440px; margin-bottom: 28px; padding: 28px 44px 26px; }
+    .hero__video { margin-bottom: 26px; }
+    .gifts { gap: 18px; }
+    .about-grid {
+      grid-template-columns: 300px 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .portrait { margin: 0; }
+  }
+
+  /* ---------- DESKTOP / LANDSCAPE HERO RESHAPE ----------
+     BG's note: on desktop/landscape the headline wrapped to ~3 lines in a
+     narrow scrim box and ate vertical height, pushing the video down. Below
+     ~900px-wide (and any landscape) we WIDEN the scrim panel so the headline
+     fits on ONE LINE, tighten the line-height/spacing, and let the pain +
+     promise lines sit compactly together — so the video rides much higher.
+     Mobile (which BG loves) is left entirely alone: these only kick in at
+     wider widths. */
+  @media (min-width: 900px) {
+    .hero__inner { max-width: 920px; padding: 40px 24px 52px; }
+
+    /* Wide, short scrim band instead of a tall narrow box. */
+    .hero__lead {
+      max-width: 880px;
+      margin: 0 auto 20px;
+      padding: 20px 40px 18px;
+      background: radial-gradient(
+        90% 150% at 50% 42%,
+        rgba(12, 8, 7, 0.60) 0%,
+        rgba(12, 8, 7, 0.38) 58%,
+        rgba(12, 8, 7, 0) 100%
+      );
+    }
+
+    /* Size the headline to fit on one line at desktop widths, tight leading. */
+    .hero__headline {
+      font-size: clamp(2.1rem, 4.3vw, 3.05rem);
+      line-height: 1.04;
+      margin: 0 0 0.3em;
+      white-space: nowrap;       /* hold the headline on one line on desktop */
+    }
+
+    /* Pain + promise sit together compactly on one line, smaller and tighter,
+       taking as little vertical room as possible. */
+    .hero__pain,
+    .hero__promise {
+      display: inline;
+      font-size: clamp(1rem, 1.5vw, 1.16rem);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .hero__pain { color: #f1e7dc; }
+    .hero__promise { color: #eaddd2; }
+    /* a gentle separator dot between the two lines when inline */
+    .hero__pain::after {
+      content: "  \00b7  ";
+      color: var(--accent);
+      font-weight: 600;
+    }
+    /* drop the down-arrow cue on desktop — it added height; the video is
+       already right below and visible. */
+    .hero__promise::after { display: none; }
+  }
+
+  /* Landscape safety net: short-but-wide viewports (e.g. a laptop in
+     landscape, or a phone turned sideways at >=700px wide) get the same
+     reshape even if just under 900px, so the headline never re-wraps tall. */
+  @media (orientation: landscape) and (min-width: 700px) {
+    .hero { min-height: auto; }
+    .hero__inner { max-width: 920px; padding: 36px 24px 44px; }
+    .hero__lead {
+      max-width: 880px;
+      margin: 0 auto 18px;
+      padding: 18px 38px 16px;
+      background: radial-gradient(
+        90% 150% at 50% 42%,
+        rgba(12, 8, 7, 0.60) 0%,
+        rgba(12, 8, 7, 0.38) 58%,
+        rgba(12, 8, 7, 0) 100%
+      );
+    }
+    .hero__headline {
+      font-size: clamp(1.9rem, 4vw, 3.05rem);
+      line-height: 1.04;
+      margin: 0 0 0.3em;
+      white-space: nowrap;
+    }
+    .hero__pain,
+    .hero__promise {
+      display: inline;
+      font-size: clamp(0.98rem, 1.5vw, 1.16rem);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .hero__pain::after {
+      content: "  \00b7  ";
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .hero__promise::after { display: none; }
+    .hero__video { margin-bottom: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============ HERO ============
+       James Smith high-converting structure: headline -> pain -> promise ->
+       video -> CTA. A text headline stack sits ABOVE the video so a cold
+       visitor knows who it's for and why to press play. The stack rides on a
+       darker scrim band so it reads crisply over the busy handwritten wall.
+       The visible headline IS the real <h1> now (one h1 on the page). -->
+  <header class="hero">
+    <!-- Full-bleed hero background (local file, 1536x1024). object-fit: cover. -->
+    <img class="hero__bg"
+         src="assets/hero-background.png"
+         alt="A raw, textured wall covered in handwritten phrases. In the center, large: HELP I'M NOT OK. Around it, smaller phrases like depressed, anxious, falling apart, alone, and worthless." />
+
+    <div class="hero__inner">
+      <!-- Headline stack: rides on its own scrim panel for legibility over
+           the busy image. Headline is the visual lead, pain + promise smaller
+           and lighter beneath, the promise line pointing down into the video. -->
+      <div class="hero__lead">
+        <h1 class="hero__headline">You're not okay. There's honest hope here.</h1>
+        <p class="hero__pain">You can smile through Sunday and still come home heavy.</p>
+        <p class="hero__promise">John's been there, and he made this for you. Give him a few minutes.</p>
+      </div>
+
+      <!--
+        VIDEO — John's talking video, the watch-then-sign-up centerpiece.
+        Click-to-play: preload="none" + poster means NOTHING downloads until
+        the visitor presses play. This protects mobile data (the file is ~229 MB).
+
+        TEMPORARY SOURCE: the video + poster below are served from John's
+        existing HighLevel (FileSafe / filesafe.space) CDN. This is TEMPORARY.
+        John is leaving HighLevel, so before this page goes live this must be
+        re-hosted on the site itself, or swapped for an unlisted YouTube/Vimeo
+        embed. Do not ship to production pointing at this CDN.
+      -->
+      <div class="hero__video">
+        <video controls preload="none"
+               playsinline
+               poster="https://assets.cdn.filesafe.space/EYFl7yP7SHl4xHF9NXtt/media/transcoded_videos/52e300b13f255fb9.jpg">
+          <source src="https://assets.cdn.filesafe.space/EYFl7yP7SHl4xHF9NXtt/media/6a19839080841a99db816745.mp4" type="video/mp4" />
+          Your browser doesn't support embedded video. You can still sign up below.
+        </video>
+      </div>
+
+      <p class="subhead subhead--secondary">You don't have to have it all together to be okay. And you're not as alone in this as it feels.</p>
+      <a href="#signup" class="btn">Send Me the Details</a>
+      <p class="reassure">A free program from John Fowler. Currently in beta.</p>
+    </div>
+  </header>
+
+  <!-- ============ EMPATHY ============ -->
+  <section class="empathy">
+    <div class="wrap">
+      <p>You know how to answer "How are you?" without really answering it.</p>
+      <p>Fine. Good. Hanging in there. You say it on a Sunday morning, in the grocery line, to the people who love you most. And underneath it, something is heavy. Maybe it has been for a while.</p>
+      <p>Church can be one of the hardest places to be honest about that. Everyone seems to be doing well. So you put on the face, sing the songs, and carry the weight home with you, still alone with it.</p>
+
+      <span class="fillin">
+        <span class="tag">Needs John's words</span>
+        I've sat with a lot of people who were doing exactly that. A true, plain line goes here from John — that he's been on both sides of it, has walked with people through hard seasons, or has been in one himself. This is where his honesty earns the reader's trust, so it should be his actual experience.
+      </span>
+
+      <p>If any of that is you right now, I'm glad you found this. You can put the face down here.</p>
+    </div>
+  </section>
+
+  <!-- ============ THE TURN / WHAT THIS IS ============ -->
+  <section class="section-alt">
+    <div class="wrap">
+      <p class="eyebrow">What this is</p>
+      <h2 class="section-title">A way through that doesn't ask you to pretend.</h2>
+      <p class="lead">"Help, I'm Not Okay" is a free program about exactly that — admitting you're not okay, and finding your way toward hope without pretending and without performing.</p>
+      <p>
+        It started as five sermons.
+        <span class="fillin inline"><span class="tag">Needs John's words</span> Confirm the origin and add a sentence on where these came from — the season or the people that prompted them. That it grew out of real preaching to real people is part of why it lands.</span>
+        Now it's a short book, thirteen chapters, built to walk with you a piece at a time.
+      </p>
+      <p>
+        It isn't a fix-it plan or a list of steps to get your life back in order.
+        <span class="fillin inline"><span class="tag">Needs John's confirmation</span> Confirm the core promise.</span>
+        It's permission to be honest about where you are, and a faith-rooted path toward hope and through the hard season — the kind a pastor would actually say to you across a table, not from a stage.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ WHAT YOU'LL GET ============ -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">What you'll get</p>
+      <h2 class="section-title">Honest help, in plain words.</h2>
+
+      <span class="fillin">
+        <span class="tag">Needs John's confirmation</span>
+        These specifics are written from the brief — John should make each line true before this goes public.
+      </span>
+
+      <ul class="gifts">
+        <li class="gift"><p>The honest teaching from the book and the sermons it grew out of, in plain words.</p></li>
+        <li class="gift"><p>A way through a hard season that doesn't ask you to pretend you're fine.</p></li>
+        <li class="gift"><p>A reminder, in the moments you need it, that you're not carrying this alone.</p></li>
+        <li class="gift"><p>Early access to the free beta before it opens up more widely.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT JOHN ============ -->
+  <section class="section-alt">
+    <div class="wrap wrap-wide">
+      <div class="about-grid">
+        <div class="portrait">
+          <!-- PHOTO PLACEHOLDER: a warm, real photo of John. Not a stage shot.
+               The kind where he looks like the person who'd sit across the table from you. -->
+          <div class="portrait-frame" role="img" aria-label="Placeholder for a warm portrait photo of John Fowler">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" />
+            </svg>
+            <span class="ph-label">John's photo</span>
+            <span class="ph-sub">A warm portrait goes here — the kind where he looks like he'd sit across the table from you.</span>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <p class="eyebrow">About John</p>
+          <h2 class="section-title">I wrote this because I've needed it too.</h2>
+          <p>
+            I'm John Fowler — a pastor and a writer.
+            <span class="fillin inline"><span class="tag">Needs John's words</span> Where he pastors and how long, plus one true, human line about his own story or why this matters to him personally.</span>
+          </p>
+          <p>I wrote "Help, I'm Not Okay" because I got tired of watching good people suffer quietly while pretending everything was fine — and because I've needed this message myself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIGN-UP CTA + FORM ============ -->
+  <section class="cta-section" id="signup">
+    <div class="wrap">
+      <p class="eyebrow">Get in early</p>
+      <h2 class="section-title">Tell Me Where to Send It</h2>
+      <p class="lead">Leave your name and email and I'll send you more about "Help, I'm Not Okay" and let you know when the free beta opens. No cost, no pressure. Just a heads-up when it's ready.</p>
+
+      <!--
+        ============================================================
+        FORM PLACEHOLDER — NOT WIRED TO A BACKEND.
+        This is a real-looking, inert sample form. On submit it shows a
+        friendly confirmation state via the tiny inline JS below; nothing
+        is sent anywhere.
+        TO DO (BG): wire this to BG's email/forms tool (e.g. ConvertKit /
+        HighLevel) — set the <form> action/method or swap in the tool's
+        embed, and map the "name" and "email" fields.
+        ============================================================
+      -->
+      <form class="form-card" id="signup-form" action="#" method="post" novalidate>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="First name" />
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" />
+        </div>
+        <button type="submit" class="btn btn--full">Send Me the Details</button>
+        <p class="form-reassure">Free. No spam. Just John, letting you know when it's ready.</p>
+      </form>
+
+      <!-- Confirmation state (revealed on submit) -->
+      <div class="form-card form-success" id="form-success" role="status" aria-live="polite">
+        <div class="check" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8f3a27" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </div>
+        <h3>Thanks — you're in.</h3>
+        <p>John will be in touch with more about "Help, I'm Not Okay" and a heads-up when the free beta opens.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <p class="f-title">Help, I'm Not Okay.</p>
+    <p>A free program with John Fowler.</p>
+    <p class="micro">A free beta — you're getting in early, before it opens up wider. Unsubscribe anytime.</p>
+  </footer>
+
+  <!-- Tiny inline JS: shows the confirmation state on submit. No network call. -->
+  <script>
+    (function () {
+      var form = document.getElementById('signup-form');
+      var success = document.getElementById('form-success');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault(); // placeholder — not wired to a backend
+        form.style.display = 'none';
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    })();
+  </script>
+
+</body>
+</html>
