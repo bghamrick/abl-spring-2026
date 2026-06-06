@@ -36,9 +36,14 @@
                           of BG (assets/bg-invite-video-still.webp) with a play
                           overlay, but it is NOT a working video. Swap the 16:9
                           still for the real embed once BG records it (see #hero).
-    3. FORM ENDPOINT    — see the <form> handler (handleSignup). It is a NO-OP.
-                          It does NOT send data anywhere. Wire it to the chosen
-                          email tool (Otto's pending decision) before launch.
+    3. FORM ENDPOINT    — WIRED to BG's owned Kit (ConvertKit) account.
+                          All three forms POST first_name + email to Kit's PUBLIC
+                          hosted-form endpoint and tag registrants. NO API SECRET
+                          is in this page (the public endpoint exposes none). The
+                          only value to set is the numeric Kit form ID — see the
+                          KIT_FORM_ID constant in the <script> at the bottom.
+                          Full wiring doc: Alphryd repo →
+                          Systems/Free Workshop Sign-up/How this System runs.md
     4. LEGAL LINKS      — see footer. Privacy / Terms are TODO placeholders.
   ============================================================
 -->
@@ -401,7 +406,7 @@
     <div class="cta-block">
       <h3>Save Your Seat — It's <span class="amber">Free</span></h3>
       <p class="cta-sub">Leave your name and email and I'll send you the link to join us live July 7, 8 and 9.</p>
-      <!-- FORM #1 — endpoint is a NO-OP placeholder. See handleSignup(). -->
+      <!-- FORM #1 — posts to BG's owned Kit via handleSignup(). No secret in page. -->
       <form class="signup-form" onsubmit="return handleSignup(event)" data-form="hero">
         <div class="field-row">
           <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" />
@@ -499,7 +504,7 @@
     <div class="cta-block">
       <h3>Build the System I'm Talking About — Free, in <span class="amber">3 Days</span></h3>
       <p class="cta-sub">July 7, 8 and 9 at 2:00 PM Eastern, on Zoom. Leave your name and email and I'll send you the link.</p>
-      <!-- FORM #2 — endpoint is a NO-OP placeholder. See handleSignup(). -->
+      <!-- FORM #2 — posts to BG's owned Kit via handleSignup(). No secret in page. -->
       <form class="signup-form" onsubmit="return handleSignup(event)" data-form="data">
         <div class="field-row">
           <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" />
@@ -576,7 +581,7 @@
     <div class="cta-block">
       <h2>Everyone Has AI. Come Learn to Use It <span class="amber">Right.</span></h2>
       <p class="cta-sub">Free, live, July 7, 8 and 9 at 2:00 PM Eastern, on Zoom. Three days to build an AI team you own.</p>
-      <!-- FORM #3 — endpoint is a NO-OP placeholder. See handleSignup(). -->
+      <!-- FORM #3 — posts to BG's owned Kit via handleSignup(). No secret in page. -->
       <form class="signup-form" onsubmit="return handleSignup(event)" data-form="final">
         <div class="field-row">
           <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" />
@@ -650,27 +655,121 @@
   setInterval(tickCountdown, 1000);
 
   /* =========================================================
-     SIGN-UP FORM — NO-OP PLACEHOLDER. *** DO NOT SHIP AS-IS. ***
-     The form submission destination is NOT decided yet (the email tool
-     is a separate pending decision — Otto's job). This handler does NOT
-     send data anywhere. It only shows a preview confirmation state.
+     SIGN-UP FORM — wired to BG's OWNED Kit (ConvertKit) account.
 
-     >>> TODO BEFORE LAUNCH: wire this to the chosen email/forms endpoint
-         (e.g. POST first_name + email to the provider's API or form action).
+     HOW IT WORKS
+       Each form POSTs (first name + email) to Kit's PUBLIC hosted-form
+       endpoint. This endpoint is the one Kit's own embeds use; it is
+       designed for client-side, browser submission and exposes NO secret.
+       The Kit api_secret lives ONLY in BG's server-side abl-kit tool
+       (~/Code/abl-kit/.env, chmod 600) and is NEVER in this page.
+
+       Endpoint:  https://app.kit.com/forms/<FORM_ID>/subscriptions
+       Body:      email_address, fields[first_name], tags[]=<TAG_ID>
+       The tags[] line auto-applies the workshop tag to every registrant,
+       so segmentation works even on a bare form. A tag ID is NOT a secret.
+
+     SET ONE VALUE
+       KIT_FORM_ID below is the numeric ID of the Kit form for this
+       workshop. BG creates the form once in the Kit UI (1 minute) and
+       gives us the number; drop it in here. Everything else is set.
+       The tag ("Free Workshop — Jul 2026", id 20106976) already exists.
+
+     FAIL LOUD (never silently drop a signup)
+       - If KIT_FORM_ID is not set, the form refuses to pretend success:
+         it tells the visitor to email BG directly. No fake confirmation.
+       - On a network error or a non-OK / non-success Kit response, the
+         visitor sees a plain error with a fallback (email BG), and the
+         original form stays on screen so they can retry. We only show the
+         "you're registered" state when Kit actually accepted the signup.
+
+     Full wiring + revive doc: Alphryd repo →
+       Systems/Free Workshop Sign-up/How this System runs.md
      ========================================================= */
+
+  // ---- The one value to set. Numeric Kit form ID (NOT the uid string). ----
+  var KIT_FORM_ID = '';                 // e.g. '8830000' — from the Kit form BG creates
+  var KIT_TAG_ID  = '20106976';         // "Free Workshop — Jul 2026" (already created)
+  var KIT_FALLBACK_EMAIL = 'bg@bghamrick.com';
+
+  function showConfirm(block, form) {
+    form.style.display = 'none';
+    var confirm = block.querySelector('.form-confirm');
+    if (confirm) confirm.classList.add('show');
+  }
+
+  // Plain, visible error under the form. Never silently swallow a failure.
+  // Uses textContent only — no HTML injection.
+  function showError(form, msg) {
+    var box = form.parentNode.querySelector('.form-error');
+    if (!box) {
+      box = document.createElement('p');
+      box.className = 'form-error';
+      box.setAttribute('role', 'alert');
+      box.style.cssText = 'color:#ECAB73;font-size:0.92rem;margin:0.9em 0 0;text-align:center;';
+      form.parentNode.insertBefore(box, form.nextSibling);
+    }
+    box.textContent = msg;
+  }
+
   function handleSignup(e) {
     e.preventDefault();
     var form = e.target;
-
-    // TODO: replace this block with a real submission to the email tool.
-    // Intentionally NO network request is made. Data goes nowhere.
-
     var block = form.closest('.cta-block');
-    if (block) {
-      form.style.display = 'none';
-      var confirm = block.querySelector('.form-confirm');
-      if (confirm) confirm.classList.add('show');
+
+    var emailEl = form.querySelector('input[name="email"]');
+    var nameEl  = form.querySelector('input[name="first_name"]');
+    var email = emailEl ? emailEl.value.trim() : '';
+    var name  = nameEl ? nameEl.value.trim() : '';
+
+    // Guard: form not wired yet. Do NOT fake a success — say so plainly.
+    if (!KIT_FORM_ID) {
+      showError(form,
+        'Sign-up isn’t live on this preview yet. Email ' +
+        KIT_FALLBACK_EMAIL + ' to be added.');
+      return false;
     }
+
+    var btn = form.querySelector('button[type="submit"]');
+    var btnText = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+
+    var body = new URLSearchParams();
+    body.append('email_address', email);
+    body.append('fields[first_name]', name);
+    if (KIT_TAG_ID) { body.append('tags[]', KIT_TAG_ID); }
+
+    var endpoint = 'https://app.kit.com/forms/' + KIT_FORM_ID + '/subscriptions';
+
+    function fail() {
+      if (btn) { btn.disabled = false; btn.textContent = btnText; }
+      showError(form,
+        'Something went wrong saving your spot. Please try again, or email ' +
+        KIT_FALLBACK_EMAIL + ' and I’ll add you.');
+    }
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: body
+    })
+    .then(function (res) {
+      if (!res.ok) { throw new Error('HTTP ' + res.status); }
+      return res.json();
+    })
+    .then(function (data) {
+      // Kit returns status: "success" | "quarantined" (held for review) on accept,
+      // or "failed" with errors. Treat success/quarantined as registered; a
+      // quarantined signup is still captured in Kit, just pending Kit's spam review.
+      var status = data && data.status;
+      if (status === 'success' || status === 'quarantined') {
+        if (block) showConfirm(block, form);
+      } else {
+        throw new Error('Kit status: ' + status);
+      }
+    })
+    .catch(function () { fail(); });
+
     return false;
   }
 </script>
