@@ -31,8 +31,11 @@
 
   ============================================================
   PLACEHOLDERS / TODO BEFORE THIS CAN GO PUBLIC:
-    1. [BG PHOTO]      — see #teaching. Swap the placeholder block for BG's real photo.
-    2. [BG INVITE VIDEO] — see #hero. Swap the 16:9 placeholder for the real embed.
+    1. [BG PHOTO]      — DONE. Real bio portrait placed (assets/bg-headshot.webp).
+    2. [BG INVITE VIDEO] — STILL A PLACEHOLDER. The hero now shows a real still
+                          of BG (assets/bg-invite-video-still.webp) with a play
+                          overlay, but it is NOT a working video. Swap the 16:9
+                          still for the real embed once BG records it (see #hero).
     3. FORM ENDPOINT    — see the <form> handler (handleSignup). It is a NO-OP.
                           It does NOT send data anywhere. Wire it to the chosen
                           email tool (Otto's pending decision) before launch.
@@ -118,7 +121,8 @@
   .hero h1 { margin-bottom: 0.35em; }
   .hero .subhead { max-width: 720px; margin: 0 auto 2.4em; font-size: clamp(1.05rem, 2.1vw, 1.3rem); }
 
-  /* --- Video placeholder (16:9) --- */
+  /* --- Hero video (16:9). Currently a still image with a play overlay,
+         standing in until BG's real invite video is recorded. --- */
   .video-slot {
     position: relative;
     width: 100%;
@@ -128,32 +132,40 @@
     background: var(--card);
     border: 1px solid var(--hairline);
     border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .video-slot .video-still {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Subtle darken so the amber play button reads cleanly over the image. */
+  .video-slot::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(24,24,24,0.28);
   }
   .video-slot .play {
-    width: 76px; height: 76px;
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 84px; height: 84px;
     border-radius: 50%;
     background: var(--accent);
     display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease, transform 0.08s ease;
   }
+  .video-slot:hover .play { background: var(--accent-deep); }
+  .video-slot:active .play { transform: translate(-50%, -50%) scale(0.97); }
   .video-slot .play::after {
     content: "";
     width: 0; height: 0;
-    border-left: 22px solid var(--btn-text);
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent;
+    border-left: 24px solid var(--btn-text);
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
     margin-left: 6px;
   }
-  .video-slot .tag {
-    font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700;
-  }
-  .video-slot .placeholder-note { font-size: 0.85rem; color: var(--muted); max-width: 360px; }
   .video-caption { font-size: 0.95rem; color: var(--muted); max-width: 560px; margin: 0 auto 2.6em; font-style: italic; }
 
   /* --- Countdown --- */
@@ -277,22 +289,15 @@
 
   /* --- Who's teaching --- */
   .teaching-grid { display: grid; grid-template-columns: 320px 1fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
-  .photo-slot {
-    aspect-ratio: 4 / 5;
+  .bio-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     background: var(--card);
     border: 1px solid var(--hairline);
     border-radius: 18px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;
-    padding: 20px;
+    display: block;
   }
-  .photo-slot .tag { font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
-  .photo-slot .placeholder-note { font-size: 0.82rem; color: var(--muted); }
-  .photo-slot .ph-icon {
-    width: 64px; height: 64px; border-radius: 50%;
-    border: 2px solid var(--accent); position: relative;
-  }
-  .photo-slot .ph-icon::before { content: ""; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 22px; height: 22px; border-radius: 50%; background: var(--accent); }
-  .photo-slot .ph-icon::after { content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 38px; height: 22px; border-radius: 19px 19px 0 0; background: var(--accent); }
   .teaching-bio .meta-line { color: var(--accent); font-weight: 600; font-style: italic; }
 
   /* --- Who it's for --- */
@@ -331,7 +336,7 @@
   @media (max-width: 880px) {
     .days-grid { grid-template-columns: 1fr; }
     .teaching-grid { grid-template-columns: 1fr; }
-    .photo-slot { max-width: 320px; margin: 0 auto; }
+    .bio-photo { max-width: 320px; margin: 0 auto; }
     .for-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 540px) {
@@ -363,12 +368,20 @@
     <!-- 4. SUBHEAD -->
     <p class="subhead">Most people use AI to save a few minutes. In 3 days I'll show you how to build a small team of AI specialists that runs the busywork for you — Capture, Build, Automate — so you get a full day back every week. You build it, you own it, and it runs your whole life, not just your inbox.</p>
 
-    <!-- 3. HERO VIDEO SLOT — PLACEHOLDER [BG INVITE VIDEO] -->
-    <!-- TODO: replace this block with BG's real invite video embed (16:9). -->
-    <div class="video-slot" role="img" aria-label="BG invite video placeholder">
-      <div class="play"></div>
-      <div class="tag">[ BG Invite Video ]</div>
-      <div class="placeholder-note">Placeholder — BG's short invite video drops in here before launch.</div>
+    <!-- 3. HERO VIDEO SLOT — still image with play overlay (16:9).
+         This is a PLACEHOLDER STILL, not a working video yet. The image is a
+         talking-head still of BG; the play button is decorative for now (no-op).
+
+         >>> TODO BEFORE LAUNCH: when BG records the real invite video, replace
+             the <img> + <div class="play"> below with the real embed, e.g.:
+               <video class="video-still" controls poster="assets/bg-invite-video-still.webp">
+                 <source src="assets/bg-invite-video.mp4" type="video/mp4">
+               </video>
+             or a YouTube/Vimeo <iframe> sized to fill the .video-slot.
+             Keep the .video-slot wrapper so the 16:9 frame and styling hold. -->
+    <div class="video-slot" role="img" aria-label="A still from BG's invite video — full video coming soon" onclick="return false;">
+      <img class="video-still" src="assets/bg-invite-video-still.webp" alt="BG Hamrick, seated at his desk, inviting you to the workshop" />
+      <div class="play" aria-hidden="true"></div>
     </div>
     <p class="video-caption">A quick word from me on what these three days are and who they're for.</p>
 
@@ -506,12 +519,8 @@
     <span class="eyebrow" style="text-align:center; display:block;">Who's Teaching This</span>
     <div class="teaching-grid">
 
-      <!-- [BG PHOTO] PLACEHOLDER — TODO: swap for BG's real photo before launch -->
-      <div class="photo-slot" role="img" aria-label="BG photo placeholder">
-        <div class="ph-icon"></div>
-        <div class="tag">[ BG Photo ]</div>
-        <div class="placeholder-note">Placeholder — BG's real photo before launch.</div>
-      </div>
+      <!-- BG bio portrait (square, flat — brand canon). -->
+      <img class="bio-photo" src="assets/bg-headshot.webp" alt="BG Hamrick" width="720" height="720" loading="lazy" />
 
       <div class="teaching-bio">
         <p>I'm BG Hamrick. I've spent 44 years in business — 20 in ministry, then 24 running a marketing agency I built and later sold.</p>
